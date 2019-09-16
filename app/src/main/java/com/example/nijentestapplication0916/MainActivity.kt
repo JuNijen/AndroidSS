@@ -7,41 +7,38 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-
-//인텐트를 위하여 추가.
 import android.content.Intent
-
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        SetEditText();
+        setContentView(R.layout.app_login)
+        SetMain();
     }
 
-    fun SetEditText()
+    fun SetMain()
     {
         //버튼과 에딧 텍스트를 찾아 연결해준다.
         var sendButton = findViewById<Button>(R.id.button);
-        var editText = findViewById<EditText>(R.id.editText);
+        var editText = findViewById<EditText>(R.id.nameEdit);
 
         //에딧 텍스트의 힌트를 설정.
         editText.setHint(R.string.TEXT_WRITE_YOUR_NAME);
 
         //버튼이 눌렸을 경우 동작.
         sendButton.setOnClickListener {
-            SendButtonOnClick(editText);
+            sendButtonOnClick(editText);
         }
     }
 
-    fun SendButtonOnClick(arg1: EditText)
+    fun sendButtonOnClick(arg1: EditText)
     {
         if(arg1.text.isEmpty())
         {
             //값이 제대로 입력되지 않았을 경우.
-            Toast.makeText(this, R.string.ERR_EDITTEXT_NOVALUE, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.ERR_EDITTEXT_NOVALUE, Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -49,19 +46,18 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "${arg1.text}님, 반갑습니다.", Toast.LENGTH_LONG).show();
 
             //에디터 텍스트값을 비운다.
-            arg1.setText("");
+            arg1.setText("")
 
-            // 메인으로 화면 이동
-            //val intent = Intent(this,MainPage::class.java)
-            //intent.putExtra("인텐트 키값","전달할 값")
-            //startActivity(intent)
-
-            // 메인으로 화면 이동
+            // test_app_buttons으로 화면 이동
             val intent = Intent(this, TestAppButtons::class.java)
+            //intent.putExtra("인텐트 키값","전달할 값")
             startActivity(intent)
+
+            finish()
         }
     }
 }
+
 
 
 /* 190916 inflearn 강의 ( https://bit.ly/2kL0hew )
