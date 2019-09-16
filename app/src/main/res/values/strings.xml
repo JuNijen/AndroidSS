@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">테스트 어플 ver 0916</string>
+
+    <string name="ERR_EDITTEXT_NOVALUE">입력되지 않았습니다.</string>
+
+    <string name="TEXT_WRITE_YOUR_NAME">이름을 입력 해 주십시오.</string>
+    <string name="TEXT_WELCOME">환영합니다.</string>
+
+    <string name="BTN_OK">확인</string>
+    <string name="BTN_CANCEL">취소</string>
+
+
+    <!-- 문자열 참조하는 방법 메모 -->
+    <!--
+        XML : @string/(STRING NAME)
+        KT  : R.string.(STRING NAME)
+    -->
+</resources>
