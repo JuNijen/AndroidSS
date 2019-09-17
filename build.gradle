@@ -1,5 +1,8 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// google map api & location
+implementation 'com.google.android.gms:play-services-maps:16.0.0'
+implementation 'com.google.android.gms:play-services-location:16.0.0'
 
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = '1.3.41'
     repositories {

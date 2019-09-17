@@ -11,7 +11,8 @@
     <string name="TEXT_NOTICE">안내</string>
     <string name="TEXT_PERMISSION_NOTICE">서비스의 이용을 위해서는\n권한 수락이 필요합니다. </string>
 
-    <string name="TEXT_CALL_NUM">119</string>
+    <!-- TEST DATA -->
+    <string name="TEXT_CALL_NUM">01062771242</string>
 
     <string name="BTN_OK">확인</string>
     <string name="BTN_CANCEL">취소</string>
