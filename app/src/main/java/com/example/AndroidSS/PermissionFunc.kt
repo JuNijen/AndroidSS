@@ -22,7 +22,6 @@ import android.widget.Toast
 //내가아는... enum이... 아니네...
 enum class MY_PERMISSION
 {
-    E_NONE,
     E_CALL_PHONE,
     E_ACCESS_FINE_LOCATION,
     E_ACCESS_COARSE_LOCATION
@@ -30,7 +29,6 @@ enum class MY_PERMISSION
 
 class PermissionFunc
 {
-    private var NONE = 0
     private var P_CALL_PHONE_ENABLE_REQUEST_CODE = 0
     private var P_ACESS_FINE_LOCATION_CODE = 0
     private var P_ACCESS_COARSE_LOCATION_CODE = 0
@@ -38,6 +36,7 @@ class PermissionFunc
 
     // public fun ----------------------------------------------------------------------------------
 
+    //Check에는 Alart > Request 기능이 포함되어있다.
     fun CallCheckPermission(app_activity: AppCompatActivity, per_type : MY_PERMISSION): Boolean
     {
         return CheckPermission(app_activity, per_type)
@@ -45,7 +44,6 @@ class PermissionFunc
 
     fun CallRequestPermission(app_activity: AppCompatActivity, per_type : MY_PERMISSION)
     {
-        //안내를 먼저 띄우고 안내에서 퍼미션을 요청해야 함.
         RequestPermission(app_activity, per_type)
     }
 
@@ -69,7 +67,7 @@ class PermissionFunc
 
     // private fun ---------------------------------------------------------------------------------
 
-
+    //Check에는 Alart > Request 기능이 포함되어있다.
     private fun CheckPermission(app_activity: AppCompatActivity, per_type : MY_PERMISSION): Boolean
     {
         var bReady = false
@@ -127,7 +125,6 @@ class PermissionFunc
         var type_string = ""
 
         when (type_num) {
-            //MY_PERMISSION.E_NONE -> type_string = getString(R.string.ERR_FROM_CODE)
             MY_PERMISSION.E_CALL_PHONE -> type_string = android.Manifest.permission.CALL_PHONE
             MY_PERMISSION.E_ACCESS_FINE_LOCATION -> type_string = android.Manifest.permission.ACCESS_FINE_LOCATION
             MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_string = android.Manifest.permission.ACCESS_COARSE_LOCATION
@@ -142,7 +139,6 @@ class PermissionFunc
         var type_code = 0
 
         when (type_num) {
-            MY_PERMISSION.E_NONE -> Toast.makeText(this, R.string.ERR_FROM_CODE, Toast.LENGTH_SHORT).show()
             MY_PERMISSION.E_CALL_PHONE -> type_code = P_CALL_PHONE_ENABLE_REQUEST_CODE
             MY_PERMISSION.E_ACCESS_FINE_LOCATION -> type_code = P_ACESS_FINE_LOCATION_CODE
             MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_code = P_ACCESS_COARSE_LOCATION_CODE

@@ -84,12 +84,7 @@ class TTSFunc
     //TTSFunc를 사용중인 곳에 추가하여야 할 것.
     //override fun onPause()
     //{
-    //    if (mTTS.isSpeaking)
-    //    {
-    //        //if speaking then stop
-    //        mTTS.stop()
-    //        //mTTS.shutdown()
-    //    }
+    //    (TTSFunc 변수).CallStopTTS()
     //    super.onPause()
     //}
 }

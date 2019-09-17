@@ -29,6 +29,12 @@ class ButtonsActivity : AppCompatActivity()
         SetMain()
     }
 
+    override fun onPause()
+    {
+        ttsFunc.CallStopTTS()
+        super.onPause()
+    }
+
     private fun SetMain()
     {
         var callBtn = findViewById<ImageButton>(R.id.callBtn).setOnClickListener {
@@ -52,30 +58,14 @@ class ButtonsActivity : AppCompatActivity()
     {
         val intent = Intent(Intent.ACTION_CALL)
 
-        if (CheckPermission())
+        //PermissionFunc를 생성하고 Check 한다.
+        //Check에는 Alart > Request 기능이 포함되어있다.
+        if (PermissionFunc().CallCheckPermission(this, MY_PERMISSION.E_CALL_PHONE))
         {
-            //TODO::
-            //인텐트 저친구 뭐가문젠지 모르겠음. 아무튼 해결해야함
+            //TODO::인텐트 저친구 뭐가문젠지 잘 모르겠음. 아무튼 해결해야함
             intent.data = Uri.parse("tel:${getString(R.string.TEXT_CALL_NUM)}")
             startActivity(intent)
         }
-    }
-
-    private fun CheckPermission(): Boolean
-    {
-        var bReady = false
-        var permissionActivity = PermissionFunc()
-
-        if (!permissionActivity.CallCheckPermission(this, MY_PERMISSION.E_CALL_PHONE))
-        {
-            //권한이 없을 경우 요청한다.
-            permissionActivity.CallRequestPermission(this, MY_PERMISSION.E_CALL_PHONE)
-        }
-        else
-        {
-            bReady = true
-        }
-        return bReady
     }
 
     private fun alarmBtnOnClick()

@@ -1,6 +1,5 @@
 package com.example.AndroidSS;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,6 +32,7 @@ import java.io.IOException;
 //https://webnautes.tistory.com/1315
 
 
+//TODO:: 여기에 있는 내용 중 퍼미션에 해당하는 부분을 PermissionFunc.kt 로 옮길 필요가 있음.
 public class GPSFunc extends AppCompatActivity
 {
     private GpsTracker gpsTracker;
@@ -81,49 +81,6 @@ public class GPSFunc extends AppCompatActivity
         });
     }
 
-
-    /*
-     * ActivityCompat.requestPermissions를 사용한 퍼미션 요청의 결과를 리턴받는 메소드입니다.
-     */
-    @Override
-    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grandResults)
-    {
-        if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length)
-        {
-            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
-            boolean check_result = true;
-
-            // 모든 퍼미션을 허용했는지 체크합니다.
-            for (int result : grandResults)
-            {
-                if (result != PackageManager.PERMISSION_GRANTED)
-                {
-                    check_result = false;
-                    break;
-                }
-            }
-
-            if (check_result)
-            {
-                //위치 값을 가져올 수 있음
-            }
-            else
-            {
-//                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
-//                if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
-//                        || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1]))
-//                {
-//                    Toast.makeText(MainActivity.this, R.string.TEXT_NOTICE, Toast.LENGTH_LONG).show();
-//                    finish();
-//                }
-//                else
-//                {
-//                    Toast.makeText(MainActivity.this, R.string.TEXT_NOTICE, Toast.LENGTH_LONG).show();
-//                }
-            }
-        }
-    }
-
     void checkRunTimePermission()
     {
         //런타임 퍼미션 처리
@@ -143,24 +100,23 @@ public class GPSFunc extends AppCompatActivity
         }
         else
         {
-            //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+            //TODO:: 이곳에는 지금 무언가를 하려다가 말은 흔적이 있다. 뭔지 알지?
+            PermissionFunc permissionFunc = new PermissionFunc();
 
-            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
+            //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지(3-1, 4-1) 경우가 있습니다.
+            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0]))
             {
+
+
+                permissionFunc.CallAlertDialog(this, MY_PERMISSION.E_ACCESS_COARSE_LOCATION);
                 // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                Toast.makeText(this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-                // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
-                        PERMISSIONS_REQUEST_CODE);
+                //Toast.makeText(this, R.string.TEXT_PERMISSION_NOTICE, Toast.LENGTH_LONG).show();
             }
-            else
-            {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
-                        PERMISSIONS_REQUEST_CODE);
-            }
+
+            // 요청 결과는 onRequestPermissionResult 에서 수신됩니다.
+            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
+                    PERMISSIONS_REQUEST_CODE);
         }
     }
 
@@ -186,6 +142,7 @@ public class GPSFunc extends AppCompatActivity
         }
         catch (IllegalArgumentException illegalArgumentException)
         {
+            //잘못된 GPS 좌표
             Toast.makeText(this, R.string.ERR_FROM_GPS_WRONG_LOCATION, Toast.LENGTH_LONG).show();
             resultStr = getString(R.string.ERR_FROM_GPS_WRONG_LOCATION);
             return resultStr;
@@ -193,6 +150,7 @@ public class GPSFunc extends AppCompatActivity
 
         if (addresses == null || addresses.size() == 0)
         {
+            //위치가 확인되지 않음
             Toast.makeText(this, R.string.ERR_FROM_GPS_NO_LOCATION, Toast.LENGTH_LONG).show();
             resultStr = getString(R.string.ERR_FROM_GPS_NO_LOCATION);
             return resultStr;
@@ -203,7 +161,7 @@ public class GPSFunc extends AppCompatActivity
     }
 
 
-    //여기부터는 GPS 활성화를 위한 메소드들
+    //GPS 활성화를 위한 메소드
     private void showDialogForLocationServiceSetting()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -246,7 +204,7 @@ public class GPSFunc extends AppCompatActivity
                 {
                     if (checkLocationServicesStatus())
                     {
-                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
+                        Log.d("@@@", "GPSFunc.java - onActivityResult : GPS ON");
                         checkRunTimePermission();
                         return;
                     }
