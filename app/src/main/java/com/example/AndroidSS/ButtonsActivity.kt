@@ -50,7 +50,7 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun callBtnOnClick()
     {
-        val intent = Intent(Intent.ACTION_CALL);
+        val intent = Intent(Intent.ACTION_CALL)
 
         if (CheckPermission())
         {
@@ -64,12 +64,12 @@ class ButtonsActivity : AppCompatActivity()
     private fun CheckPermission(): Boolean
     {
         var bReady = false
-        var permissionActivity = PermissionActivity()
+        var permissionActivity = PermissionFunc()
 
-        if (!permissionActivity.CallCheckPermission(this))
+        if (!permissionActivity.CallCheckPermission(this, MY_PERMISSION.E_CALL_PHONE))
         {
             //권한이 없을 경우 요청한다.
-            permissionActivity.CallRequestPermission(this)
+            permissionActivity.CallRequestPermission(this, MY_PERMISSION.E_CALL_PHONE)
         }
         else
         {

@@ -16,9 +16,9 @@ class TTSFunc
 {
     lateinit var mTTS: TextToSpeech
 
-    fun CallInitFunc(arg_app_compact_activity: AppCompatActivity)
+    fun CallInitFunc(app_activity: AppCompatActivity)
     {
-        InitFunc(arg_app_compact_activity)
+        InitFunc(app_activity)
     }
 
     fun CallPlayTTS(toSpeak: String)
@@ -31,14 +31,14 @@ class TTSFunc
         StopTTS()
     }
 
-    private fun InitFunc(arg_app_compact_activity: AppCompatActivity)
+    private fun InitFunc(app_activity: AppCompatActivity)
     {
-        mTTS = TextToSpeech(arg_app_compact_activity, TextToSpeech.OnInitListener { status ->
+        mTTS = TextToSpeech(app_activity, TextToSpeech.OnInitListener { status ->
             if (status != TextToSpeech.ERROR)
             {
                 //if there is no error then set language
                 mTTS.language = Locale.KOREA
-                //mTTS.setLanguage(Locale.getDefault());
+                //mTTS.setLanguage(Locale.getDefault())
             }
         })
     }
