@@ -4,17 +4,17 @@
     <string name="ERR_EDITTEXT_NOVALUE">입력되지 않았습니다.</string>
     <string name="ERR_ERR_FROM_CODE"> 오류가 발견되었습니다.</string>
 
+    <string name="TEXT_WELCOME">환영합니다.</string>
     <string name="TEXT_WRITE_YOUR_NAME">이름</string> <!--을 입력 해 주십시오.</string>-->
     <string name="TEXT_WRITE_YOUR_PW">비밀번호</string>
-    <string name="TEXT_WELCOME">환영합니다.</string>
+
+    <string name="TEXT_NOTICE">안내</string>
+    <string name="TEXT_PERMISSION_NOTICE">서비스의 이용을 위해서는\n권한 수락이 필요합니다. </string>
 
     <string name="TEXT_CALL_NUM">119</string>
-    <string name="TEXT_PERMISSION_NOTICE">서비스의 이용을 위해서는\n권한 수락이 필요합니다. </string>
-    <string name="TEXT_NOTICE">안내</string>
 
     <string name="BTN_OK">확인</string>
     <string name="BTN_CANCEL">취소</string>
-
     <string name="BTN_LOGOUT">로그아웃</string>
 
 

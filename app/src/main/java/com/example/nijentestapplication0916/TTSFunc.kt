@@ -55,7 +55,7 @@ class TTSFunc
             //롤리팝 이상일 경우
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             {
-                mTTS!!.speak("Hello 안녕하세요 가나다 텍스트 입니다.", TextToSpeech.QUEUE_FLUSH, null, "")
+                mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
             }
             //롤리팝 미만일경우
             else

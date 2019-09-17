@@ -51,9 +51,8 @@ class TestAppButtons : AppCompatActivity()
 
         if (CheckPermission()) {
             //TODO::
-            //전화번호가 잘못 전달되는 문제가 발견됨. 수정해야함.
             //인텐트 저친구 뭐가문젠지 모르겠음. 아무튼 해결해야함
-            intent.data = Uri.parse("tel:${R.string.TEXT_CALL_NUM}")
+            intent.data = Uri.parse("tel:${getString(R.string.TEXT_CALL_NUM)}")
             startActivity(intent)
         }
     }
@@ -79,14 +78,13 @@ class TestAppButtons : AppCompatActivity()
 
     private fun voiceBtnBtnOnClick()
     {
-        ttsFunc.CallPlayTTS("asef")
+        ttsFunc.CallPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE))
     }
 
     private fun returnHomeBtnOnClick()
     {
         // 메인으로 화면 이동
         val intent = Intent(this, MainActivity::class.java)
-        //intent.putExtra("인텐트 키값","전달할 값")
         startActivity(intent)
 
         finish()
