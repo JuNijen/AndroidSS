@@ -4,7 +4,6 @@ package com.example.nijentestapplication0916
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
-import android.util.Log
 import android.os.Build
 
 
@@ -17,9 +16,9 @@ class TTSFunc
 {
     lateinit var mTTS: TextToSpeech
 
-    fun CallCheckTTSStatus(arg_app_compact_activity : AppCompatActivity) : Boolean
+    fun CallInitFunc(arg_app_compact_activity : AppCompatActivity)
     {
-        return CheckTTSStatus(arg_app_compact_activity)
+        InitFunc(arg_app_compact_activity)
     }
 
     fun CallPlayTTS(toSpeak : String)
@@ -32,38 +31,31 @@ class TTSFunc
         StopTTS()
     }
 
-
-    private fun CheckTTSStatus(arg_app_compact_activity : AppCompatActivity) : Boolean
+    private fun InitFunc(arg_app_compact_activity : AppCompatActivity)
     {
-        var bReady = false
-        mTTS = TextToSpeech(arg_app_compact_activity, TextToSpeech.OnInitListener { status ->
-            if (status != TextToSpeech.ERROR)
-            {
-                //if there is no error then set language
-                mTTS.language = Locale.KOREA
-                bReady = true
-            }
-            else
-            {
-                Log.e("TTS :: ", "TTSFunc.kt" + R.string.ERR_ERR_FROM_CODE);
-            }
+        mTTS = TextToSpeech(arg_app_compact_activity, TextToSpeech.OnInitListener
+        {
+                status -> if (status != TextToSpeech.ERROR)
+        {
+            //if there is no error then set language
+            mTTS.language = Locale.KOREA
+            //mTTS.setLanguage(Locale.getDefault());
+        }
         })
-        return bReady
     }
 
-    private fun PlayTTS(toSpeak : String)
-    {
+    private fun PlayTTS(toSpeak: String) {
         //내용이 있어야만 작성 가능.
-        //if (toSpeak.isNullOrBlank()) toSpeak = "Please enter a message"
-        if (toSpeak != "")
+        if (toSpeak.isNullOrBlank())
         {
-            //mTTS.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
-            //mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
-
+            //안내 등 무언가의 처리를 해 주면 좋을듯.
+        }
+        else
+        {
             //롤리팝 이상일 경우
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             {
-                mTTS!!.speak("안녕하세요 가나다 텍스트 입니다.", TextToSpeech.QUEUE_FLUSH, null, "")
+                mTTS!!.speak("Hello 안녕하세요 가나다 텍스트 입니다.", TextToSpeech.QUEUE_FLUSH, null, "")
             }
             //롤리팝 미만일경우
             else
