@@ -23,38 +23,33 @@ class PermissionActivity
 
     enum class MY_PERMISSION
     {
-        NONE,
-        CALL_PHONE,
-        CAMERA
+        NONE, CALL_PHONE, CAMERA
     }
 
-    private val PERMISSIONS_STORAGE = arrayOf<String>(
-        android.Manifest.permission.CALL_PHONE,
-        android.Manifest.permission.ACCESS_FINE_LOCATION
-    )
+    private val PERMISSIONS_STORAGE = arrayOf<String>(android.Manifest.permission.CALL_PHONE, android.Manifest.permission.ACCESS_FINE_LOCATION)
 
 
     private var MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
     private var MY_PERMISSIONS_REQUEST_CAMERA = 0;
 
 
-    fun CallCheckPermission(arg_app_compact_activity : AppCompatActivity) : Boolean
+    fun CallCheckPermission(arg_app_compact_activity: AppCompatActivity): Boolean
     {
         return CheckPermission(arg_app_compact_activity)
     }
 
-    fun CallRequestPermission(arg_app_compact_activity : AppCompatActivity)
+    fun CallRequestPermission(arg_app_compact_activity: AppCompatActivity)
     {
         //안내를 먼저 띄우고 안내에서 퍼미션을 요청해야 함.
         RequestPermission(arg_app_compact_activity)
     }
 
-    fun CallAlertDialog(arg_app_compact_activity : AppCompatActivity)
+    fun CallAlertDialog(arg_app_compact_activity: AppCompatActivity)
     {
         AlertDialog(arg_app_compact_activity)
     }
 
-    private fun CheckPermission(arg_app_compact_activity : AppCompatActivity) : Boolean
+    private fun CheckPermission(arg_app_compact_activity: AppCompatActivity): Boolean
     {
         var bReady = false
 
@@ -72,11 +67,9 @@ class PermissionActivity
         return bReady
     }
 
-    private fun RequestPermission(arg_app_compact_activity : AppCompatActivity)
+    private fun RequestPermission(arg_app_compact_activity: AppCompatActivity)
     {
-        ActivityCompat.requestPermissions(arg_app_compact_activity,
-                arrayOf(android.Manifest.permission.CALL_PHONE),
-                MY_PERMISSIONS_REQUEST_CALL_PHONE)
+        ActivityCompat.requestPermissions(arg_app_compact_activity, arrayOf(android.Manifest.permission.CALL_PHONE), MY_PERMISSIONS_REQUEST_CALL_PHONE)
 
         /*
         //제작에 참고한 자료
@@ -92,7 +85,8 @@ class PermissionActivity
         */
     }
 
-    private fun AlertDialog(arg_app_compact_activity : AppCompatActivity) {
+    private fun AlertDialog(arg_app_compact_activity: AppCompatActivity)
+    {
         val builder = AlertDialog.Builder(arg_app_compact_activity)
 
         builder.setTitle(R.string.TEXT_NOTICE)
@@ -100,7 +94,7 @@ class PermissionActivity
         builder.setCancelable(false)
 
         //요청 팝업을 띄워준다. 버튼을 누르면 리퀘스트.
-        builder.setPositiveButton(R.string.BTN_OK){dialogInterface, i ->CallRequestPermission(arg_app_compact_activity)}
+        builder.setPositiveButton(R.string.BTN_OK) { dialogInterface, i -> CallRequestPermission(arg_app_compact_activity) }
 
         val dialog = builder.create()
         dialog.show()

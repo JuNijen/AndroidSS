@@ -16,12 +16,12 @@ class TTSFunc
 {
     lateinit var mTTS: TextToSpeech
 
-    fun CallInitFunc(arg_app_compact_activity : AppCompatActivity)
+    fun CallInitFunc(arg_app_compact_activity: AppCompatActivity)
     {
         InitFunc(arg_app_compact_activity)
     }
 
-    fun CallPlayTTS(toSpeak : String)
+    fun CallPlayTTS(toSpeak: String)
     {
         PlayTTS(toSpeak)
     }
@@ -31,20 +31,20 @@ class TTSFunc
         StopTTS()
     }
 
-    private fun InitFunc(arg_app_compact_activity : AppCompatActivity)
+    private fun InitFunc(arg_app_compact_activity: AppCompatActivity)
     {
-        mTTS = TextToSpeech(arg_app_compact_activity, TextToSpeech.OnInitListener
-        {
-                status -> if (status != TextToSpeech.ERROR)
-        {
-            //if there is no error then set language
-            mTTS.language = Locale.KOREA
-            //mTTS.setLanguage(Locale.getDefault());
-        }
+        mTTS = TextToSpeech(arg_app_compact_activity, TextToSpeech.OnInitListener { status ->
+            if (status != TextToSpeech.ERROR)
+            {
+                //if there is no error then set language
+                mTTS.language = Locale.KOREA
+                //mTTS.setLanguage(Locale.getDefault());
+            }
         })
     }
 
-    private fun PlayTTS(toSpeak: String) {
+    private fun PlayTTS(toSpeak: String)
+    {
         //내용이 있어야만 작성 가능.
         if (toSpeak.isNullOrBlank())
         {
@@ -60,8 +60,7 @@ class TTSFunc
             //롤리팝 미만일경우
             else
             {
-                @Suppress("DEPRECATION")
-                mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                @Suppress("DEPRECATION") mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
             }
         }
     }

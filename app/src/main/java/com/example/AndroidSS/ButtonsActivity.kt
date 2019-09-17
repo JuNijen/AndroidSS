@@ -16,7 +16,7 @@ import android.net.Uri
 class ButtonsActivity : AppCompatActivity()
 {
 
-    lateinit var ttsFunc : TTSFunc
+    lateinit var ttsFunc: TTSFunc
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -52,7 +52,8 @@ class ButtonsActivity : AppCompatActivity()
     {
         val intent = Intent(Intent.ACTION_CALL);
 
-        if (CheckPermission()) {
+        if (CheckPermission())
+        {
             //TODO::
             //인텐트 저친구 뭐가문젠지 모르겠음. 아무튼 해결해야함
             intent.data = Uri.parse("tel:${getString(R.string.TEXT_CALL_NUM)}")
@@ -65,10 +66,13 @@ class ButtonsActivity : AppCompatActivity()
         var bReady = false
         var permissionActivity = PermissionActivity()
 
-        if (!permissionActivity.CallCheckPermission(this)) {
+        if (!permissionActivity.CallCheckPermission(this))
+        {
             //권한이 없을 경우 요청한다.
             permissionActivity.CallRequestPermission(this)
-        } else {
+        }
+        else
+        {
             bReady = true
         }
         return bReady

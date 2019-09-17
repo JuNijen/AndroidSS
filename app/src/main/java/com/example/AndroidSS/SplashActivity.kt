@@ -6,9 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 //20190916 제작
 
-class SplashActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+class SplashActivity : AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         Thread.sleep(1000);
