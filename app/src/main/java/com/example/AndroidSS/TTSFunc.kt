@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 import android.os.Build
 
-
+//20190917 제작
 //제작에 참고한 자료 ::
 //https://devofandroid.blogspot.com/2018/10/text-to-speech-android-studio-kotlin.html
 //수정에 참고한 자료 ::

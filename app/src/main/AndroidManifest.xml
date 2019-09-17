@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.AndroidSS">
 
-    <!-- 즉시 통화를 위하여 필요한 Permission -->
+    <!-- 20190916 즉시 통화를 위하여 필요한 Permission -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <!-- GPS 정보 이용 및 가공을 위하여 필요한 Permission -->
-    <!-- 참고자료: https://webnautes.tistory.com/1315 -->
+    <!-- 20190917 GPS 정보 이용 및 가공을 위하여 필요한 Permission -->
+    <!-- 제작에 참고한 자료 :: https://webnautes.tistory.com/1315 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
@@ -29,7 +29,15 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
-        <activity android:name=".TestAppButtons"/>
+        <activity android:name=".ButtonsActivity"/>
+
+        <!-- 20190917 API 연동을 위하여 추가된 부분 -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBYbndK-eqBK7S4mePE2bQPSJUm7kfVINE" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <!-- 20190917 API 연동을 위하여 추가된 부분 -->
 
     </application>
 

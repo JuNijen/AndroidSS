@@ -9,6 +9,9 @@ import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
 
+
+//20190916 제작
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             arg1.setText("")
 
             // test_app_buttons으로 화면 이동
-            val intent = Intent(this, TestAppButtons::class.java)
+            val intent = Intent(this, ButtonsActivity::class.java)
             //intent.putExtra("인텐트 키값","전달할 값")
             startActivity(intent)
 

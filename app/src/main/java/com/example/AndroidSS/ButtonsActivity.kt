@@ -10,15 +10,22 @@ import android.widget.ImageButton
 import android.net.Uri
 
 
-class TestAppButtons : AppCompatActivity()
+//20190916 제작
+//20190917 수정 (CALL, TTS)
+
+class ButtonsActivity : AppCompatActivity()
 {
 
     lateinit var ttsFunc : TTSFunc
+    lateinit var gpsFunc : GPSFunc
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         ttsFunc = TTSFunc()
         ttsFunc.CallInitFunc(this)
+
+        gpsFunc = GPSFunc()
+        gpsFunc.SetMain(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_main)
@@ -73,7 +80,7 @@ class TestAppButtons : AppCompatActivity()
 
     private fun alarmBtnOnClick()
     {
-
+        gpsFunc.GetMyPosition(this)
     }
 
     private fun voiceBtnBtnOnClick()

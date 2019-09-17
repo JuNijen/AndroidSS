@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
+//20190916 제작
 
 class SplashActivity : AppCompatActivity() {
 

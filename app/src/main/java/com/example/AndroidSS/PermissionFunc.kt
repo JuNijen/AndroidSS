@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import android.app.AlertDialog
 
 
+//20190916 제작
 //TODO:: 이 클래스에 대한 개선이 필요.
 //1. 메세지, 퍼미션 타입을 나눠서 분기 주기.
 //2.
@@ -78,6 +79,7 @@ class PermissionActivity
                 MY_PERMISSIONS_REQUEST_CALL_PHONE)
 
         /*
+        //제작에 참고한 자료
         //https://developer.android.com/training/permissions/requesting?hl=ko
         if (ActivityCompat.shouldShowRequestPermissionRationale(arg1,
                 android.Manifest.permission.CALL_PHONE)) {
