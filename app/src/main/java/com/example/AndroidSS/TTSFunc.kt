@@ -1,4 +1,4 @@
-package com.example.nijentestapplication0916
+package com.example.AndroidSS
 
 //하단부터 추가된 파일.
 import android.speech.tts.TextToSpeech
@@ -82,18 +82,15 @@ class TTSFunc
     }
 
     //TODO::
-    //TTS를 사용중인 곳에 추가하여야 할 것.
-    //fun CheckYourCode()
+    //TTSFunc를 사용중인 곳에 추가하여야 할 것.
+    //override fun onPause()
     //{
-    //    override fun onPause()
+    //    if (mTTS.isSpeaking)
     //    {
-    //        if (mTTS.isSpeaking)
-    //        {
-    //            //if speaking then stop
-    //            mTTS.stop()
-    //            //mTTS.shutdown()
-    //        }
-    //        super.onPause()
+    //        //if speaking then stop
+    //        mTTS.stop()
+    //        //mTTS.shutdown()
     //    }
+    //    super.onPause()
     //}
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nijentestapplication0916">
+    package="com.example.AndroidSS">
 
     <!-- 즉시 통화를 위하여 필요한 Permission -->
     <uses-permission android:name="android.permission.CALL_PHONE" />

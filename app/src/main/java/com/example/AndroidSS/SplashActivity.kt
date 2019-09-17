@@ -1,4 +1,4 @@
-package com.example.nijentestapplication0916
+package com.example.AndroidSS
 
 import android.content.Intent
 import android.os.Bundle
