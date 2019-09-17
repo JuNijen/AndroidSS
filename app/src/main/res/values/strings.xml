@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">테스트 어플 ver 0916</string>
+    <string name="app_name">테스트 ver 0917</string>
 
     <string name="ERR_EDITTEXT_NOVALUE">입력되지 않았습니다.</string>
+    <string name="ERR_ERR_FROM_CODE"> 오류가 발견되었습니다.</string>
 
     <string name="TEXT_WRITE_YOUR_NAME">이름</string> <!--을 입력 해 주십시오.</string>-->
     <string name="TEXT_WRITE_YOUR_PW">비밀번호</string>
