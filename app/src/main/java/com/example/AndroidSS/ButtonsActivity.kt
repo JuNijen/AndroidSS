@@ -17,15 +17,11 @@ class ButtonsActivity : AppCompatActivity()
 {
 
     lateinit var ttsFunc : TTSFunc
-    lateinit var gpsFunc : GPSFunc
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         ttsFunc = TTSFunc()
         ttsFunc.CallInitFunc(this)
-
-        gpsFunc = GPSFunc()
-        gpsFunc.SetMain(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_main)
@@ -80,7 +76,8 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun alarmBtnOnClick()
     {
-        gpsFunc.GetMyPosition(this)
+        val intent = Intent(this, GPSFunc::class.java)
+        startActivity(intent)
     }
 
     private fun voiceBtnBtnOnClick()

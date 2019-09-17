@@ -30,6 +30,7 @@
 
         <activity android:name=".MainActivity"/>
         <activity android:name=".ButtonsActivity"/>
+        <activity android:name=".GPSFunc"/>
 
         <!-- 20190917 API 연동을 위하여 추가된 부분 -->
         <meta-data
