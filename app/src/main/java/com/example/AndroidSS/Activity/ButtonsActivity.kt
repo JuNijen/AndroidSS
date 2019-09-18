@@ -8,10 +8,8 @@ import android.widget.Button
 import android.content.Intent
 import android.widget.ImageButton
 import android.net.Uri
-import com.example.AndroidSS.Func.GPSFunc
-import com.example.AndroidSS.Func.MY_PERMISSION
-import com.example.AndroidSS.Func.PermissionFunc
-import com.example.AndroidSS.Func.TTSFunc
+import android.provider.MediaStore
+import com.example.AndroidSS.Func.*
 import com.example.AndroidSS.R
 
 
@@ -31,7 +29,7 @@ class ButtonsActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_main)
 
-        SetMain()
+        SetButtons()
     }
 
     override fun onPause()
@@ -40,21 +38,25 @@ class ButtonsActivity : AppCompatActivity()
         super.onPause()
     }
 
-    private fun SetMain()
+    private fun SetButtons()
     {
-        var callBtn = findViewById<ImageButton>(R.id.callBtn).setOnClickListener {
+        findViewById<ImageButton>(R.id.callBtn).setOnClickListener {
             callBtnOnClick()
         }
 
-        var alarmBtn = findViewById<ImageButton>(R.id.alarmBtn).setOnClickListener {
-            alarmBtnOnClick()
+        findViewById<ImageButton>(R.id.gpsBtn).setOnClickListener {
+            gpsBtnBtnOnClick()
         }
 
-        var voiceBtn = findViewById<ImageButton>(R.id.voiceBtn).setOnClickListener {
+        findViewById<ImageButton>(R.id.voiceBtn).setOnClickListener {
             voiceBtnBtnOnClick()
         }
 
-        var returnHomeBtn = findViewById<Button>(R.id.returnHomeBtn).setOnClickListener {
+        findViewById<ImageButton>(R.id.speakerBtn).setOnClickListener {
+            speakerBtnOnClick()
+        }
+
+        findViewById<Button>(R.id.returnHomeBtn).setOnClickListener {
             returnHomeBtnOnClick()
         }
     }
@@ -73,7 +75,7 @@ class ButtonsActivity : AppCompatActivity()
         }
     }
 
-    private fun alarmBtnOnClick()
+    private fun gpsBtnBtnOnClick()
     {
         val intent = Intent(this, GPSFunc::class.java)
         startActivity(intent)
@@ -81,8 +83,8 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun voiceBtnBtnOnClick()
     {
-        //TODO:: 이 부분은 임시입니다.
-        ttsFunc.CallPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE))
+        val intent = Intent(this, AudioRecordFunc::class.java)
+        startActivity(intent)
     }
 
     private fun returnHomeBtnOnClick()
@@ -92,5 +94,11 @@ class ButtonsActivity : AppCompatActivity()
         startActivity(intent)
 
         finish()
+    }
+
+    private fun speakerBtnOnClick()
+    {
+        //TODO:: 이 부분은 임시입니다.
+        ttsFunc.CallPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE, getString(R.string.TEXT_EMPTY)))
     }
 }

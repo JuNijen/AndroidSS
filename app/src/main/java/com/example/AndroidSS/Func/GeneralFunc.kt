@@ -46,7 +46,7 @@ class GeneralFunc
         builder.setMessage(str_message)
         builder.setCancelable(false)
 
-        //per_type가 비어있지 않다면
+        //per_type가 비어있지 않다면 퍼미션 요청용 Dialog이다.
         if(per_type != MY_PERMISSION.E_NONE)
         {
             //요청 팝업을 띄워준다. 버튼을 누르면 리퀘스트.
@@ -63,6 +63,7 @@ class GeneralFunc
                     dialogInterface, i -> dialogInterface.cancel()
             }
         }
+
 
         if(add_negative_btn)
         {

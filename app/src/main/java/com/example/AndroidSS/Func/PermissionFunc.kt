@@ -24,14 +24,18 @@ enum class MY_PERMISSION
     E_NONE,
     E_CALL_PHONE,
     E_ACCESS_FINE_LOCATION,
-    E_ACCESS_COARSE_LOCATION
+    E_ACCESS_COARSE_LOCATION,
+    E_RECORD_AUDIO,
+    E_WRITE_EXTERNAL_STORAGE
 }
 
 class PermissionFunc
 {
-    private var P_CALL_PHONE_ENABLE_REQUEST_CODE = 0
-    private var P_ACESS_FINE_LOCATION_CODE = 0
-    private var P_ACCESS_COARSE_LOCATION_CODE = 0
+    private var P_CALL_PHONE_ENABLE = 0
+    private var P_ACESS_FINE_LOCATION_ENABLE = 0
+    private var P_ACCESS_COARSE_LOCATION_ENABLE = 0
+    private var P_RECORD_AUDIO_ENABLE = 0
+    private var P_WRITE_EXTERNAL_STORAGE_ENABLE = 0
 
 
     // public fun ----------------------------------------------------------------------------------
@@ -130,6 +134,8 @@ class PermissionFunc
             MY_PERMISSION.E_CALL_PHONE -> type_string = android.Manifest.permission.CALL_PHONE
             MY_PERMISSION.E_ACCESS_FINE_LOCATION -> type_string = android.Manifest.permission.ACCESS_FINE_LOCATION
             MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_string = android.Manifest.permission.ACCESS_COARSE_LOCATION
+            MY_PERMISSION.E_RECORD_AUDIO -> type_string = android.Manifest.permission.RECORD_AUDIO
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> type_string = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
         }
 
         return type_string
@@ -142,9 +148,11 @@ class PermissionFunc
 
         when (type_num)
         {
-            MY_PERMISSION.E_CALL_PHONE -> type_code = P_CALL_PHONE_ENABLE_REQUEST_CODE
-            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> type_code = P_ACESS_FINE_LOCATION_CODE
-            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_code = P_ACCESS_COARSE_LOCATION_CODE
+            MY_PERMISSION.E_CALL_PHONE -> type_code = P_CALL_PHONE_ENABLE
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> type_code = P_ACESS_FINE_LOCATION_ENABLE
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_code = P_ACCESS_COARSE_LOCATION_ENABLE
+            MY_PERMISSION.E_RECORD_AUDIO -> type_code = P_RECORD_AUDIO_ENABLE
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> type_code = P_WRITE_EXTERNAL_STORAGE_ENABLE
         }
 
         return type_code
@@ -166,6 +174,12 @@ class PermissionFunc
             )
             MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = app_activity.getString(
                 R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION
+            )
+            MY_PERMISSION.E_RECORD_AUDIO -> name_string = app_activity.getString(
+                R.string.TEXT_PERMISSION_RECORD_AUDIO
+            )
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> name_string = app_activity.getString(
+                R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE
             )
         }
 

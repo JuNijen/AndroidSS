@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
+    <!-- 20190917 녹음 서비스를 위하여 필요한 Permission -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -31,6 +34,7 @@
         <activity android:name=".Activity.MainActivity"/>
         <activity android:name=".Activity.ButtonsActivity"/>
         <activity android:name=".Func.GPSFunc"/>
+        <activity android:name=".Func.AudioRecordFunc"/>
 
         <!-- 20190917 API 연동을 위하여 추가된 부분 -->
         <meta-data
