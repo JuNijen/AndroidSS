@@ -26,6 +26,14 @@
     <string name="TEXT_GPS_NOTICE">서비스의 이용을 위하여 GPS(위치 서비스)가 필요합니다. GPS를 활성화 해 주세요.</string>
     <string name="TEXT_GPS_ON">GPS가 활성화 되었습니다.</string>
 
+    <string name="TEXT_AUDIO_FILE_NAME">/AudioRecording.3gp</string>
+    <string name="TEXT_AUDIO_RECORD_STARTED">녹음이 시작되었습니다.</string>
+    <string name="TEXT_AUDIO_RECORD_STOPPED">녹음이 중지되었습니다.</string>
+    <string name="TEXT_AUDIO_RECORD_IS_RUNNING">녹음중입니다.</string>
+    <string name="TEXT_AUDIO_RECORD_LISTENING_STOPPED">재생을 중지하였습니다.</string>
+    <string name="TEXT_AUDIO_RECORD_LISTENING_STARTED">재생합니다.</string>
+
+
     <!-- TEST DATA -->
     <string name="TEXT_CALL_NUM">01062771242</string>
 

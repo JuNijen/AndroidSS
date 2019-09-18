@@ -16,8 +16,6 @@ import java.io.IOException
 import android.media.MediaPlayer
 
 
-private const val LOG_TAG = "AudioRecordTest"
-
 //20190918 제작
 //제작에 참고한 자료 ::
 //https://developer.android.com/guide/topics/media/mediarecorder
@@ -25,16 +23,15 @@ private const val LOG_TAG = "AudioRecordTest"
 
 class AudioRecordFunc : AppCompatActivity()
 {
-    var LOG_TAG = "AudioRecording"
-    var mFileName = ""
+    private var mFileName = ""
 
-    var mRecorder: MediaRecorder? = null
-    var mPlayer: MediaPlayer? = null
+    private var mRecorder: MediaRecorder? = null
+    private var mPlayer: MediaPlayer? = null
 
-    private lateinit var startbtn: Button
-    private lateinit var stopbtn: Button
-    private lateinit var playbtn: Button
-    private lateinit var stopplay: Button
+    private lateinit var startRecordBtn: Button
+    private lateinit var stopRecordBtn: Button
+    private lateinit var startplayBtn: Button
+    private lateinit var stopPlayBtn: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -45,33 +42,33 @@ class AudioRecordFunc : AppCompatActivity()
         SetButtons()
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath()
-        mFileName += "/AudioRecording.3gp"
+        mFileName += getString(R.string.TEXT_AUDIO_FILE_NAME)
     }
 
     private fun SetButtons()
     {
-        startbtn = findViewById(R.id.btnRecord)
-        stopbtn = findViewById(R.id.btnStop)
-        playbtn = findViewById(R.id.btnPlay)
-        stopplay = findViewById(R.id.btnStopPlay)
+        startRecordBtn = findViewById(R.id.btnRecord)
+        stopRecordBtn = findViewById(R.id.btnStop)
+        startplayBtn = findViewById(R.id.btnPlay)
+        stopPlayBtn = findViewById(R.id.btnStopPlay)
 
-        startbtn.isEnabled = true
-        stopbtn.isEnabled = false
-        playbtn.isEnabled = false
-        stopplay.isEnabled = false
+        startRecordBtn.isEnabled = true
+        stopRecordBtn.isEnabled = false
+        startplayBtn.isEnabled = false
+        stopPlayBtn.isEnabled = false
 
-        startbtn.setOnClickListener{
+        startRecordBtn.setOnClickListener{
             StartBtnOnClick()
         }
 
-        stopbtn.setOnClickListener{
+        stopRecordBtn.setOnClickListener{
             StopBtnOnClick()
         }
 
-        playbtn.setOnClickListener{
+        startplayBtn.setOnClickListener{
             PlayBtnOnClick()
         }
-        stopplay.setOnClickListener{
+        stopPlayBtn.setOnClickListener{
             StopPlayBtnOnClick()
         }
     }
@@ -84,10 +81,10 @@ class AudioRecordFunc : AppCompatActivity()
         //두 권한 모두 가지고 있을 경우
         if (isRecordAudioEnabled && isWriteExternalStroageEnabled)
         {
-            startbtn.isEnabled = false
-            stopbtn.isEnabled = true
-            playbtn.isEnabled = false
-            stopplay.isEnabled = false
+            startRecordBtn.isEnabled = false
+            stopRecordBtn.isEnabled = true
+            startplayBtn.isEnabled = false
+            stopPlayBtn.isEnabled = false
 
             mRecorder = MediaRecorder()
             mRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -100,35 +97,33 @@ class AudioRecordFunc : AppCompatActivity()
             }
             catch (e: IOException)
             {
-                Log.e(LOG_TAG, "prepare() failed")
+                Log.e(getString(R.string.TEXT_AUDIO_RECORD_IS_RUNNING), getString(R.string.ERR_FROM_CODE))
             }
             mRecorder?.start()
-            Toast.makeText(getApplicationContext(), "Recording Started", Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_LONG).show()
         }
     }
 
 
     private fun StopBtnOnClick()
     {
-        startbtn.isEnabled = true
-        stopbtn.isEnabled = false
-        playbtn.isEnabled = true
-        stopplay.isEnabled = true
+        startRecordBtn.isEnabled = true
+        stopRecordBtn.isEnabled = false
+        startplayBtn.isEnabled = true
+        stopPlayBtn.isEnabled = true
 
         mRecorder?.stop()
         mRecorder?.release()
         mRecorder = null
-        Toast.makeText(getApplicationContext(), "Recording Stopped", Toast.LENGTH_LONG)
-            .show()
+        Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STOPPED, Toast.LENGTH_LONG).show()
     }
 
     private fun PlayBtnOnClick()
     {
-        startbtn.isEnabled = true
-        stopbtn.isEnabled = false
-        playbtn.isEnabled = false
-        stopplay.isEnabled = true
+        startRecordBtn.isEnabled = true
+        stopRecordBtn.isEnabled = false
+        startplayBtn.isEnabled = false
+        stopPlayBtn.isEnabled = true
 
         mPlayer = MediaPlayer()
         try
@@ -136,15 +131,11 @@ class AudioRecordFunc : AppCompatActivity()
             mPlayer?.setDataSource(mFileName)
             mPlayer?.prepare()
             mPlayer?.start()
-            Toast.makeText(
-                getApplicationContext(),
-                "Recording Started Playing",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STARTED,Toast.LENGTH_LONG).show()
         }
         catch (e: IOException)
         {
-            Log.e(LOG_TAG, "prepare() failed");
+            Log.e(getString(R.string.TEXT_AUDIO_RECORD_IS_RUNNING), getString(R.string.ERR_FROM_CODE))
         }
     }
 
@@ -153,241 +144,11 @@ class AudioRecordFunc : AppCompatActivity()
         mPlayer?.release()
         mPlayer = null
 
-        startbtn.isEnabled = true
-        stopbtn.isEnabled = false
-        playbtn.isEnabled = true
-        stopplay.isEnabled = false
+        startRecordBtn.isEnabled = true
+        stopRecordBtn.isEnabled = false
+        startplayBtn.isEnabled = true
+        stopPlayBtn.isEnabled = false
 
-        Toast.makeText(
-            getApplicationContext(),
-            "Playing Audio Stopped",
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STOPPED,Toast.LENGTH_SHORT).show()
     }
 }
-
-//    override fun onRequestPermissionsResult(requestCode : Int,
-//                                            permissions : String, int[] grantResults)
-//    {
-//        switch(requestCode)
-//        {
-//            case REQUEST_AUDIO_PERMISSION_CODE :
-//            if (grantResults.length > 0)
-//            {
-//                boolean permissionToRecord = grantResults [0] == PackageManager.PERMISSION_GRANTED;
-//                boolean permissionToStore = grantResults [1] == PackageManager.PERMISSION_GRANTED;
-//                if (permissionToRecord && permissionToStore)
-//                {
-//                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_LONG)
-//                        .show()
-//                }
-//                else
-//                {
-//                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_LONG)
-//                        .show()
-//                }
-//            }
-//            break
-//        }
-//    }
-//    CheckPermissions() : Boolean
-//    {
-//        int result = ContextCompat . checkSelfPermission (getApplicationContext(), WRITE_EXTERNAL_STORAGE);
-//        int result1 = ContextCompat . checkSelfPermission (getApplicationContext(), RECORD_AUDIO);
-//        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED;
-//    }
-//    private void RequestPermissions()
-//    {
-//        ActivityCompat.requestPermissions(
-//            MainActivity.this,
-//            new String []{ RECORD_AUDIO, WRITE_EXTERNAL_STORAGE },
-//            REQUEST_AUDIO_PERMISSION_CODE
-//        )
-//    }
-//}
-
-/*
-//여기에 들어오기도 전부터 터짐.
-override fun onCreate(icicle: Bundle?)
-{
-    super.onCreate(icicle)
-
-    // Record to the external cache directory for visibility
-    fileName = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
-
-    ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
-
-    recordButton = RecordButton(this)
-    playButton = PlayButton(this)
-    val ll = LinearLayout(this).apply {
-        addView(
-            recordButton,
-            LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0f
-            )
-        )
-        addView(
-            playButton,
-            LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                0f
-            )
-        )
-    }
-    setContentView(ll)
-}
-
-private var fileName: String = ""
-
-private var recordButton: RecordButton? = null
-private var recorder: MediaRecorder? = null
-
-private var playButton: PlayButton? = null
-private var player: MediaPlayer? = null
-
-// Requesting permission to RECORD_AUDIO
-private var permissionToRecordAccepted = false
-private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
-
-override fun onRequestPermissionsResult(
-    requestCode: Int,
-    permissions: Array<String>,
-    grantResults: IntArray
-)
-{
-    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION)
-    {
-        grantResults[0] == PackageManager.PERMISSION_GRANTED
-    }
-    else
-    {
-        false
-    }
-    if (!permissionToRecordAccepted) finish()
-}
-
-private fun onRecord(start: Boolean) = if (start)
-{
-    startRecording()
-}
-else
-{
-    stopRecording()
-}
-
-private fun onPlay(start: Boolean) = if (start)
-{
-    startPlaying()
-}
-else
-{
-    stopPlaying()
-}
-
-private fun startPlaying()
-{
-    player = MediaPlayer().apply {
-        try
-        {
-            setDataSource(fileName)
-            prepare()
-            start()
-        }
-        catch (e: IOException)
-        {
-            Log.e(LOG_TAG, "prepare() failed")
-        }
-    }
-}
-
-private fun stopPlaying()
-{
-    player?.release()
-    player = null
-}
-
-private fun startRecording()
-{
-    recorder = MediaRecorder().apply {
-        setAudioSource(MediaRecorder.AudioSource.MIC)
-        setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-        setOutputFile(fileName)
-        setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-
-        try
-        {
-            prepare()
-        }
-        catch (e: IOException)
-        {
-            Log.e(LOG_TAG, "prepare() failed")
-        }
-
-        start()
-    }
-}
-
-private fun stopRecording()
-{
-    recorder?.apply {
-        stop()
-        release()
-    }
-    recorder = null
-}
-
-internal inner class RecordButton(ctx: Context) : Button(ctx)
-{
-
-    var mStartRecording = true
-
-    var clicker: OnClickListener = OnClickListener {
-        onRecord(mStartRecording)
-        text = when (mStartRecording)
-        {
-            true -> "Stop recording"
-            false -> "Start recording"
-        }
-        mStartRecording = !mStartRecording
-    }
-
-    init
-    {
-        text = "Start recording"
-        setOnClickListener(clicker)
-    }
-}
-
-internal inner class PlayButton(ctx: Context) : Button(ctx)
-{
-    var mStartPlaying = true
-    var clicker: OnClickListener = OnClickListener {
-        onPlay(mStartPlaying)
-        text = when (mStartPlaying)
-        {
-            true -> "Stop playing"
-            false -> "Start playing"
-        }
-        mStartPlaying = !mStartPlaying
-    }
-
-    init
-    {
-        text = "Start playing"
-        setOnClickListener(clicker)
-    }
-}
-
-override fun onStop()
-{
-    super.onStop()
-    recorder?.release()
-    recorder = null
-    player?.release()
-    player = null
-}
-*/
