@@ -59,6 +59,8 @@
 [ API PAGE LINK ]
 :: https://console.developers.google.com/apis/credentials?project=glowing-carport-253205
 
+[ ADB SETTING ]
+:: 192.168.0.34
 
 
 ----------------------------------------------------------------------------------------------------

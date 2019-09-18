@@ -76,6 +76,7 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun voiceBtnBtnOnClick()
     {
+        //TODO:: 이 부분은 임시입니다.
         ttsFunc.CallPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE))
     }
 

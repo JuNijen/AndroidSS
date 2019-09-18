@@ -7,13 +7,11 @@ class GeneralFunc
 {
     // public fun ----------------------------------------------------------------------------------
 
-    //s_dialog_title    default value : ""
-    //s_dialog_message  default value : ""
     //add_negative_btn  default value : false
     //per_type          default value : MY_PERMISSION.E_NONE
     //per_type는 퍼미션요청이 필요할 경우에만 받도록 한다.
-    fun CallCreateAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String = "",
-                        s_dialog_message : String = "", add_negative_btn : Boolean = false,
+    fun CallCreateAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String,
+                        s_dialog_message : String, add_negative_btn : Boolean = false,
                         per_type: MY_PERMISSION = MY_PERMISSION.E_NONE)
     {
         CreateAlertDialog(app_activity, s_dialog_title, s_dialog_message, add_negative_btn, per_type)
@@ -36,13 +34,9 @@ class GeneralFunc
 
         //내용물이 없으면 기본값을 채워준다.
         //기본값은 공백으로 하는게 나을까? 굳이 기본값이 필요하지 않을지도.
-        if(str_title.isNullOrEmpty())
+        if(str_title.isNullOrEmpty()||str_message.isNullOrEmpty())
         {
-            str_title = app_activity.getString(R.string.TEXT_NOTICE)
-        }
-        if(str_message.isNullOrEmpty())
-        {
-            str_message = app_activity.getString(R.string.TEXT_PERMISSION_NOTICE)
+            return
         }
 
         builder.setTitle(str_title)

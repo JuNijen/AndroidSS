@@ -9,7 +9,6 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 
 //알림창을 위하여 추가된 파일
-import android.app.AlertDialog
 
 
 //20190916 제작 - CALL ONLY
@@ -52,17 +51,6 @@ class PermissionFunc
         return CheckDeniedBefore(app_activity, per_type)
     }
 
-    //s_dialog_title    default value : ""
-    //s_dialog_message  default value : ""
-    //per_type          default value : MY_PERMISSION.E_NONE
-    fun CallAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String = "",
-                        s_dialog_message : String = "", add_negative_btn : Boolean = false,
-                        per_type: MY_PERMISSION = MY_PERMISSION.E_NONE)
-    {
-        GeneralFunc().CallCreateAlertDialog(app_activity, s_dialog_title, s_dialog_message,
-                                                                    add_negative_btn, per_type)
-    }
-
     //Permission에 맞는 Code(: Int)로 바꿔줌
     fun CallGetTypeCode(type_num: MY_PERMISSION): Int
     {
@@ -88,8 +76,9 @@ class PermissionFunc
         {
             //퍼미션을 보유중이지 않을 경우
             //알림창을 별도로 띄워준다.
-            CallAlertDialog(app_activity, app_activity.getString(R.string.TEXT_EMPTY),
-                app_activity.getString(R.string.TEXT_EMPTY), false, per_type)
+            GeneralFunc().CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
+                app_activity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(app_activity, per_type)),
+                false, per_type)
         }
         else
         {
@@ -116,9 +105,9 @@ class PermissionFunc
         if (app_activity.shouldShowRequestPermissionRationale(CallGetTypeString(per_type)))
         {
             //요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명
-            CallAlertDialog(app_activity, app_activity.getString(R.string.TEXT_EMPTY),
-                app_activity.getString(R.string.TEXT_EMPTY), true,
-                MY_PERMISSION.E_ACCESS_COARSE_LOCATION)
+            GeneralFunc().CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
+                app_activity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(app_activity, per_type))
+                , false, per_type)
         }
         else
         {
@@ -156,5 +145,21 @@ class PermissionFunc
         }
 
         return type_code
+    }
+
+    //Permission에 맞는 Name로 바꿔줌
+    private fun GetPermissionName(app_activity: AppCompatActivity, type_num: MY_PERMISSION): String
+    {
+        //TODO:: 이거 하나때문에 app_activity를 받아오는것이 옳은지 생각 해 봐야한다.
+        var name_string = ""
+
+        when (type_num)
+        {
+            MY_PERMISSION.E_CALL_PHONE -> name_string = app_activity.getString(R.string.TEXT_PERMISSION_CALL_PHONE)
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> name_string = app_activity.getString(R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION)
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = app_activity.getString(R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION)
+        }
+
+        return name_string
     }
 }

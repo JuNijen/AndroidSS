@@ -46,27 +46,16 @@ public class GPSFunc extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_gps);
 
-        //권한이 있는지 확인.
-        checkRunTimePermission();
-
-        if (!checkLocationServicesStatus())
-        {
-            showDialogForLocationServiceSetting();
-        }
-
-
         Button ShowLocationButton = findViewById(R.id.button);
         ShowLocationButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View arg0)
             {
-                checkRunTimePermission();
-
                 gpsTracker = new GpsTracker(GPSFunc.this);
 
                 //현재의 주소를 받아 이름이 textview 라는 텍스트뷰에 적용.
-                String address = getCurrentAddress(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+                String address = GetCurrentAddress(gpsTracker.getLatitude(), gpsTracker.getLongitude());
                 ((TextView)findViewById(R.id.textview)).setText(address);
 
                 //Toast.makeText(GPSFunc.this, "현재위치 \n위도 "
@@ -75,7 +64,7 @@ public class GPSFunc extends AppCompatActivity
         });
     }
 
-    void checkRunTimePermission()
+    void CheckPermissions()
     {
         //런타임 퍼미션 처리
         // 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -96,8 +85,16 @@ public class GPSFunc extends AppCompatActivity
     }
 
 
-    public String getCurrentAddress(double latitude, double longitude)
+    public String GetCurrentAddress(double latitude, double longitude)
     {
+        //권한이 있는지 확인.
+        CheckPermissions();
+
+        if (!CheckLocationServicesStatus())
+        {
+            GpsNoticeDialog();
+        }
+
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(GPSFunc.this, Locale.getDefault());
 
@@ -136,9 +133,15 @@ public class GPSFunc extends AppCompatActivity
     }
 
 
-    //GPS 활성화를 위한 메소드
-    private void showDialogForLocationServiceSetting()
+    //GPS 활성화를 위한 Alert Dialog
+    private void GpsNoticeDialog()
     {
+//        GeneralFunc geleralFunc = new GeneralFunc();
+//        geleralFunc.CallCreateAlertDialog(this, getString(R.string.TEXT_GPS_DISABLED),
+//            getString(R.string.TEXT_GPS_NOTICE),true);
+
+        getString(R.string.TEXT_GPS_DISABLED);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.TEXT_GPS_DISABLED);
         builder.setMessage(R.string.TEXT_GPS_NOTICE);
@@ -177,9 +180,9 @@ public class GPSFunc extends AppCompatActivity
             case GPS_ENABLE_REQUEST_CODE:
 
                 //사용자가 GPS 활성 시켰는지 검사
-                if (checkLocationServicesStatus())
+                if (CheckLocationServicesStatus())
                 {
-                    if (checkLocationServicesStatus())
+                    if (CheckLocationServicesStatus())
                     {
                         Log.d("@@@", "GPSFunc.java - onActivityResult : GPS ON");
                         Toast.makeText(GPSFunc.this, R.string.TEXT_GPS_ON, Toast.LENGTH_LONG).show();
@@ -190,7 +193,7 @@ public class GPSFunc extends AppCompatActivity
         }
     }
 
-    public boolean checkLocationServicesStatus()
+    public boolean CheckLocationServicesStatus()
     {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
