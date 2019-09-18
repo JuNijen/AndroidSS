@@ -1,4 +1,4 @@
-package com.example.AndroidSS
+package com.example.AndroidSS.Func
 
 //하단부터 추가된 파일.
 import android.speech.tts.TextToSpeech

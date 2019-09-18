@@ -1,4 +1,4 @@
-package com.example.AndroidSS
+package com.example.AndroidSS.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import android.content.Intent
+import com.example.AndroidSS.R
 
 
 //20190916 제작

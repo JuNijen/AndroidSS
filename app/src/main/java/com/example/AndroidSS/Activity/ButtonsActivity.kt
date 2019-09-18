@@ -1,4 +1,4 @@
-package com.example.AndroidSS
+package com.example.AndroidSS.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,11 @@ import android.widget.Button
 import android.content.Intent
 import android.widget.ImageButton
 import android.net.Uri
+import com.example.AndroidSS.Func.GPSFunc
+import com.example.AndroidSS.Func.MY_PERMISSION
+import com.example.AndroidSS.Func.PermissionFunc
+import com.example.AndroidSS.Func.TTSFunc
+import com.example.AndroidSS.R
 
 
 //20190916 제작

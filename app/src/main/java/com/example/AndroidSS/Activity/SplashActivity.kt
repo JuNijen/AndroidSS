@@ -1,4 +1,4 @@
-package com.example.AndroidSS
+package com.example.AndroidSS.Activity
 
 import android.content.Intent
 import android.os.Bundle

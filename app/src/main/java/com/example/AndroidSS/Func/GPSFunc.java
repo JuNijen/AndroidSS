@@ -1,4 +1,4 @@
-package com.example.AndroidSS;
+package com.example.AndroidSS.Func;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -20,6 +20,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.AndroidSS.R;
 
 import java.util.List;
 import java.util.Locale;

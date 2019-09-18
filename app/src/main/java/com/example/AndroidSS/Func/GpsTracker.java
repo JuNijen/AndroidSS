@@ -1,4 +1,4 @@
-package com.example.AndroidSS;
+package com.example.AndroidSS.Func;
 
 import android.util.Log;
 import android.Manifest;

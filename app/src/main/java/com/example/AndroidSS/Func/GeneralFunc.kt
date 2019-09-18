@@ -1,7 +1,8 @@
-package com.example.AndroidSS
+package com.example.AndroidSS.Func
 
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.AndroidSS.R
 
 class GeneralFunc
 {
@@ -12,7 +13,8 @@ class GeneralFunc
     //per_type는 퍼미션요청이 필요할 경우에만 받도록 한다.
     fun CallCreateAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String,
                         s_dialog_message : String, add_negative_btn : Boolean = false,
-                        per_type: MY_PERMISSION = MY_PERMISSION.E_NONE)
+                        per_type: MY_PERMISSION = MY_PERMISSION.E_NONE
+    )
     {
         CreateAlertDialog(app_activity, s_dialog_title, s_dialog_message, add_negative_btn, per_type)
     }
@@ -26,7 +28,8 @@ class GeneralFunc
 
     private fun CreateAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String,
                                   s_dialog_message : String, add_negative_btn : Boolean = false,
-                                  per_type: MY_PERMISSION = MY_PERMISSION.E_NONE)
+                                  per_type: MY_PERMISSION = MY_PERMISSION.E_NONE
+    )
     {
         var str_title = s_dialog_title
         var str_message = s_dialog_message
@@ -49,7 +52,8 @@ class GeneralFunc
             //요청 팝업을 띄워준다. 버튼을 누르면 리퀘스트.
             builder.setPositiveButton(R.string.BTN_OK)
             {
-                    dialogInterface, i -> PermissionFunc().CallRequestPermission(app_activity, per_type)
+                    dialogInterface, i -> PermissionFunc()
+                .CallRequestPermission(app_activity, per_type)
             }
         }
         else

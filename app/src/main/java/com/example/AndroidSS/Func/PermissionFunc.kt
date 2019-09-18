@@ -1,4 +1,4 @@
-package com.example.AndroidSS
+package com.example.AndroidSS.Func
 
 import androidx.appcompat.app.AppCompatActivity
 
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
+import com.example.AndroidSS.R
 
 //알림창을 위하여 추가된 파일
 
@@ -76,7 +77,8 @@ class PermissionFunc
         {
             //퍼미션을 보유중이지 않을 경우
             //알림창을 별도로 띄워준다.
-            GeneralFunc().CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
+            GeneralFunc()
+                .CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
                 app_activity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(app_activity, per_type)),
                 false, per_type)
         }
@@ -105,7 +107,8 @@ class PermissionFunc
         if (app_activity.shouldShowRequestPermissionRationale(CallGetTypeString(per_type)))
         {
             //요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명
-            GeneralFunc().CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
+            GeneralFunc()
+                .CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
                 app_activity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(app_activity, per_type))
                 , false, per_type)
         }
@@ -155,9 +158,15 @@ class PermissionFunc
 
         when (type_num)
         {
-            MY_PERMISSION.E_CALL_PHONE -> name_string = app_activity.getString(R.string.TEXT_PERMISSION_CALL_PHONE)
-            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> name_string = app_activity.getString(R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION)
-            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = app_activity.getString(R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION)
+            MY_PERMISSION.E_CALL_PHONE -> name_string = app_activity.getString(
+                R.string.TEXT_PERMISSION_CALL_PHONE
+            )
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> name_string = app_activity.getString(
+                R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION
+            )
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = app_activity.getString(
+                R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION
+            )
         }
 
         return name_string
