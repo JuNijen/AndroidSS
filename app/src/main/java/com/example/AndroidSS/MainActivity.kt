@@ -12,9 +12,11 @@ import android.content.Intent
 
 //20190916 제작
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.app_login)
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun sendButtonOnClick(arg1: EditText)
     {
-        if(arg1.text.isEmpty())
+        if (arg1.text.isEmpty())
         {
             //값이 제대로 입력되지 않았을 경우.
             Toast.makeText(this, R.string.ERR_EDITTEXT_NOVALUE, Toast.LENGTH_SHORT).show()

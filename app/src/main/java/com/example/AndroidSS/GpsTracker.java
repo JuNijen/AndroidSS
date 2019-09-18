@@ -52,23 +52,17 @@ public class GpsTracker extends Service implements LocationListener
             boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            if (!isGPSEnabled && !isNetworkEnabled)
-            {
-
-            }
-            else
+            //GPS와 NET을 사용 가능 할 경우
+            if (isGPSEnabled && isNetworkEnabled)
             {
                 int hasFineLocationPermission = ContextCompat.checkSelfPermission(mContext,
                         Manifest.permission.ACCESS_FINE_LOCATION);
                 int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(mContext,
                         Manifest.permission.ACCESS_COARSE_LOCATION);
 
-                if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                        hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED)
-                {
-
-                }
-                else
+                //PER이 없을 경우
+                if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &&
+                        hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED)
                 {
                     return null;
                 }
@@ -134,6 +128,15 @@ public class GpsTracker extends Service implements LocationListener
         return longitude;
     }
 
+    public void stopUsingGPS()
+    {
+        if (locationManager != null)
+        {
+            locationManager.removeUpdates(GpsTracker.this);
+        }
+    }
+
+
     @Override
     public void onLocationChanged(Location location)
     {
@@ -158,14 +161,5 @@ public class GpsTracker extends Service implements LocationListener
     public IBinder onBind(Intent arg0)
     {
         return null;
-    }
-
-
-    public void stopUsingGPS()
-    {
-        if (locationManager != null)
-        {
-            locationManager.removeUpdates(GpsTracker.this);
-        }
     }
 }

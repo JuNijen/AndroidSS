@@ -28,6 +28,7 @@ import java.io.IOException;
 
 
 //20190917 제작
+//20190918 수정 - PER
 //제작에 참고한 자료 ::
 //https://webnautes.tistory.com/1315
 
@@ -68,6 +69,8 @@ public class GPSFunc extends AppCompatActivity
             @Override
             public void onClick(View arg0)
             {
+                checkRunTimePermission();
+
                 gpsTracker = new GpsTracker(GPSFunc.this);
 
                 double latitude = gpsTracker.getLatitude();
@@ -76,7 +79,8 @@ public class GPSFunc extends AppCompatActivity
                 String address = getCurrentAddress(latitude, longitude);
                 textview_address.setText(address);
 
-                Toast.makeText(GPSFunc.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+                Toast.makeText(GPSFunc.this, "현재위치 \n위도 "
+                        + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -90,33 +94,16 @@ public class GPSFunc extends AppCompatActivity
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED)
+        if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED &&
+                hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED)
         {
-            // 2. 이미 퍼미션을 가지고 있다면
-            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
-            // 3.  위치 값을 가져올 수 있음
-        }
-        else
-        {
-            //TODO:: 이곳에는 지금 무언가를 하려다가 말은 흔적이 있다. 뭔지 알지?
             PermissionFunc permissionFunc = new PermissionFunc();
 
-            //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지(3-1, 4-1) 경우가 있습니다.
-            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0]))
+            //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다.
+            if(permissionFunc.CallCheckDeniedBefore(this,MY_PERMISSION.E_ACCESS_COARSE_LOCATION))
             {
-
-
-                permissionFunc.CallAlertDialog(this, MY_PERMISSION.E_ACCESS_COARSE_LOCATION);
-                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                //Toast.makeText(this, R.string.TEXT_PERMISSION_NOTICE, Toast.LENGTH_LONG).show();
+                permissionFunc.CallRequestPermission(this, MY_PERMISSION.E_ACCESS_COARSE_LOCATION);
             }
-
-            // 요청 결과는 onRequestPermissionResult 에서 수신됩니다.
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
-                    PERMISSIONS_REQUEST_CODE);
         }
     }
 
