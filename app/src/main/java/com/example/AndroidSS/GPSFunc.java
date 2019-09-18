@@ -1,7 +1,6 @@
 package com.example.AndroidSS;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.pm.PackageManager;
@@ -39,9 +38,6 @@ public class GPSFunc extends AppCompatActivity
     private GpsTracker gpsTracker;
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int PERMISSIONS_REQUEST_CODE = 100;
-    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION};
 
 
     @Override
@@ -50,17 +46,13 @@ public class GPSFunc extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_gps);
 
+        //권한이 있는지 확인.
+        checkRunTimePermission();
 
         if (!checkLocationServicesStatus())
         {
             showDialogForLocationServiceSetting();
         }
-        else
-        {
-            checkRunTimePermission();
-        }
-
-        final TextView textview_address = findViewById(R.id.textview);
 
 
         Button ShowLocationButton = findViewById(R.id.button);
@@ -73,14 +65,12 @@ public class GPSFunc extends AppCompatActivity
 
                 gpsTracker = new GpsTracker(GPSFunc.this);
 
-                double latitude = gpsTracker.getLatitude();
-                double longitude = gpsTracker.getLongitude();
+                //현재의 주소를 받아 이름이 textview 라는 텍스트뷰에 적용.
+                String address = getCurrentAddress(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+                ((TextView)findViewById(R.id.textview)).setText(address);
 
-                String address = getCurrentAddress(latitude, longitude);
-                textview_address.setText(address);
-
-                Toast.makeText(GPSFunc.this, "현재위치 \n위도 "
-                        + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+                //Toast.makeText(GPSFunc.this, "현재위치 \n위도 "
+                //        + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -88,7 +78,7 @@ public class GPSFunc extends AppCompatActivity
     void checkRunTimePermission()
     {
         //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
+        // 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -99,11 +89,9 @@ public class GPSFunc extends AppCompatActivity
         {
             PermissionFunc permissionFunc = new PermissionFunc();
 
-            //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다.
-            if(permissionFunc.CallCheckDeniedBefore(this,MY_PERMISSION.E_ACCESS_COARSE_LOCATION))
-            {
-                permissionFunc.CallRequestPermission(this, MY_PERMISSION.E_ACCESS_COARSE_LOCATION);
-            }
+            //퍼미션 요청을 거절한 적이 있는지 체크.
+            permissionFunc.CallCheckDeniedBefore(this,MY_PERMISSION.E_ACCESS_FINE_LOCATION);
+            permissionFunc.CallCheckDeniedBefore(this,MY_PERMISSION.E_ACCESS_COARSE_LOCATION);
         }
     }
 
@@ -144,7 +132,7 @@ public class GPSFunc extends AppCompatActivity
         }
 
         Address address = addresses.get(0);
-        return address.getAddressLine(0).toString();
+        return address.getAddressLine(0);
     }
 
 
@@ -155,6 +143,7 @@ public class GPSFunc extends AppCompatActivity
         builder.setTitle(R.string.TEXT_GPS_DISABLED);
         builder.setMessage(R.string.TEXT_GPS_NOTICE);
         builder.setCancelable(true);
+
         builder.setPositiveButton(R.string.BTN_OK, new DialogInterface.OnClickListener()
         {
             @Override
@@ -165,6 +154,7 @@ public class GPSFunc extends AppCompatActivity
                 startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
             }
         });
+
         builder.setNegativeButton(R.string.BTN_CANCEL, new DialogInterface.OnClickListener()
         {
             @Override
@@ -192,7 +182,7 @@ public class GPSFunc extends AppCompatActivity
                     if (checkLocationServicesStatus())
                     {
                         Log.d("@@@", "GPSFunc.java - onActivityResult : GPS ON");
-                        checkRunTimePermission();
+                        Toast.makeText(GPSFunc.this, R.string.TEXT_GPS_ON, Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
