@@ -60,6 +60,10 @@
     <string name="XML_TEXT_PLAY_RECORD">재생 시작</string>
     <string name="XML_TEXT_STOP_RECORD_PLAYING">재생 중지</string>
 
+    <!--임시값-->
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+
 
     <!-- 문자열 참조하는 방법 메모 -->
     <!--
