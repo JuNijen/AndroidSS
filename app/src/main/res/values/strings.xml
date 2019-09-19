@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">_TEST 0918.05</string>
+    <string name="app_name">_TEST 0919.01</string>
 
     <string name="ERR_EDITTEXT_NOVALUE">입력되지 않았습니다.</string>
     <string name="ERR_FROM_CODE"> 오류가 발견되었습니다.</string>
