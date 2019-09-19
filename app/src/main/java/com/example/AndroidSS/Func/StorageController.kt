@@ -8,6 +8,8 @@ import java.io.File
 import com.example.AndroidSS.R
 
 
+//20190919 제작
+
 //기본 폴더 위치 ::
 //storage/emulated/0/Android/data/com.example.AndroidSS
 class StorageController

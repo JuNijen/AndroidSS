@@ -17,41 +17,46 @@ import com.example.AndroidSS.R
 
 //20190916 제작
 //20190917 수정 (CALL, TTS)
+//20190919 수정 (GPS, RECORD)
 
 class ButtonsActivity : AppCompatActivity()
 {
-    lateinit var ttsFunc: TTSFunc
-    lateinit var audioRecordFunc : AudioRecordFunc
-
+    private lateinit var ttsFunc: TTSFunc
+    private lateinit var audioRecordFunc : AudioRecordFunc
 
     private lateinit var startRecordBtn: Button
     private lateinit var stopRecordBtn: Button
-    private lateinit var startplayBtn: Button
+    private lateinit var startPlayBtn: Button
     private lateinit var stopPlayBtn: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
-        ttsFunc = TTSFunc()
-        ttsFunc.CallInitFunc(this)
-
-        audioRecordFunc = AudioRecordFunc()
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_main)
 
-        SetButtons()
+        initActivity()
+        setButtons()
     }
 
     override fun onPause()
     {
-        ttsFunc.CallStopTTS()
+        ttsFunc.callStopTTS()
         super.onPause()
     }
 
 
-    private fun SetButtons()
+    // private fun ---------------------------------------------------------------------------------
+
+    private fun initActivity()
+    {
+        ttsFunc = TTSFunc()
+        ttsFunc.callInitFunc(this)
+
+        audioRecordFunc = AudioRecordFunc()
+    }
+
+    private fun setButtons()
     {
         findViewById<ImageButton>(R.id.callBtn).setOnClickListener {
             callBtnOnClick()
@@ -73,27 +78,27 @@ class ButtonsActivity : AppCompatActivity()
             returnHomeBtnOnClick()
         }
 
-        SetRecordButtons()
+        setRecordButtons()
     }
 
-    private fun SetRecordButtons()
+    private fun setRecordButtons()
     {
         startRecordBtn = findViewById(R.id.btnRecord)
         stopRecordBtn = findViewById(R.id.btnStop)
-        startplayBtn = findViewById(R.id.btnPlay)
+        startPlayBtn = findViewById(R.id.btnPlay)
         stopPlayBtn = findViewById(R.id.btnStopPlay)
 
         //초기 버튼 설정
         startRecordBtn.isEnabled = true
         stopRecordBtn.isEnabled = false
-        startplayBtn.isEnabled = false
+        startPlayBtn.isEnabled = false
         stopPlayBtn.isEnabled = false
 
         //시작 버튼
         startRecordBtn.setOnClickListener{
             startRecordBtn.isEnabled = false
             stopRecordBtn.isEnabled = true
-            startplayBtn.isEnabled = false
+            startPlayBtn.isEnabled = false
             stopPlayBtn.isEnabled = false
 
             audioRecordFunc.callStartBtnOnClick(this)
@@ -104,7 +109,7 @@ class ButtonsActivity : AppCompatActivity()
         stopRecordBtn.setOnClickListener{
             startRecordBtn.isEnabled = true
             stopRecordBtn.isEnabled = false
-            startplayBtn.isEnabled = true
+            startPlayBtn.isEnabled = true
             stopPlayBtn.isEnabled = true
 
             audioRecordFunc.callStopBtnOnClick()
@@ -112,10 +117,10 @@ class ButtonsActivity : AppCompatActivity()
         }
 
         //재생 시작 버튼
-        startplayBtn.setOnClickListener{
+        startPlayBtn.setOnClickListener{
             startRecordBtn.isEnabled = true
             stopRecordBtn.isEnabled = false
-            startplayBtn.isEnabled = false
+            startPlayBtn.isEnabled = false
             stopPlayBtn.isEnabled = true
 
             audioRecordFunc.callPlayBtnOnClick()
@@ -127,7 +132,7 @@ class ButtonsActivity : AppCompatActivity()
 
             startRecordBtn.isEnabled = true
             stopRecordBtn.isEnabled = false
-            startplayBtn.isEnabled = true
+            startPlayBtn.isEnabled = true
             stopPlayBtn.isEnabled = false
 
             audioRecordFunc.callStopPlayBtnOnClick()
@@ -139,9 +144,9 @@ class ButtonsActivity : AppCompatActivity()
     {
         val intent = Intent(Intent.ACTION_CALL)
 
-        //PermissionFunc를 생성하고 Check 한다.
-        //Check에는 Alart > Request 기능이 포함되어있다.
-        if (PermissionFunc().CallCheckPermission(this, MY_PERMISSION.E_CALL_PHONE))
+        //PermissionFunc 를 생성하고 Check 한다.
+        //Check 에는 Alert > Request 기능이 포함되어있다.
+        if (PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_CALL_PHONE))
         {
             //TODO::인텐트 저친구 뭐가문젠지 잘 모르겠음. 아무튼 해결해야함
             intent.data = Uri.parse("tel:${getString(R.string.TEXT_CALL_NUM)}")
@@ -152,7 +157,7 @@ class ButtonsActivity : AppCompatActivity()
     private fun gpsBtnBtnOnClick()
     {
         var strCurrentPosition = getString(R.string.TEXT_GPS_CURRENT_POSITION)
-        var strAdress = GPSFunc().callGetAdress(this)
+        var strAdress = GPSFunc().callGetKoreanAdress(this)
 
         findViewById<TextView>(R.id.textView1).text = strCurrentPosition + strAdress
     }
@@ -174,6 +179,6 @@ class ButtonsActivity : AppCompatActivity()
     private fun speakerBtnOnClick()
     {
         //TODO:: 이 부분은 임시입니다.
-        ttsFunc.CallPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE, getString(R.string.TEXT_EMPTY)))
+        ttsFunc.callPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE, getString(R.string.TEXT_EMPTY)))
     }
 }

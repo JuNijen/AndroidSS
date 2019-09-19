@@ -53,7 +53,7 @@ class GeneralFunc
             builder.setPositiveButton(R.string.BTN_OK)
             {
                     dialogInterface, i -> PermissionFunc()
-                .CallRequestPermission(appCompactActivity, per_type)
+                .callRequestPermission(appCompactActivity, per_type)
             }
         }
         else

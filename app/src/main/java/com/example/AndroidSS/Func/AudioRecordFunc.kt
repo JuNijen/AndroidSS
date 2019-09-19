@@ -88,8 +88,8 @@ class AudioRecordFunc
     private fun startBtnOnClick(appCompactActivity: AppCompatActivity)
     {
         var isRecordAudioEnabled =
-            PermissionFunc().CallCheckPermission(appCompactActivity, MY_PERMISSION.E_RECORD_AUDIO)
-        var isWriteExternalStroageEnabled = PermissionFunc().CallCheckPermission(
+            PermissionFunc().callCheckPermission(appCompactActivity, MY_PERMISSION.E_RECORD_AUDIO)
+        var isWriteExternalStroageEnabled = PermissionFunc().callCheckPermission(
             appCompactActivity,
             MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE
         )

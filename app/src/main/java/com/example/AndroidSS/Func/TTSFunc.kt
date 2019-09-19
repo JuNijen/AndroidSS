@@ -3,8 +3,8 @@ package com.example.AndroidSS.Func
 //하단부터 추가된 파일.
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 import android.os.Build
+import java.util.*
 
 //20190917 제작
 //제작에 참고한 자료 ::
@@ -12,26 +12,32 @@ import android.os.Build
 //수정에 참고한 자료 ::
 //https://gist.github.com/leesc22/5f13cc049e84610fe147f21ab7e4b814
 
+
 class TTSFunc
 {
-    lateinit var mTTS: TextToSpeech
+    private lateinit var mTTS: TextToSpeech
 
-    fun CallInitFunc(appCompactActivity: AppCompatActivity)
+    // public fun ----------------------------------------------------------------------------------
+
+    fun callInitFunc(appCompactActivity: AppCompatActivity)
     {
-        InitFunc(appCompactActivity)
+        initFunc(appCompactActivity)
     }
 
-    fun CallPlayTTS(toSpeak: String)
+    fun callPlayTTS(toSpeak: String)
     {
-        PlayTTS(toSpeak)
+        playTTS(toSpeak)
     }
 
-    fun CallStopTTS()
+    fun callStopTTS()
     {
-        StopTTS()
+        stopTTS()
     }
 
-    private fun InitFunc(appCompactActivity: AppCompatActivity)
+
+    // private fun ---------------------------------------------------------------------------------
+
+    private fun initFunc(appCompactActivity: AppCompatActivity)
     {
         mTTS = TextToSpeech(appCompactActivity, TextToSpeech.OnInitListener { status ->
             if (status != TextToSpeech.ERROR)
@@ -43,7 +49,7 @@ class TTSFunc
         })
     }
 
-    private fun PlayTTS(toSpeak: String)
+    private fun playTTS(toSpeak: String)
     {
         //내용이 있어야만 작성 가능.
         if (toSpeak.isNullOrBlank())
@@ -66,7 +72,7 @@ class TTSFunc
     }
 
     //중지 버튼을 누르면 TTS 중단.
-    private fun StopTTS()
+    private fun stopTTS()
     {
         if (mTTS.isSpeaking)
         {
@@ -83,7 +89,7 @@ class TTSFunc
     //TTSFunc를 사용중인 곳에 추가하여야 할 것.
     //override fun onPause()
     //{
-    //    (TTSFunc 변수).CallStopTTS()
+    //    (TTSFunc 변수).callStopTTS()
     //    super.onPause()
     //}
 }

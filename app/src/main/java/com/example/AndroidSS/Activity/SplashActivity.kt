@@ -1,8 +1,8 @@
 package com.example.AndroidSS.Activity
 
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 
 //20190916 제작
 

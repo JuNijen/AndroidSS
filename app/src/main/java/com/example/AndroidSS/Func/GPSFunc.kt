@@ -3,7 +3,6 @@ package com.example.AndroidSS.Func
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import android.content.pm.PackageManager
-import android.content.DialogInterface
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -22,7 +21,8 @@ import java.util.Locale
 //20190917 제작
 //20190918 수정 - PER
 //20190919 수정 - .java > .kt
-//제작에 참고한 자료 ::
+//20190919 수정 - -AppCompactActivity
+// 제작에 참고한 자료 ::
 //https://webnautes.tistory.com/1315
 
 
@@ -33,20 +33,26 @@ class GPSFunc
     private val GPS_ENABLE_REQUEST_CODE = 2001
 
 
-    fun callGetAdress(appCompactActivity: AppCompatActivity) : String
+    // public fun ----------------------------------------------------------------------------------
+
+    fun callGetKoreanAdress(appCompactActivity: AppCompatActivity) : String
     {
-        return getAdress(appCompactActivity)
+        return getCurrentKoreanAdress(appCompactActivity)
     }
 
-    private fun getAdress(appCompactActivity: AppCompatActivity) : String
+    private fun getCurrentKoreanAdress(appCompactActivity: AppCompatActivity) : String
     {
         gpsTracker = GpsTracker(appCompactActivity)
+        gpsTracker?.stopUsingGPS()
 
         //Latitude : 위도, Longitude : 경도
-        return GetCurrentAddress(appCompactActivity, gpsTracker!!.getLatitude(), gpsTracker!!.getLongitude())
+        return getCurrentAddress(appCompactActivity, gpsTracker!!.getLatitude(), gpsTracker!!.getLongitude())
     }
 
-    private fun CheckPermissions(appCompactActivity: AppCompatActivity)
+
+    // private fun ---------------------------------------------------------------------------------
+
+    private fun checkPermissions(appCompactActivity: AppCompatActivity)
     {
         //런타임 퍼미션 처리
         // 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -63,31 +69,31 @@ class GPSFunc
             val permissionFunc = PermissionFunc()
 
             //퍼미션 요청을 거절한 적이 있는지 체크.
-            permissionFunc.CallCheckDeniedBefore(appCompactActivity, MY_PERMISSION.E_ACCESS_FINE_LOCATION)
-            permissionFunc.CallCheckDeniedBefore(appCompactActivity, MY_PERMISSION.E_ACCESS_COARSE_LOCATION)
+            permissionFunc.callCheckDeniedBefore(appCompactActivity, MY_PERMISSION.E_ACCESS_FINE_LOCATION)
+            permissionFunc.callCheckDeniedBefore(appCompactActivity, MY_PERMISSION.E_ACCESS_COARSE_LOCATION)
         }
     }
 
 
-    fun GetCurrentAddress(appCompactActivity: AppCompatActivity, latitude: Double, longitude: Double): String
+    private fun getCurrentAddress(appCompactActivity: AppCompatActivity, latitude: Double, longitude: Double): String
     {
         //권한이 있는지 확인.
-        CheckPermissions(appCompactActivity)
+        checkPermissions(appCompactActivity)
 
-        if (!CheckLocationServicesStatus(appCompactActivity))
+        if (!checkLocationServicesStatus(appCompactActivity))
         {
-            GpsNoticeDialog(appCompactActivity)
+            gpsNoticeDialog(appCompactActivity)
         }
 
         //지오코더... GPS를 주소로 변환
-        val geocoder = Geocoder(appCompactActivity, Locale.getDefault())
+        val geoCoder = Geocoder(appCompactActivity, Locale.getDefault())
 
         val addresses: List<Address>?
         var resultStr = ""
 
         try
         {
-            addresses = geocoder.getFromLocation(latitude, longitude, 7)
+            addresses = geoCoder.getFromLocation(latitude, longitude, 7)
         }
         catch (ioException: IOException)
         {
@@ -118,12 +124,8 @@ class GPSFunc
 
 
     //GPS 활성화를 위한 Alert Dialog
-    private fun GpsNoticeDialog(appCompactActivity: AppCompatActivity)
+    private fun gpsNoticeDialog(appCompactActivity: AppCompatActivity)
     {
-        //        GeneralFunc geleralFunc = new GeneralFunc();
-        //        geleralFunc.CallCreateAlertDialog(this, getString(R.string.TEXT_GPS_DISABLED),
-        //            getString(R.string.TEXT_GPS_NOTICE),true);
-
         appCompactActivity.getString(R.string.TEXT_GPS_DISABLED)
 
         val builder = AlertDialog.Builder(appCompactActivity)
@@ -138,24 +140,17 @@ class GPSFunc
             appCompactActivity.startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE)
         }
 
-        builder.setNegativeButton(R.string.BTN_CANCEL, object : DialogInterface.OnClickListener
-        {
-            override fun onClick(dialog: DialogInterface, id: Int)
-            {
-                dialog.cancel()
-            }
-        })
+        builder.setNegativeButton(R.string.BTN_CANCEL) {
+                dialog, id -> dialog.cancel()
+        }
         builder.create().show()
     }
 
-
-    fun CheckLocationServicesStatus(appCompactActivity: AppCompatActivity): Boolean
+    private fun checkLocationServicesStatus(appCompactActivity: AppCompatActivity): Boolean
     {
-        val locationManager = appCompactActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager  = appCompactActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         return (locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager!!.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        ))
+                || locationManager!!.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
     }
 }
