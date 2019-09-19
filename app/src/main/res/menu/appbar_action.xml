@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--20190919 제작-->
+<!--참고한 자료 :: https://recipes4dev.tistory.com/149-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_search_category_default"
+        android:title="Search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_account"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="Account"
+        app:showAsAction="always" />
+
+<item
+    android:id="@+id/action_settings"
+    android:title="Settings"
+    app:showAsAction="never"/>
+</menu>
