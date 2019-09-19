@@ -9,8 +9,6 @@ import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
 import com.example.AndroidSS.R
 
-//알림창을 위하여 추가된 파일
-
 
 //20190916 제작 - CALL ONLY
 //20190917 수정 - 타입 분기 추가

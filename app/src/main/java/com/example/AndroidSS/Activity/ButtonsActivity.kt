@@ -9,6 +9,7 @@ import android.content.Intent
 import android.widget.ImageButton
 import android.net.Uri
 import android.provider.MediaStore
+import android.widget.TextView
 import com.example.AndroidSS.Func.*
 import com.example.AndroidSS.R
 
@@ -77,8 +78,7 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun gpsBtnBtnOnClick()
     {
-        val intent = Intent(this, GPSFunc::class.java)
-        startActivity(intent)
+        findViewById<TextView>(R.id.textView1).text = GPSFunc().callGetAdress(this)
     }
 
     private fun voiceBtnBtnOnClick()
