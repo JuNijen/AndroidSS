@@ -1,7 +1,7 @@
 package com.example.AndroidSS.Func
 
-import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import android.app.AlertDialog
 import com.example.AndroidSS.R
 
 class GeneralFunc

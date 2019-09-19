@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 //하단부터 추가된 파일.
-import android.widget.Button
-import android.content.Intent
 import android.widget.ImageButton
-import android.net.Uri
-import android.provider.MediaStore
 import android.widget.TextView
+import android.widget.Button
+import android.widget.Toast
+import android.content.Intent
+import android.net.Uri
+
 import com.example.AndroidSS.Func.*
 import com.example.AndroidSS.R
 
@@ -19,13 +20,23 @@ import com.example.AndroidSS.R
 
 class ButtonsActivity : AppCompatActivity()
 {
-
     lateinit var ttsFunc: TTSFunc
+    lateinit var audioRecordFunc : AudioRecordFunc
+
+
+    private lateinit var startRecordBtn: Button
+    private lateinit var stopRecordBtn: Button
+    private lateinit var startplayBtn: Button
+    private lateinit var stopPlayBtn: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
         ttsFunc = TTSFunc()
         ttsFunc.CallInitFunc(this)
+
+        audioRecordFunc = AudioRecordFunc()
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_main)
@@ -38,6 +49,7 @@ class ButtonsActivity : AppCompatActivity()
         ttsFunc.CallStopTTS()
         super.onPause()
     }
+
 
     private fun SetButtons()
     {
@@ -60,6 +72,67 @@ class ButtonsActivity : AppCompatActivity()
         findViewById<Button>(R.id.returnHomeBtn).setOnClickListener {
             returnHomeBtnOnClick()
         }
+
+        SetRecordButtons()
+    }
+
+    private fun SetRecordButtons()
+    {
+        startRecordBtn = findViewById(R.id.btnRecord)
+        stopRecordBtn = findViewById(R.id.btnStop)
+        startplayBtn = findViewById(R.id.btnPlay)
+        stopPlayBtn = findViewById(R.id.btnStopPlay)
+
+        //초기 버튼 설정
+        startRecordBtn.isEnabled = true
+        stopRecordBtn.isEnabled = false
+        startplayBtn.isEnabled = false
+        stopPlayBtn.isEnabled = false
+
+        //시작 버튼
+        startRecordBtn.setOnClickListener{
+            startRecordBtn.isEnabled = false
+            stopRecordBtn.isEnabled = true
+            startplayBtn.isEnabled = false
+            stopPlayBtn.isEnabled = false
+
+            audioRecordFunc.CallStartBtnOnClick(this)
+            Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_LONG).show()
+        }
+
+        //정지 버튼
+        stopRecordBtn.setOnClickListener{
+            startRecordBtn.isEnabled = true
+            stopRecordBtn.isEnabled = false
+            startplayBtn.isEnabled = true
+            stopPlayBtn.isEnabled = true
+
+            audioRecordFunc.CalStopBtnOnClick()
+            Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STOPPED, Toast.LENGTH_LONG).show()
+        }
+
+        //재생 시작 버튼
+        startplayBtn.setOnClickListener{
+            startRecordBtn.isEnabled = true
+            stopRecordBtn.isEnabled = false
+            startplayBtn.isEnabled = false
+            stopPlayBtn.isEnabled = true
+
+            audioRecordFunc.CallPlayBtnOnClick()
+            Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STARTED,Toast.LENGTH_LONG).show()
+        }
+
+        //재생 정지 버튼
+        stopPlayBtn.setOnClickListener{
+
+            startRecordBtn.isEnabled = true
+            stopRecordBtn.isEnabled = false
+            startplayBtn.isEnabled = true
+            stopPlayBtn.isEnabled = false
+
+            audioRecordFunc.CallStopPlayBtnOnClick()
+            Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STOPPED, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun callBtnOnClick()
@@ -78,13 +151,15 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun gpsBtnBtnOnClick()
     {
-        findViewById<TextView>(R.id.textView1).text = GPSFunc().callGetAdress(this)
+        var strCurrentPosition = getString(R.string.TEXT_GPS_CURRENT_POSITION)
+        var strAdress = GPSFunc().callGetAdress(this)
+
+        findViewById<TextView>(R.id.textView1).text = strCurrentPosition + strAdress
     }
 
     private fun voiceBtnBtnOnClick()
     {
-        val intent = Intent(this, AudioRecordFunc::class.java)
-        startActivity(intent)
+
     }
 
     private fun returnHomeBtnOnClick()

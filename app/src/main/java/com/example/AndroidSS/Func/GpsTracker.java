@@ -7,11 +7,12 @@ import android.os.IBinder;
 import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
+
 import android.location.Location;
 import android.location.LocationManager;
 import android.location.LocationListener;
-import android.content.pm.PackageManager;
 
+import android.content.pm.PackageManager;
 import androidx.core.content.ContextCompat;
 
 
@@ -25,7 +26,6 @@ import androidx.core.content.ContextCompat;
 
 public class GpsTracker extends Service implements LocationListener
 {
-
     private final Context mContext;
     Location location;
     double latitude;

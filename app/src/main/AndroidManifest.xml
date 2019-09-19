@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.AndroidSS">
 
+    <!-- 퍼미션 요청 할 때마다 꼭 추가하기... 꼭... -->
     <!-- 20190916 즉시 통화를 위하여 필요한 Permission -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -10,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-    <!-- 20190917 녹음 서비스를 위하여 필요한 Permission -->
+    <!-- 20190918 녹음 서비스를 위하여 필요한 Permission -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -22,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- 20190916 Splash 화면을 위하여 추가된 부분 -->
         <activity android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -31,10 +33,9 @@
             </intent-filter>
         </activity>
 
+        <!-- 액티비티 화면 만들때마다 꼭 추가하기... 꼭... -->
         <activity android:name=".Activity.MainActivity"/>
         <activity android:name=".Activity.ButtonsActivity"/>
-        <activity android:name=".Func.GPSFunc"/>
-        <activity android:name=".Func.AudioRecordFunc"/>
 
         <!-- 20190917 API 연동을 위하여 추가된 부분 -->
         <meta-data
@@ -42,7 +43,6 @@
             android:value="AIzaSyBYbndK-eqBK7S4mePE2bQPSJUm7kfVINE" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <!-- 20190917 API 연동을 위하여 추가된 부분 -->
 
     </application>
 
