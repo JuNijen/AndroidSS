@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">_TEST 0919.05</string>
+    <string name="app_name">_TEST 0919.06</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
