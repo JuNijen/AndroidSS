@@ -39,19 +39,19 @@ class PermissionFunc
     // public fun ----------------------------------------------------------------------------------
 
     //Check에는 Alart > Request 기능이 포함되어있다.
-    fun CallCheckPermission(app_activity: AppCompatActivity, per_type: MY_PERMISSION): Boolean
+    fun CallCheckPermission(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION): Boolean
     {
-        return CheckPermission(app_activity, per_type)
+        return CheckPermission(appCompactActivity, per_type)
     }
 
-    fun CallRequestPermission(app_activity: AppCompatActivity, per_type: MY_PERMISSION)
+    fun CallRequestPermission(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION)
     {
-        RequestPermission(app_activity, per_type)
+        RequestPermission(appCompactActivity, per_type)
     }
 
-    fun CallCheckDeniedBefore(app_activity: AppCompatActivity, per_type: MY_PERMISSION) : Boolean
+    fun CallCheckDeniedBefore(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION) : Boolean
     {
-        return CheckDeniedBefore(app_activity, per_type)
+        return CheckDeniedBefore(appCompactActivity, per_type)
     }
 
     //Permission에 맞는 Code(: Int)로 바꿔줌
@@ -70,18 +70,18 @@ class PermissionFunc
     // private fun ---------------------------------------------------------------------------------
 
     //Check에는 Alart > Request 기능이 포함되어있다.
-    private fun CheckPermission(app_activity: AppCompatActivity, per_type: MY_PERMISSION): Boolean
+    private fun CheckPermission(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION): Boolean
     {
         var bReady = false
 
-        if (ContextCompat.checkSelfPermission(app_activity, CallGetTypeString(per_type))
+        if (ContextCompat.checkSelfPermission(appCompactActivity, CallGetTypeString(per_type))
                                                             != PackageManager.PERMISSION_GRANTED)
         {
             //퍼미션을 보유중이지 않을 경우
             //알림창을 별도로 띄워준다.
             GeneralFunc()
-                .CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
-                app_activity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(app_activity, per_type)),
+                .CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
+                    appCompactActivity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(appCompactActivity, per_type)),
                 false, per_type)
         }
         else
@@ -92,13 +92,13 @@ class PermissionFunc
         return bReady
     }
 
-    private fun RequestPermission(app_activity: AppCompatActivity, per_type: MY_PERMISSION)
+    private fun RequestPermission(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION)
     {
-        ActivityCompat.requestPermissions(app_activity,
+        ActivityCompat.requestPermissions(appCompactActivity,
             arrayOf(CallGetTypeString(per_type)), CallGetTypeCode(per_type))
     }
 
-    private fun CheckDeniedBefore(app_activity: AppCompatActivity, per_type: MY_PERMISSION) : Boolean
+    private fun CheckDeniedBefore(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION) : Boolean
     {
         var bReady = false
 
@@ -106,12 +106,12 @@ class PermissionFunc
         // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우
 
         //TODO::shouldSRPR을 대신할 기능을 찾아보아야한다.
-        if (app_activity.shouldShowRequestPermissionRationale(CallGetTypeString(per_type)))
+        if (appCompactActivity.shouldShowRequestPermissionRationale(CallGetTypeString(per_type)))
         {
             //요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명
             GeneralFunc()
-                .CallCreateAlertDialog(app_activity, app_activity.getString(R.string.TEXT_NOTICE),
-                app_activity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(app_activity, per_type))
+                .CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
+                    appCompactActivity.getString(R.string.TEXT_PERMISSION_NOTICE, GetPermissionName(appCompactActivity, per_type))
                 , false, per_type)
         }
         else
@@ -157,26 +157,26 @@ class PermissionFunc
     }
 
     //Permission에 맞는 Name로 바꿔줌
-    private fun GetPermissionName(app_activity: AppCompatActivity, type_num: MY_PERMISSION): String
+    private fun GetPermissionName(appCompactActivity: AppCompatActivity, type_num: MY_PERMISSION): String
     {
         //TODO:: 이거 하나때문에 app_activity를 받아오는것이 옳은지 생각 해 봐야한다.
         var name_string = ""
 
         when (type_num)
         {
-            MY_PERMISSION.E_CALL_PHONE -> name_string = app_activity.getString(
+            MY_PERMISSION.E_CALL_PHONE -> name_string = appCompactActivity.getString(
                 R.string.TEXT_PERMISSION_CALL_PHONE
             )
-            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> name_string = app_activity.getString(
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> name_string = appCompactActivity.getString(
                 R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION
             )
-            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = app_activity.getString(
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = appCompactActivity.getString(
                 R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION
             )
-            MY_PERMISSION.E_RECORD_AUDIO -> name_string = app_activity.getString(
+            MY_PERMISSION.E_RECORD_AUDIO -> name_string = appCompactActivity.getString(
                 R.string.TEXT_PERMISSION_RECORD_AUDIO
             )
-            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> name_string = app_activity.getString(
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> name_string = appCompactActivity.getString(
                 R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE
             )
         }

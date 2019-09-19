@@ -96,7 +96,7 @@ class ButtonsActivity : AppCompatActivity()
             startplayBtn.isEnabled = false
             stopPlayBtn.isEnabled = false
 
-            audioRecordFunc.CallStartBtnOnClick(this)
+            audioRecordFunc.callStartBtnOnClick(this)
             Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_LONG).show()
         }
 
@@ -107,7 +107,7 @@ class ButtonsActivity : AppCompatActivity()
             startplayBtn.isEnabled = true
             stopPlayBtn.isEnabled = true
 
-            audioRecordFunc.CalStopBtnOnClick()
+            audioRecordFunc.callStopBtnOnClick()
             Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STOPPED, Toast.LENGTH_LONG).show()
         }
 
@@ -118,7 +118,7 @@ class ButtonsActivity : AppCompatActivity()
             startplayBtn.isEnabled = false
             stopPlayBtn.isEnabled = true
 
-            audioRecordFunc.CallPlayBtnOnClick()
+            audioRecordFunc.callPlayBtnOnClick()
             Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STARTED,Toast.LENGTH_LONG).show()
         }
 
@@ -130,7 +130,7 @@ class ButtonsActivity : AppCompatActivity()
             startplayBtn.isEnabled = true
             stopPlayBtn.isEnabled = false
 
-            audioRecordFunc.CallStopPlayBtnOnClick()
+            audioRecordFunc.callStopPlayBtnOnClick()
             Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STOPPED, Toast.LENGTH_SHORT).show()
         }
     }

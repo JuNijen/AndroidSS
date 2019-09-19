@@ -14,14 +14,14 @@ class StorageController
 {
     // public fun ----------------------------------------------------------------------------------
 
-    fun callGetAppFileDirectory(app_activity: AppCompatActivity) : String
+    fun callGetAppFileDirectory(appCompactActivity: AppCompatActivity) : String
     {
-        return getAppFileDirectory(app_activity)
+        return getAppFileDirectory(appCompactActivity)
     }
 
-    fun callGetAppFileDirectoryName(app_activity: AppCompatActivity) : String
+    fun callGetAppFileDirectoryName(appCompactActivity: AppCompatActivity) : String
     {
-        return getAppFileDirectoryName(app_activity)
+        return getAppFileDirectoryName(appCompactActivity)
     }
 
     fun callCreateFileDirectory(str_dir : String, str_dir_name : String) : Boolean
@@ -33,16 +33,16 @@ class StorageController
     // private fun ---------------------------------------------------------------------------------
 
     //storage/emulated/0/Android/data/
-    private fun getAppFileDirectory(app_activity: AppCompatActivity) : String
+    private fun getAppFileDirectory(appCompactActivity: AppCompatActivity) : String
     {
-        return Environment.getExternalStorageDirectory().getAbsolutePath() + app_activity.getString(
+        return Environment.getExternalStorageDirectory().getAbsolutePath() + appCompactActivity.getString(
             R.string.APP_DATA_DIRECTORY)
     }
 
     //com.example.AndroidSS
-    private fun getAppFileDirectoryName(app_activity: AppCompatActivity) : String
+    private fun getAppFileDirectoryName(appCompactActivity: AppCompatActivity) : String
     {
-        return app_activity.getString(R.string.APP_DATA_DIRECTORY_NAME)
+        return appCompactActivity.getString(R.string.APP_DATA_DIRECTORY_NAME)
     }
 
     //createFileDirectory 제작에 참고한 자료 ::

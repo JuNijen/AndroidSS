@@ -11,12 +11,12 @@ class GeneralFunc
     //add_negative_btn  default value : false
     //per_type          default value : MY_PERMISSION.E_NONE
     //per_type는 퍼미션요청이 필요할 경우에만 받도록 한다.
-    fun CallCreateAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String,
+    fun CallCreateAlertDialog(appCompactActivity: AppCompatActivity, s_dialog_title : String,
                         s_dialog_message : String, add_negative_btn : Boolean = false,
                         per_type: MY_PERMISSION = MY_PERMISSION.E_NONE
     )
     {
-        CreateAlertDialog(app_activity, s_dialog_title, s_dialog_message, add_negative_btn, per_type)
+        CreateAlertDialog(appCompactActivity, s_dialog_title, s_dialog_message, add_negative_btn, per_type)
     }
 
 
@@ -26,14 +26,14 @@ class GeneralFunc
     //굳이 이렇게 짜야하나에 대한 자괴감이 들고있지만 일단 이미 진행한거 만들기로 한다.
     //per_type는 퍼미션요청이 필요할 경우에만 받도록 한다.
 
-    private fun CreateAlertDialog(app_activity: AppCompatActivity, s_dialog_title : String,
+    private fun CreateAlertDialog(appCompactActivity: AppCompatActivity, s_dialog_title : String,
                                   s_dialog_message : String, add_negative_btn : Boolean = false,
                                   per_type: MY_PERMISSION = MY_PERMISSION.E_NONE
     )
     {
         var str_title = s_dialog_title
         var str_message = s_dialog_message
-        val builder = AlertDialog.Builder(app_activity)
+        val builder = AlertDialog.Builder(appCompactActivity)
 
         //내용물이 없으면 기본값을 채워준다.
         //기본값은 공백으로 하는게 나을까? 굳이 기본값이 필요하지 않을지도.
@@ -53,7 +53,7 @@ class GeneralFunc
             builder.setPositiveButton(R.string.BTN_OK)
             {
                     dialogInterface, i -> PermissionFunc()
-                .CallRequestPermission(app_activity, per_type)
+                .CallRequestPermission(appCompactActivity, per_type)
             }
         }
         else

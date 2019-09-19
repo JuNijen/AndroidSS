@@ -33,27 +33,27 @@ class GPSFunc
     private val GPS_ENABLE_REQUEST_CODE = 2001
 
 
-    fun callGetAdress(app_activity: AppCompatActivity) : String
+    fun callGetAdress(appCompactActivity: AppCompatActivity) : String
     {
-        return getAdress(app_activity)
+        return getAdress(appCompactActivity)
     }
 
-    private fun getAdress(app_activity: AppCompatActivity) : String
+    private fun getAdress(appCompactActivity: AppCompatActivity) : String
     {
-        gpsTracker = GpsTracker(app_activity)
+        gpsTracker = GpsTracker(appCompactActivity)
 
         //Latitude : 위도, Longitude : 경도
-        return GetCurrentAddress(app_activity, gpsTracker!!.getLatitude(), gpsTracker!!.getLongitude())
+        return GetCurrentAddress(appCompactActivity, gpsTracker!!.getLatitude(), gpsTracker!!.getLongitude())
     }
 
-    private fun CheckPermissions(app_activity: AppCompatActivity)
+    private fun CheckPermissions(appCompactActivity: AppCompatActivity)
     {
         //런타임 퍼미션 처리
         // 위치 퍼미션을 가지고 있는지 체크합니다.
-        val hasFineLocationPermission = ContextCompat.checkSelfPermission( app_activity,
+        val hasFineLocationPermission = ContextCompat.checkSelfPermission( appCompactActivity,
             Manifest.permission.ACCESS_FINE_LOCATION
         )
-        val hasCoarseLocationPermission = ContextCompat.checkSelfPermission( app_activity,
+        val hasCoarseLocationPermission = ContextCompat.checkSelfPermission( appCompactActivity,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
 
@@ -63,24 +63,24 @@ class GPSFunc
             val permissionFunc = PermissionFunc()
 
             //퍼미션 요청을 거절한 적이 있는지 체크.
-            permissionFunc.CallCheckDeniedBefore(app_activity, MY_PERMISSION.E_ACCESS_FINE_LOCATION)
-            permissionFunc.CallCheckDeniedBefore(app_activity, MY_PERMISSION.E_ACCESS_COARSE_LOCATION)
+            permissionFunc.CallCheckDeniedBefore(appCompactActivity, MY_PERMISSION.E_ACCESS_FINE_LOCATION)
+            permissionFunc.CallCheckDeniedBefore(appCompactActivity, MY_PERMISSION.E_ACCESS_COARSE_LOCATION)
         }
     }
 
 
-    fun GetCurrentAddress(app_activity: AppCompatActivity, latitude: Double, longitude: Double): String
+    fun GetCurrentAddress(appCompactActivity: AppCompatActivity, latitude: Double, longitude: Double): String
     {
         //권한이 있는지 확인.
-        CheckPermissions(app_activity)
+        CheckPermissions(appCompactActivity)
 
-        if (!CheckLocationServicesStatus(app_activity))
+        if (!CheckLocationServicesStatus(appCompactActivity))
         {
-            GpsNoticeDialog(app_activity)
+            GpsNoticeDialog(appCompactActivity)
         }
 
         //지오코더... GPS를 주소로 변환
-        val geocoder = Geocoder(app_activity, Locale.getDefault())
+        val geocoder = Geocoder(appCompactActivity, Locale.getDefault())
 
         val addresses: List<Address>?
         var resultStr = ""
@@ -92,23 +92,23 @@ class GPSFunc
         catch (ioException: IOException)
         {
             //네트워크 문제
-            Toast.makeText(app_activity, R.string.ERR_FROM_GPS_NETWORK, Toast.LENGTH_LONG).show()
-            resultStr = app_activity.getString(R.string.ERR_FROM_GPS_NETWORK)
+            Toast.makeText(appCompactActivity, R.string.ERR_FROM_GPS_NETWORK, Toast.LENGTH_LONG).show()
+            resultStr = appCompactActivity.getString(R.string.ERR_FROM_GPS_NETWORK)
             return resultStr
         }
         catch (illegalArgumentException: IllegalArgumentException)
         {
             //잘못된 GPS 좌표
-            Toast.makeText(app_activity, R.string.ERR_FROM_GPS_WRONG_LOCATION, Toast.LENGTH_LONG).show()
-            resultStr = app_activity.getString(R.string.ERR_FROM_GPS_WRONG_LOCATION)
+            Toast.makeText(appCompactActivity, R.string.ERR_FROM_GPS_WRONG_LOCATION, Toast.LENGTH_LONG).show()
+            resultStr = appCompactActivity.getString(R.string.ERR_FROM_GPS_WRONG_LOCATION)
             return resultStr
         }
 
         if (addresses == null || addresses!!.size == 0)
         {
             //위치가 확인되지 않음
-            Toast.makeText(app_activity, R.string.ERR_FROM_GPS_NO_LOCATION, Toast.LENGTH_LONG).show()
-            resultStr = app_activity.getString(R.string.ERR_FROM_GPS_NO_LOCATION)
+            Toast.makeText(appCompactActivity, R.string.ERR_FROM_GPS_NO_LOCATION, Toast.LENGTH_LONG).show()
+            resultStr = appCompactActivity.getString(R.string.ERR_FROM_GPS_NO_LOCATION)
             return resultStr
         }
 
@@ -118,15 +118,15 @@ class GPSFunc
 
 
     //GPS 활성화를 위한 Alert Dialog
-    private fun GpsNoticeDialog(app_activity: AppCompatActivity)
+    private fun GpsNoticeDialog(appCompactActivity: AppCompatActivity)
     {
         //        GeneralFunc geleralFunc = new GeneralFunc();
         //        geleralFunc.CallCreateAlertDialog(this, getString(R.string.TEXT_GPS_DISABLED),
         //            getString(R.string.TEXT_GPS_NOTICE),true);
 
-        app_activity.getString(R.string.TEXT_GPS_DISABLED)
+        appCompactActivity.getString(R.string.TEXT_GPS_DISABLED)
 
-        val builder = AlertDialog.Builder(app_activity)
+        val builder = AlertDialog.Builder(appCompactActivity)
         builder.setTitle(R.string.TEXT_GPS_DISABLED)
         builder.setMessage(R.string.TEXT_GPS_NOTICE)
         builder.setCancelable(true)
@@ -135,7 +135,7 @@ class GPSFunc
                 dialog, id ->
             val callGPSSettingIntent =
                 Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            app_activity.startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE)
+            appCompactActivity.startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE)
         }
 
         builder.setNegativeButton(R.string.BTN_CANCEL, object : DialogInterface.OnClickListener
@@ -149,30 +149,9 @@ class GPSFunc
     }
 
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-//    {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        when (requestCode)
-//        {
-//            GPS_ENABLE_REQUEST_CODE ->
-//
-//                //사용자가 GPS 활성 시켰는지 검사
-//                if (CheckLocationServicesStatus())
-//                {
-//                    if (CheckLocationServicesStatus())
-//                    {
-//                        Log.d("@@@", "GPSFunc2.java - onActivityResult : GPS ON")
-//                        Toast.makeText(this, R.string.TEXT_GPS_ON, Toast.LENGTH_LONG).show()
-//                        return
-//                    }
-//                }
-//        }
-//    }
-
-    fun CheckLocationServicesStatus(app_activity: AppCompatActivity): Boolean
+    fun CheckLocationServicesStatus(appCompactActivity: AppCompatActivity): Boolean
     {
-        val locationManager = app_activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = appCompactActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         return (locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 || locationManager!!.isProviderEnabled(

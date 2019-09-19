@@ -3,7 +3,6 @@ package com.example.AndroidSS.Func
 import androidx.appcompat.app.AppCompatActivity
 import android.media.MediaRecorder
 import android.media.MediaPlayer
-import android.os.Environment
 import android.util.Log
 
 import java.text.SimpleDateFormat
@@ -11,7 +10,6 @@ import java.io.IOException
 import java.util.*
 
 import com.example.AndroidSS.R
-import java.io.File
 
 
 //20190918 제작
@@ -28,73 +26,71 @@ class AudioRecordFunc
 
     // public fun ----------------------------------------------------------------------------------
 
-    fun callSetFileName(app_activity: AppCompatActivity)
+    fun callSetFileName(appCompactActivity: AppCompatActivity)
     {
-        setFileName(app_activity)
+        setFileName(appCompactActivity)
     }
 
-    fun CallStartBtnOnClick(app_activity: AppCompatActivity)
+    fun callStartBtnOnClick(appCompactActivity: AppCompatActivity)
     {
-        StartBtnOnClick(app_activity)
+        startBtnOnClick(appCompactActivity)
     }
 
-    fun CalStopBtnOnClick()
+    fun callStopBtnOnClick()
     {
-        StopBtnOnClick()
+        stopBtnOnClick()
     }
 
-    fun CallPlayBtnOnClick()
+    fun callPlayBtnOnClick()
     {
-        PlayBtnOnClick()
+        playBtnOnClick()
     }
 
-    fun CallStopPlayBtnOnClick()
+    fun callStopPlayBtnOnClick()
     {
-        StopPlayBtnOnClick()
+        stopPlayBtnOnClick()
     }
 
 
     // private fun ---------------------------------------------------------------------------------
 
-    //setFileDirectory 제작에 참고한 자료 ::
-    //https://itstudentstudy.tistory.com/48
-    private fun setFileDirectory(app_activity: AppCompatActivity)
+    private fun setFileDirectory(appCompactActivity: AppCompatActivity)
     {
-        var strAppDir = StorageController().callGetAppFileDirectory(app_activity)
-        var strAppDirName = StorageController().callGetAppFileDirectoryName(app_activity)
+        var strAppDir = StorageController().callGetAppFileDirectory(appCompactActivity)
+        var strAppDirName = StorageController().callGetAppFileDirectoryName(appCompactActivity)
 
         //storage/emulated/0/Android/data/com.example.AndroidSS 를 생성하거나 이미 존재하면
         StorageController().callCreateFileDirectory(strAppDir, strAppDirName)
 
         //recorded_files 폴더를 만들어준다.
         //storage/emulated/0/Android/data/com.example.AndroidSS/recorded_files
-        var strRecordDir  = StorageController().callGetAppFileDirectory(app_activity) + strAppDirName
-        var strRecordDirName  = app_activity.getString(R.string.APP_DATA_DIRECTORY_NAME_VOICE)
+        var strRecordDir  = StorageController().callGetAppFileDirectory(appCompactActivity) + strAppDirName
+        var strRecordDirName  = appCompactActivity.getString(R.string.APP_DATA_DIRECTORY_NAME_VOICE)
 
         StorageController().callCreateFileDirectory(strRecordDir, strRecordDirName)
     }
 
-    private fun setFileName(app_activity: AppCompatActivity)
+    private fun setFileName(appCompactActivity: AppCompatActivity)
     {
         mFileName = ""
 
-        setFileDirectory(app_activity)
+        setFileDirectory(appCompactActivity)
 
-        var mAppDirectory = StorageController().callGetAppFileDirectory(app_activity) + StorageController().callGetAppFileDirectoryName(app_activity)
-        var mRecordFileDirectory = mAppDirectory + app_activity.getString(R.string.APP_DATA_DIRECTORY_NAME_VOICE_DIR)
+        var mAppDirectory = StorageController().callGetAppFileDirectory(appCompactActivity) + StorageController().callGetAppFileDirectoryName(appCompactActivity)
+        var mRecordFileDirectory = mAppDirectory + appCompactActivity.getString(R.string.APP_DATA_DIRECTORY_NAME_VOICE_DIR)
         var mCurrentTime = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         var mCurrentDateTime =
-            app_activity.getString(R.string.TEXT_AUDIO_FILE_NAME_FORMAT, mCurrentTime)
+            appCompactActivity.getString(R.string.TEXT_AUDIO_FILE_NAME_FORMAT, mCurrentTime)
 
         mFileName = mRecordFileDirectory + mCurrentDateTime
     }
 
-    private fun StartBtnOnClick(app_activity: AppCompatActivity)
+    private fun startBtnOnClick(appCompactActivity: AppCompatActivity)
     {
         var isRecordAudioEnabled =
-            PermissionFunc().CallCheckPermission(app_activity, MY_PERMISSION.E_RECORD_AUDIO)
+            PermissionFunc().CallCheckPermission(appCompactActivity, MY_PERMISSION.E_RECORD_AUDIO)
         var isWriteExternalStroageEnabled = PermissionFunc().CallCheckPermission(
-            app_activity,
+            appCompactActivity,
             MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE
         )
 
@@ -106,7 +102,7 @@ class AudioRecordFunc
             mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
             mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
 
-            callSetFileName(app_activity)
+            callSetFileName(appCompactActivity)
             mRecorder?.setOutputFile(mFileName)
 
             try
@@ -116,22 +112,22 @@ class AudioRecordFunc
             catch (e: IOException)
             {
                 Log.e(
-                    app_activity.getString(R.string.TEXT_AUDIO_RECORD_IS_RUNNING),
-                    app_activity.getString(R.string.ERR_FROM_CODE)
+                    appCompactActivity.getString(R.string.TEXT_AUDIO_RECORD_IS_RUNNING),
+                    appCompactActivity.getString(R.string.ERR_FROM_CODE)
                 )
             }
             mRecorder?.start()
         }
     }
 
-    private fun StopBtnOnClick()
+    private fun stopBtnOnClick()
     {
         mRecorder?.stop()
         mRecorder?.release()
         mRecorder = null
     }
 
-    private fun PlayBtnOnClick()
+    private fun playBtnOnClick()
     {
         mPlayer = MediaPlayer()
 
@@ -147,7 +143,7 @@ class AudioRecordFunc
         }
     }
 
-    private fun StopPlayBtnOnClick()
+    private fun stopPlayBtnOnClick()
     {
         mPlayer?.release()
         mPlayer = null

@@ -16,9 +16,9 @@ class TTSFunc
 {
     lateinit var mTTS: TextToSpeech
 
-    fun CallInitFunc(app_activity: AppCompatActivity)
+    fun CallInitFunc(appCompactActivity: AppCompatActivity)
     {
-        InitFunc(app_activity)
+        InitFunc(appCompactActivity)
     }
 
     fun CallPlayTTS(toSpeak: String)
@@ -31,9 +31,9 @@ class TTSFunc
         StopTTS()
     }
 
-    private fun InitFunc(app_activity: AppCompatActivity)
+    private fun InitFunc(appCompactActivity: AppCompatActivity)
     {
-        mTTS = TextToSpeech(app_activity, TextToSpeech.OnInitListener { status ->
+        mTTS = TextToSpeech(appCompactActivity, TextToSpeech.OnInitListener { status ->
             if (status != TextToSpeech.ERROR)
             {
                 //if there is no error then set language
