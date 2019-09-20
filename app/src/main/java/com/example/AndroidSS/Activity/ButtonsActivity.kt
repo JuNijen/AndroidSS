@@ -102,7 +102,6 @@ class ButtonsActivity : AppCompatActivity()
             stopPlayBtn.isEnabled = false
 
             audioRecordFunc.callStartBtnOnClick(this)
-            Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_LONG).show()
         }
 
         //정지 버튼

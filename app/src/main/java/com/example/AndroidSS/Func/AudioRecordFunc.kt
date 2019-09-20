@@ -3,6 +3,7 @@ package com.example.AndroidSS.Func
 import androidx.appcompat.app.AppCompatActivity
 import android.media.MediaRecorder
 import android.media.MediaPlayer
+import android.widget.Toast
 import android.util.Log
 
 import java.text.SimpleDateFormat
@@ -117,6 +118,7 @@ class AudioRecordFunc
                 )
             }
             mRecorder?.start()
+            Toast.makeText(appCompactActivity, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_LONG).show()
         }
     }
 

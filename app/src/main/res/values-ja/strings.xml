@@ -1,12 +1,7 @@
 <resources>
-    <string name="app_name">_TEST 0919.06</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
-    <string name="APP_DATA_DIRECTORY">/Android/data/</string>
-    <string name="APP_DATA_DIRECTORY_NAME">com.example.AndroidSS</string>
-    <string name="APP_DATA_DIRECTORY_NAME_VOICE">recorded_files</string>
-    <string name="APP_DATA_DIRECTORY_NAME_VOICE_DIR">/recorded_files</string>
 
     <string name="ERR_EDITTEXT_NOVALUE">入力されていない。</string>
     <string name="ERR_FROM_CODE">エラーが検出されました。</string>
@@ -19,7 +14,7 @@
 
     <string name="TEXT_NOTICE">案内</string>
     <string name="TEXT_WELCOME">歓迎します。</string>
-    <string name="TEXT_WRITE_YOUR_NAME">名前</string> <!--을 입력 해 주십시오.</string>-->
+    <string name="TEXT_WRITE_YOUR_NAME">名前</string>
     <string name="TEXT_WRITE_YOUR_PW">パスワード</string>
     <string name="TEXT_LOGOUT">ログアウト</string>
 
@@ -35,7 +30,6 @@
     <string name="TEXT_GPS_NOTICE">サービスの利用のためにGPS（位置情報サービス）が必要です。 GPSを有効にしてください。</string>
     <string name="TEXT_GPS_ON">GPSが有効化された。</string>
 
-    <string name="TEXT_AUDIO_FILE_NAME_FORMAT">/RecordedAudio_%s.3gp</string>
     <!--<string name="TEXT_AUDIO_FILE_NAME">/AudioRecording.3gp</string>-->
     <string name="TEXT_AUDIO_RECORD_STARTED">録音が開始されました。</string>
     <string name="TEXT_AUDIO_RECORD_STOPPED">録音が停止しました。</string>
@@ -45,7 +39,6 @@
 
 
     <!-- TEST DATA -->
-    <string name="TEXT_CALL_NUM">01062771242</string>
 
     <string name="BTN_OK">確認</string>
     <string name="BTN_CANCEL">キャンセル</string>

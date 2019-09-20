@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">_TEST 0919.06</string>
+    <string name="app_name" translatable="false">_TEST_0920_01</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
@@ -19,11 +19,11 @@
 
     <string name="TEXT_NOTICE">Guidance</string>
     <string name="TEXT_WELCOME">Welcome.</string>
-    <string name="TEXT_WRITE_YOUR_NAME">Name</string> <!--을 입력 해 주십시오.</string>-->
+    <string name="TEXT_WRITE_YOUR_NAME">Name</string>
     <string name="TEXT_WRITE_YOUR_PW">Password</string>
     <string name="TEXT_LOGOUT">Logout</string>
 
-    <string name="TEXT_PERMISSION_NOTICE">You must accept the% s permission to use the service.</string>
+    <string name="TEXT_PERMISSION_NOTICE">You must accept the %s permission to use the service.</string>
     <string name="TEXT_PERMISSION_CALL_PHONE">Calling phone</string>
     <string name="TEXT_PERMISSION_ACCESS_FINE_LOCATION">Location via Wi-Fi</string>
     <string name="TEXT_PERMISSION_ACCESS_COARSE_LOCATION">Location verification using base station information</string>
@@ -35,13 +35,13 @@
     <string name="TEXT_GPS_NOTICE">GPS is required to use the service. Please activate GPS.</string>
     <string name="TEXT_GPS_ON">GPS is activated.</string>
 
-    <string name="TEXT_AUDIO_FILE_NAME_FORMAT" translatable="false">/RecordedAudio_%s.3gp</string>
     <!--<string name="TEXT_AUDIO_FILE_NAME">/AudioRecording.3gp</string>-->
+    <string name="TEXT_AUDIO_FILE_NAME_FORMAT">/Rec12</string>
     <string name="TEXT_AUDIO_RECORD_STARTED">Recording has started.</string>
     <string name="TEXT_AUDIO_RECORD_STOPPED">Recording has stopped.</string>
     <string name="TEXT_AUDIO_RECORD_IS_RUNNING">Recording</string>
     <string name="TEXT_AUDIO_RECORD_LISTENING_STOPPED">Playback has stopped</string>
-    <string name="TEXT_AUDIO_RECORD_LISTENING_STARTED">Playback has started</string>
+    <string name="TEXT_AUDIO_RECORD_LISTENING_STARTED">/RecordedAudio_%s.3gp</string>
 
 
     <!-- TEST DATA -->
