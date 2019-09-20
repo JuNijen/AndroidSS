@@ -43,8 +43,7 @@ class TTSFunc
             if (status != TextToSpeech.ERROR)
             {
                 //if there is no error then set language
-                mTTS.language = Locale.KOREA
-                //mTTS.setLanguage(Locale.getDefault())
+                mTTS.language = Locale.getDefault()
             }
         })
     }

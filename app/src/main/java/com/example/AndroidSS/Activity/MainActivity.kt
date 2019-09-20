@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity()
         else
         {
             //입력값을 토스트로 띄워주고
-            Toast.makeText(this, "${editText.text}님, 반갑습니다.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "${editText.text}님, 반갑습니다.", Toast.LENGTH_SHORT).show()
 
             //에디터 텍스트값을 비운다.
             editText.setText("")

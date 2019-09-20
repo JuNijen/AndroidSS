@@ -112,7 +112,7 @@ class ButtonsActivity : AppCompatActivity()
             stopPlayBtn.isEnabled = true
 
             audioRecordFunc.callStopBtnOnClick()
-            Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STOPPED, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STOPPED, Toast.LENGTH_SHORT).show()
         }
 
         //재생 시작 버튼
@@ -123,7 +123,7 @@ class ButtonsActivity : AppCompatActivity()
             stopPlayBtn.isEnabled = true
 
             audioRecordFunc.callPlayBtnOnClick()
-            Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STARTED,Toast.LENGTH_LONG).show()
+            Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STARTED,Toast.LENGTH_SHORT).show()
         }
 
         //재생 정지 버튼

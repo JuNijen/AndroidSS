@@ -118,7 +118,7 @@ class AudioRecordFunc
                 )
             }
             mRecorder?.start()
-            Toast.makeText(appCompactActivity, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_LONG).show()
+            Toast.makeText(appCompactActivity, R.string.TEXT_AUDIO_RECORD_STARTED, Toast.LENGTH_SHORT).show()
         }
     }
 

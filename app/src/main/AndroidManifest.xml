@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <!-- 20190920 시작 프로그램 등록을 위하여 필요한 Permission -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +32,6 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,6 +46,18 @@
             android:value="AIzaSyBYbndK-eqBK7S4mePE2bQPSJUm7kfVINE" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
+        <!-- 20190920 시작 프로그램 등록을 위하여 추가된 부분 -->
+        <receiver
+            android:name=".StartReceiver"
+            android:enabled="true"
+            android:exported="false"
+            android:label="STARTReceiver">
+
+            <intent-filter >
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
