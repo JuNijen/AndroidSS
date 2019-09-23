@@ -147,12 +147,13 @@ class ButtonsActivity : AppCompatActivity()
         }
     }
 
+    //20190923 추가 - audio wave visualizer 추가를 위함.
+    //참고자료 ::
+    //https://androidexample365.com/a-light-weight-and-easy-to-use-audio-visualizer-for-android/
+    //20190923 수정 - null check, add release
+    //https://github.com/gauravk95/audio-visualizer-android/blob/c0c0bb29cc12c4b09eb573b12c517256b629e1b7/app/src/main/java/com/gauravk/audiovisualizersample/ui/CircleLineActivity.java
     private fun setVisualizer()
     {
-        //20190923 추가 - audio wave visualizer 추가를 위함.
-        //참고자료 ::
-        //https://androidexample365.com/a-light-weight-and-easy-to-use-audio-visualizer-for-android/
-
         mVisualizer = findViewById<View>(R.id.barVisualizer) as BarVisualizer
     }
 
@@ -163,7 +164,11 @@ class ButtonsActivity : AppCompatActivity()
 
         if (audioSessionId != -1)
         {
-            mVisualizer?.setAudioSessionId(audioSessionId)
+            if(mVisualizer != null)
+            {
+                mVisualizer?.show()
+                mVisualizer?.setAudioSessionId(audioSessionId)
+            }
         }
     }
 
@@ -172,7 +177,9 @@ class ButtonsActivity : AppCompatActivity()
         //TODO: check for completion of audio eg. using MediaPlayer.OnCompletionListener()
         if (mVisualizer != null)
         {
-            mVisualizer?.isEnabled = false
+            mVisualizer?.clearAnimation()
+            mVisualizer?.release()
+            mVisualizer?.hide()
         }
     }
 

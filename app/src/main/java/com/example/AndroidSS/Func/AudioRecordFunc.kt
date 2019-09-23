@@ -3,17 +3,22 @@ package com.example.AndroidSS.Func
 import androidx.appcompat.app.AppCompatActivity
 import android.media.MediaRecorder
 import android.media.MediaPlayer
-import android.media.audiofx.Visualizer
-import android.support.v4.app.INotificationSideChannel
+
 import android.widget.Toast
 import android.util.Log
+
+//TODO :: 이거 왜 필요한건지 잘 모르겠음.
+import android.media.AudioManager
+import android.content.Context
+import androidx.annotation.RequiresApi
+
 
 import java.text.SimpleDateFormat
 import java.io.IOException
 import java.util.*
 
 import com.example.AndroidSS.R
-
+import java.util.logging.Handler
 
 
 //20190918 제작
@@ -29,6 +34,8 @@ class AudioRecordFunc
     private var mRecorder: MediaRecorder? = null
     private var mPlayer: MediaPlayer? = null
     private var mFileName = ""
+
+    private var mHandler : Handler? = null
 
 
     // public fun ----------------------------------------------------------------------------------
@@ -65,6 +72,16 @@ class AudioRecordFunc
 
 
     // private fun ---------------------------------------------------------------------------------
+
+    private fun setHandler()
+    {
+        mHandler?.post(() -> { updateVisualizer() };
+    });
+
+    fun updateVisualizer ()
+    {
+
+    }
 
     private fun setFileDirectory(appCompactActivity: AppCompatActivity)
     {
@@ -183,4 +200,5 @@ class AudioRecordFunc
         mPlayer?.release()
         mPlayer = null
     }
+
 }
