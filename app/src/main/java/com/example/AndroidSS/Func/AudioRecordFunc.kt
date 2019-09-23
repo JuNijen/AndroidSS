@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.media.MediaRecorder
 import android.media.MediaPlayer
 import android.media.audiofx.Visualizer
+import android.support.v4.app.INotificationSideChannel
 import android.widget.Toast
 import android.util.Log
 
@@ -15,11 +16,12 @@ import com.example.AndroidSS.R
 
 
 
-
-
 //20190918 제작
 //제작에 참고한 자료 ::
 //https://developer.android.com/guide/topics/media/mediarecorder
+//20190923 수정
+//수정에 참고한 자료 ::
+//https://androidexample365.com/a-light-weight-and-easy-to-use-audio-visualizer-for-android/
 
 
 class AudioRecordFunc
@@ -131,8 +133,25 @@ class AudioRecordFunc
         }
     }
 
+    //20190923 추가 - audio wave visualizer 추가를 위함.
+    private fun getRecordSessionID() : Int
+    {
+        //null 상태일 시, -1을 리턴.
+        if(mRecorder == null)
+            return -1
+
+        //TODO :: 임시
+        return 0
+        //return mRecorder?.audio
+    }
+
+    //20190923 추가 - audio wave visualizer 추가를 위함.
     private fun getAudioSessionID() : Int
     {
+        //null 상태일 시, -1을 리턴.
+        if(mPlayer == null)
+            return -1
+
         return mPlayer!!.audioSessionId
     }
 

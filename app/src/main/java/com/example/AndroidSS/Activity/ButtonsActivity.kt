@@ -149,32 +149,31 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun setVisualizer()
     {
+        //20190923 추가 - audio wave visualizer 추가를 위함.
         //참고자료 ::
-        //com.gauravk.audiovisualizer.visualizer.BlastVisualizer
-        //get reference to visualizer
-        //var mVisualizer = findViewById(R.id.blast)
-        //        //((TextView)itemView.findViewById(id.itemTitle)).setText((CharSequence)"My Text");
-        //        //mVisualizer.findViewById(id.itemTitle) as TextView).text = "My Text"
+        //https://androidexample365.com/a-light-weight-and-easy-to-use-audio-visualizer-for-android/
 
         mVisualizer = findViewById<View>(R.id.barVisualizer) as BarVisualizer
+    }
+
+    private fun startVisualizer()
+    {
+        //get the AudioSessionId from your MediaPlayer and pass it to the visualizer
+        val audioSessionId = audioRecordFunc.callGetAudioSessionID()
+
+        if (audioSessionId != -1)
+        {
+            mVisualizer?.setAudioSessionId(audioSessionId)
+        }
     }
 
     private fun stopVisualizer()
     {
         //TODO: check for completion of audio eg. using MediaPlayer.OnCompletionListener()
         if (mVisualizer != null)
+        {
             mVisualizer?.isEnabled = false
-    }
-
-    private fun startVisualizer()
-    {
-        //TODO: init MediaPlayer and play the audio
-
-        //get the AudioSessionId from your MediaPlayer and pass it to the visualizer
-        val audioSessionId = audioRecordFunc.callGetAudioSessionID()
-        if (audioSessionId != -1)
-//            mVisualizer.audio(audioSessionId)
-            mVisualizer?.setAudioSessionId(audioSessionId)
+        }
     }
 
     private fun callBtnOnClick()

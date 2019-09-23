@@ -19,7 +19,7 @@
         android:layout_height="50dp"
         android:contentDescription="@string/XML_DESC_TEXTVIEW" />
 
-    <!--20190923 추가 - audio wave 추가를 위함.-->
+    <!--20190923 추가 - audio wave visualizer 추가를 위함.-->
     <com.gauravk.audiovisualizer.visualizer.BarVisualizer
         xmlns:custom="http://schemas.android.com/apk/res-auto"
         android:id="@+id/barVisualizer"
