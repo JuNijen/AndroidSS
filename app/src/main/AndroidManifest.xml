@@ -48,8 +48,9 @@
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <!-- 20190920 시작 프로그램 등록을 위하여 추가된 부분 -->
+
         <receiver
-            android:name=".StartReceiver"
+            android:name=".Func.StartReceiver"
             android:enabled="true"
             android:exported="false"
             android:label="STARTReceiver">
