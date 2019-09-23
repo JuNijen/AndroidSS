@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">_TEST_0923_02</string>
+    <string name="app_name" translatable="false">_TEST_0923_03</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
@@ -58,11 +58,12 @@
     <string name="XML_TEXT_START_RECORD">Start recording</string>
     <string name="XML_TEXT_STOP_RECORD">Stop recording</string>
     <string name="XML_TEXT_PLAY_RECORD">Start playing</string>
-    <string name="XML_TEXT_STOP_RECORD_PLAYING">재생 Stop playing중지</string>
+    <string name="XML_TEXT_STOP_RECORD_PLAYING">Stop playing</string>
 
     <!--임시값-->
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
+    <string name="XML_HINT_RESULT_TEXTVIEW">Result window</string>
 
 
     <!-- 문자열 참조하는 방법 메모 -->

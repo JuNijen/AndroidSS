@@ -56,6 +56,7 @@
     <!--임시값-->
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
+    <string name="XML_HINT_RESULT_TEXTVIEW">결과창</string>
 
 
     <!-- 문자열 참조하는 방법 메모 -->

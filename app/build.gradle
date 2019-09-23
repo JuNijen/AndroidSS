@@ -31,7 +31,9 @@ dependencies {
     //20190917 API 연동을 위하여 추가함----------------------------------
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
-    //20190917 API 연동을 위하여 추가함----------------------------------
+
+    //20190923 추가 - audio wave 추가를 위함-----------------------------
+    implementation 'com.gauravk.audiovisualizer:audiovisualizer:0.9.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'

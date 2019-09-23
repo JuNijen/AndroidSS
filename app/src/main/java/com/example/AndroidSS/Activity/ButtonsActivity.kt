@@ -9,10 +9,13 @@ import android.widget.TextView
 import android.widget.Button
 import android.widget.Toast
 import android.content.Intent
+import android.media.audiofx.Visualizer
 import android.net.Uri
 
 import com.example.AndroidSS.Func.*
 import com.example.AndroidSS.R
+import android.view.View
+import com.gauravk.audiovisualizer.visualizer.BarVisualizer
 
 
 //20190916 제작
@@ -24,10 +27,12 @@ class ButtonsActivity : AppCompatActivity()
     private lateinit var ttsFunc: TTSFunc
     private lateinit var audioRecordFunc : AudioRecordFunc
 
-    private lateinit var startRecordBtn: Button
-    private lateinit var stopRecordBtn: Button
-    private lateinit var startPlayBtn: Button
-    private lateinit var stopPlayBtn: Button
+    private lateinit var mStartRecordBtn: Button
+    private lateinit var mStopRecordBtn: Button
+    private lateinit var mStartPlayBtn: Button
+    private lateinit var mStopPlayBtn: Button
+
+    private var mVisualizer: BarVisualizer? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -36,6 +41,7 @@ class ButtonsActivity : AppCompatActivity()
         setContentView(R.layout.app_main)
 
         initActivity()
+        setVisualizer()
         setButtons()
     }
 
@@ -83,60 +89,92 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun setRecordButtons()
     {
-        startRecordBtn = findViewById(R.id.btnRecord)
-        stopRecordBtn = findViewById(R.id.btnStop)
-        startPlayBtn = findViewById(R.id.btnPlay)
-        stopPlayBtn = findViewById(R.id.btnStopPlay)
+        mStartRecordBtn = findViewById(R.id.btnRecord)
+        mStopRecordBtn = findViewById(R.id.btnStop)
+        mStartPlayBtn = findViewById(R.id.btnPlay)
+        mStopPlayBtn = findViewById(R.id.btnStopPlay)
 
         //초기 버튼 설정
-        startRecordBtn.isEnabled = true
-        stopRecordBtn.isEnabled = false
-        startPlayBtn.isEnabled = false
-        stopPlayBtn.isEnabled = false
+        mStartRecordBtn.isEnabled = true
+        mStopRecordBtn.isEnabled = false
+        mStartPlayBtn.isEnabled = false
+        mStopPlayBtn.isEnabled = false
 
         //시작 버튼
-        startRecordBtn.setOnClickListener{
-            startRecordBtn.isEnabled = false
-            stopRecordBtn.isEnabled = true
-            startPlayBtn.isEnabled = false
-            stopPlayBtn.isEnabled = false
+        mStartRecordBtn.setOnClickListener{
+            mStartRecordBtn.isEnabled = false
+            mStopRecordBtn.isEnabled = true
+            mStartPlayBtn.isEnabled = false
+            mStopPlayBtn.isEnabled = false
 
             audioRecordFunc.callStartBtnOnClick(this)
         }
 
         //정지 버튼
-        stopRecordBtn.setOnClickListener{
-            startRecordBtn.isEnabled = true
-            stopRecordBtn.isEnabled = false
-            startPlayBtn.isEnabled = true
-            stopPlayBtn.isEnabled = true
+        mStopRecordBtn.setOnClickListener{
+            mStartRecordBtn.isEnabled = true
+            mStopRecordBtn.isEnabled = false
+            mStartPlayBtn.isEnabled = true
+            mStopPlayBtn.isEnabled = true
 
             audioRecordFunc.callStopBtnOnClick()
             Toast.makeText(this, R.string.TEXT_AUDIO_RECORD_STOPPED, Toast.LENGTH_SHORT).show()
         }
 
         //재생 시작 버튼
-        startPlayBtn.setOnClickListener{
-            startRecordBtn.isEnabled = true
-            stopRecordBtn.isEnabled = false
-            startPlayBtn.isEnabled = false
-            stopPlayBtn.isEnabled = true
+        mStartPlayBtn.setOnClickListener{
+            mStartRecordBtn.isEnabled = true
+            mStopRecordBtn.isEnabled = false
+            mStartPlayBtn.isEnabled = false
+            mStopPlayBtn.isEnabled = true
 
             audioRecordFunc.callPlayBtnOnClick()
+            startVisualizer()
             Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STARTED,Toast.LENGTH_SHORT).show()
         }
 
         //재생 정지 버튼
-        stopPlayBtn.setOnClickListener{
+        mStopPlayBtn.setOnClickListener{
 
-            startRecordBtn.isEnabled = true
-            stopRecordBtn.isEnabled = false
-            startPlayBtn.isEnabled = true
-            stopPlayBtn.isEnabled = false
+            mStartRecordBtn.isEnabled = true
+            mStopRecordBtn.isEnabled = false
+            mStartPlayBtn.isEnabled = true
+            mStopPlayBtn.isEnabled = false
 
             audioRecordFunc.callStopPlayBtnOnClick()
+            stopVisualizer()
             Toast.makeText(this,R.string.TEXT_AUDIO_RECORD_LISTENING_STOPPED, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setVisualizer()
+    {
+        //참고자료 ::
+        //com.gauravk.audiovisualizer.visualizer.BlastVisualizer
+        //get reference to visualizer
+        //var mVisualizer = findViewById(R.id.blast)
+        //        //((TextView)itemView.findViewById(id.itemTitle)).setText((CharSequence)"My Text");
+        //        //mVisualizer.findViewById(id.itemTitle) as TextView).text = "My Text"
+
+        mVisualizer = findViewById<View>(R.id.barVisualizer) as BarVisualizer
+    }
+
+    private fun stopVisualizer()
+    {
+        //TODO: check for completion of audio eg. using MediaPlayer.OnCompletionListener()
+        if (mVisualizer != null)
+            mVisualizer?.isEnabled = false
+    }
+
+    private fun startVisualizer()
+    {
+        //TODO: init MediaPlayer and play the audio
+
+        //get the AudioSessionId from your MediaPlayer and pass it to the visualizer
+        val audioSessionId = audioRecordFunc.callGetAudioSessionID()
+        if (audioSessionId != -1)
+//            mVisualizer.audio(audioSessionId)
+            mVisualizer?.setAudioSessionId(audioSessionId)
     }
 
     private fun callBtnOnClick()
