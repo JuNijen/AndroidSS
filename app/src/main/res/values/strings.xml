@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">_TEST_0923_01</string>
+    <string name="app_name" translatable="false">_TEST_0923_02</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
@@ -15,7 +15,7 @@
     <string name="ERR_FROM_GPS_NO_LOCATION">Your location has not been verified.</string>
 
 
-    <string name="TEXT_EMPTY"></string>
+    <string name="TEXT_EMPTY" translatable="false"></string>
 
     <string name="TEXT_NOTICE">Guidance</string>
     <string name="TEXT_WELCOME">Welcome.</string>
@@ -36,12 +36,12 @@
     <string name="TEXT_GPS_ON">GPS is activated.</string>
 
     <!--<string name="TEXT_AUDIO_FILE_NAME">/AudioRecording.3gp</string>-->
-    <string name="TEXT_AUDIO_FILE_NAME_FORMAT">/Rec12</string>
+    <string name="TEXT_AUDIO_FILE_NAME_FORMAT" translatable="false">/RecordedAudio_%s.3gp</string>
     <string name="TEXT_AUDIO_RECORD_STARTED">Recording has started.</string>
     <string name="TEXT_AUDIO_RECORD_STOPPED">Recording has stopped.</string>
     <string name="TEXT_AUDIO_RECORD_IS_RUNNING">Recording</string>
     <string name="TEXT_AUDIO_RECORD_LISTENING_STOPPED">Playback has stopped</string>
-    <string name="TEXT_AUDIO_RECORD_LISTENING_STARTED">/RecordedAudio_%s.3gp</string>
+    <string name="TEXT_AUDIO_RECORD_LISTENING_STARTED">Playback has started</string>
 
 
     <!-- TEST DATA -->

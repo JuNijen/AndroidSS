@@ -18,7 +18,7 @@
     <string name="TEXT_WRITE_YOUR_PW">パスワード</string>
     <string name="TEXT_LOGOUT">ログアウト</string>
 
-    <string name="TEXT_PERMISSION_NOTICE">サービスの利用のために％s権限を受け入れる必要があります。</string>
+    <string name="TEXT_PERMISSION_NOTICE">サービスの利用のために ％s権限を受け入れる必要があります。</string>
     <string name="TEXT_PERMISSION_CALL_PHONE">電話</string>
     <string name="TEXT_PERMISSION_ACCESS_FINE_LOCATION">Wi-Fiを介して位置確認</string>
     <string name="TEXT_PERMISSION_ACCESS_COARSE_LOCATION">基地局情報を利用した位置確認</string>
