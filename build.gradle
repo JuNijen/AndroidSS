@@ -8,13 +8,22 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
+        //20190923 추가 / for auto-resizeing button
+        //참고자료 ::
+        //https://github.com/marcouberti/android-auto-fit-button
+        maven {
+            url  "http://dl.bintray.com/marcouberti/maven"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        //20190923 추가 / for auto-resizeing button
+        classpath 'com.marcouberti.autofitbutton:android-auto-fit-button:0.1.1@aar'
     }
 }
 
@@ -22,7 +31,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
     }
 }
 

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--20190916 제작-->
+<!--20190923 추가(custom-res-auto) / for auto-resizeing button-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,26 +28,30 @@
 
             <Button
                 android:id="@+id/btnRecord"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="@string/XML_TEXT_START_RECORD" />
 
             <Button
                 android:id="@+id/btnStop"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="@string/XML_TEXT_STOP_RECORD" />
 
             <Button
                 android:id="@+id/btnPlay"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/XML_TEXT_PLAY_RECORD" />
+                android:text="@string/XML_TEXT_PLAY_RECORD"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/btnStopPlay"
-                android:layout_width="match_parent"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="@string/XML_TEXT_STOP_RECORD_PLAYING" />
 
         </TableRow>
