@@ -47,10 +47,16 @@
      https://stackoverflow.com/questions/33013400/handle-event-power-button-press-if-activity-is-closed
      아 이거 좋은듯
 
+29 | 참고자료 ::
+     https://snowflake-1117.github.io/2018-01-15/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-SMS%EC%99%80-MMS-%EC%9D%BD%EC%96%B4-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0-(1)
+     https://snowflake-1117.github.io/2018-01-20/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-SMS%EC%99%80-MMS-%EC%9D%BD%EC%96%B4-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0-(2)
+     MMS까지 설명하고 있어 참고에 용이할듯.
+
 + 029. 메세지 읽어오는 기능 만들기
 
-* 025) 보류... 머리터질듯...
 - 022) 완료
+* 025) 보류... 머리터질듯...
+* 029) 진행중
 
 
 [ 20190923 ]
