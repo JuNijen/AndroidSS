@@ -73,10 +73,10 @@ class AudioRecordFunc
 
     // private fun ---------------------------------------------------------------------------------
 
-    private fun setHandler()
-    {
-        mHandler?.post(() -> { updateVisualizer() };
-    });
+//    private fun setHandler()
+//    {
+//        mHandler?.post(() -> { updateVisualizer() };
+//    });
 
     fun updateVisualizer ()
     {
