@@ -18,6 +18,13 @@
     <!-- 20190920 시작 프로그램 등록을 위하여 필요한 Permission -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
+    <!-- 20190924 도착하는 메세지 데이터를 받아오기 위하여 필요한 Permission-->
+    <!-- 이 중 READ_SMS, RECEIVE_SMS는 위험 권한임을 인지하여야 한다. -->
+    <!-- 제작에 참고한 자료 :: https://g-y-e-o-m.tistory.com/26 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
 
     <application
         android:allowBackup="true"
@@ -56,6 +63,13 @@
 
             <intent-filter >
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- 20190924 SMS Receiver 제작을 위하여 추가 된 부분 -->
+        <receiver android:name=".Service.MySMSReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
