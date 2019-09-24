@@ -23,7 +23,6 @@
 + 016. 액션 바 만들어보기
 + 019. 푸시알림 추가하기
 + 021. 무음상태에서 강제로 소리 재생
-+ 022. 화면을 껐음을 감지하기
 + 023. 잠금화면 위에 띄워주기
 + 025. 녹음중인 현황을 audio wave 로 표현 해 주기.
 + 026. Progress bar 추가
@@ -37,10 +36,21 @@
 [ * 일일로그 * ]------------------------------------------------------------------------------------
 
 [ 20190924 ]
+22 | 참고자료 ::
+     https://stackoverflow.com/questions/45757616/listen-for-dispatchkeyevent-whilst-app-is-in-the-background
+     https://forum.xda-developers.com/showthread.php?t=695936
+     백그라운드에서 돌리려면 유사 루팅말고 없는 것 같기도 한데...
+
+     http://wawoops67.blogspot.com/2013/01/android-keyevent-dispatchkeyevent.html
+     이건 실행중인 상태에서 돌릴 경우 참고할 레퍼런스.
+
+     https://stackoverflow.com/questions/33013400/handle-event-power-button-press-if-activity-is-closed
+     아 이거 좋은듯
+
 + 029. 메세지 읽어오는 기능 만들기
 
 * 025) 보류... 머리터질듯...
-* 022) 진행중
+- 022) 완료
 
 
 [ 20190923 ]
