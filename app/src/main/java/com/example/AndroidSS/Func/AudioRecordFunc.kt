@@ -191,7 +191,7 @@ class AudioRecordFunc
         }
         catch (e: IOException)
         {
-            //Log.e("@@@PlayBtn 몬가 문제가 생김 ",mFileName)
+            //Log.e("@@@", "@@@Err on PlayBtn", mFileName)
         }
     }
 
