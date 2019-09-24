@@ -7,12 +7,6 @@ import android.media.MediaPlayer
 import android.widget.Toast
 import android.util.Log
 
-//TODO :: 이거 왜 필요한건지 잘 모르겠음.
-import android.media.AudioManager
-import android.content.Context
-import androidx.annotation.RequiresApi
-
-
 import java.text.SimpleDateFormat
 import java.io.IOException
 import java.util.*

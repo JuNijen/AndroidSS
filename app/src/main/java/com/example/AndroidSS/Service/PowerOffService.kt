@@ -6,12 +6,8 @@ import android.app.Service
 import android.os.IBinder
 import android.os.Binder
 
-import android.content.BroadcastReceiver
-
 
 //20190923 제작
-//이건 따로 필요없을듯 해 보임. 일단은 동작 확인 될 때 까지 충실하게 하는걸로...
-//뭐라는거임;; 필요함;
 //참고자료 ::
 //https://stackoverflow.com/questions/33013400/handle-event-power-button-press-if-activity-is-closed
 class PowerOffService : Service()
@@ -37,6 +33,7 @@ class PowerOffService : Service()
         return super.onStartCommand(intent, flags, startId)
     }
 
+    //TODO :: 이친구의 존재이유에 대한 고찰이 필요.
     inner class LocalBinder : Binder()
     {
         internal val service: PowerOffService
