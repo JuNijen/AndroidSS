@@ -27,6 +27,7 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     override fun onCreate()
     {
         mTTS = TextToSpeech(this,this)
+        Thread.sleep(1000)
         mTTS!!.language = Locale.getDefault()
 
         //mTTS!!.setPitch(0.7f)
@@ -52,26 +53,7 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     override fun onStart(intent: Intent, startId: Int)
     {
-        Log.v(TAG, "onstart_service")
-
-        var maxNum = intent.getIntExtra("maxNum", 1)
-        var currentNum = intent.getIntExtra("currentNum", 1)
-
-        if(maxNum == 1)
-        {
-            callPlayTTS(intent.getStringExtra("message"))
-        }
-        else if(maxNum >= 2)
-        {
-            if(currentNum == 0)
-            {
-                callPlayTTS(intent.getStringExtra("message"))
-            }
-            else
-            {
-                callPlayTTS(intent.getStringExtra("message"), true)
-            }
-        }
+        setTTS(intent)
 
         super.onStart(intent, startId)
     }
@@ -95,5 +77,27 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     private fun playTTS(toSpeak: String,  bAddQueue : Boolean = false)
     {
         ttsFunc.callPlayTTS(toSpeak, bAddQueue)
+    }
+
+    private fun setTTS(intent: Intent)
+    {
+        var maxNum = intent.getIntExtra("maxNum", 1)
+        var currentNum = intent.getIntExtra("currentNum", 1)
+
+        if(maxNum == 1)
+        {
+            callPlayTTS(intent.getStringExtra("message"))
+        }
+        else if(maxNum >= 2)
+        {
+            if(currentNum == 0)
+            {
+                callPlayTTS(intent.getStringExtra("message"))
+            }
+            else
+            {
+                callPlayTTS(intent.getStringExtra("message"), true)
+            }
+        }
     }
 }
