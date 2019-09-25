@@ -15,6 +15,7 @@ import android.net.Uri
 import com.example.AndroidSS.Func.*
 import com.example.AndroidSS.R
 import android.view.View
+import com.example.AndroidSS.Service.PowerOffService
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer
 
 
@@ -207,7 +208,21 @@ class ButtonsActivity : AppCompatActivity()
 
     private fun voiceBtnBtnOnClick()
     {
+        //TODO::여기에 있어야 할까.
+        var bInternet = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_INTERNET)
+        var bReadSms = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_READ_SMS)
+        var bReceiveSms = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_RECEIVE_SMS)
 
+        if(!bInternet)
+            PermissionFunc().callRequestPermission(this, MY_PERMISSION.E_INTERNET)
+        if(!bReadSms)
+            PermissionFunc().callRequestPermission(this, MY_PERMISSION.E_READ_SMS)
+        if(!bReceiveSms)
+            PermissionFunc().callRequestPermission(this, MY_PERMISSION.E_RECEIVE_SMS)
+
+        //20190924 PowerOffSeivice (가제)의 적용을 위하여 추가됨.
+        //TODO::꼭 여기에 넣어줬어야했는가? 다른데 어디에 넣어야 할 지는 모르겠음.
+        this.startService(Intent(this, PowerOffService::class.java))
     }
 
     private fun returnHomeBtnOnClick()

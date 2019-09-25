@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">_TEST_0924_02</string>
+    <string name="app_name" translatable="false">_TEST_0925_02</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
@@ -64,6 +64,9 @@
     <string name="drawer_open">drawer_open</string>
     <string name="drawer_close">drawer_close</string>
     <string name="XML_HINT_RESULT_TEXTVIEW">Result window</string>
+    <string name="TEXT_PERMISSION_INTERNET">Internet</string>
+    <string name="TEXT_PERMISSION_READ_SMS">Read message</string>
+    <string name="TEXT_PERMISSION_RECEIVE_SMS">Receive message</string>
 
 
     <!-- 문자열 참조하는 방법 메모 -->

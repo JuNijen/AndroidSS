@@ -24,7 +24,10 @@ enum class MY_PERMISSION
     E_ACCESS_FINE_LOCATION,
     E_ACCESS_COARSE_LOCATION,
     E_RECORD_AUDIO,
-    E_WRITE_EXTERNAL_STORAGE
+    E_WRITE_EXTERNAL_STORAGE,
+    E_INTERNET,
+    E_READ_SMS,
+    E_RECEIVE_SMS
 }
 
 class PermissionFunc
@@ -35,6 +38,9 @@ class PermissionFunc
     private var P_ACCESS_COARSE_LOCATION_ENABLE = 0
     private var P_RECORD_AUDIO_ENABLE = 0
     private var P_WRITE_EXTERNAL_STORAGE_ENABLE = 0
+    private var P_INTERNET_ENABLE = 0
+    private var P_READ_SMS_ENABLE = 0
+    private var P_RECEIVE_SMS_ENABLE = 0
 
 
     // public fun ----------------------------------------------------------------------------------
@@ -135,6 +141,9 @@ class PermissionFunc
             MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_string = android.Manifest.permission.ACCESS_COARSE_LOCATION
             MY_PERMISSION.E_RECORD_AUDIO -> type_string = android.Manifest.permission.RECORD_AUDIO
             MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> type_string = android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            MY_PERMISSION.E_INTERNET -> type_string = android.Manifest.permission.INTERNET
+            MY_PERMISSION.E_READ_SMS -> type_string = android.Manifest.permission.READ_SMS
+            MY_PERMISSION.E_RECEIVE_SMS -> type_string = android.Manifest.permission.RECEIVE_SMS
         }
 
         return type_string
@@ -152,6 +161,9 @@ class PermissionFunc
             MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_code = P_ACCESS_COARSE_LOCATION_ENABLE
             MY_PERMISSION.E_RECORD_AUDIO -> type_code = P_RECORD_AUDIO_ENABLE
             MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> type_code = P_WRITE_EXTERNAL_STORAGE_ENABLE
+            MY_PERMISSION.E_INTERNET -> type_code = P_INTERNET_ENABLE
+            MY_PERMISSION.E_READ_SMS -> type_code = P_READ_SMS_ENABLE
+            MY_PERMISSION.E_RECEIVE_SMS -> type_code = P_RECEIVE_SMS_ENABLE
         }
 
         return type_code
@@ -179,6 +191,15 @@ class PermissionFunc
             )
             MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> name_string = appCompactActivity.getString(
                 R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE
+            )
+            MY_PERMISSION.E_INTERNET -> name_string = appCompactActivity.getString(
+                R.string.TEXT_PERMISSION_INTERNET
+            )
+            MY_PERMISSION.E_READ_SMS -> name_string = appCompactActivity.getString(
+            R.string.TEXT_PERMISSION_READ_SMS
+            )
+            MY_PERMISSION.E_RECEIVE_SMS -> name_string = appCompactActivity.getString(
+                R.string.TEXT_PERMISSION_RECEIVE_SMS
             )
         }
 
