@@ -67,7 +67,7 @@
         </receiver>
 
         <!-- 20190924 SMS Receiver 제작을 위하여 추가 된 부분 -->
-        <receiver android:name=".Service.msgReceiver">
+        <receiver android:name=".Service.MsgReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -79,6 +79,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </service>
+
+        <!-- 20190923 화면의 On Off 감지를 위하여 추가된 부분 -->
+        <service android:name=".Service.MsgTtsService" />
 
     </application>
 

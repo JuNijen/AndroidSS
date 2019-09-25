@@ -1,11 +1,11 @@
 package com.example.AndroidSS.Service
 
+import android.telephony.SmsMessage
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 
-import android.telephony.SmsMessage
 import com.example.AndroidSS.Func.TTSFunc
 
 
@@ -13,21 +13,23 @@ import com.example.AndroidSS.Func.TTSFunc
 //20190925 수정
 //참고자료 ::
 //https://g-y-e-o-m.tistory.com/26
-class msgReceiver : BroadcastReceiver()
+class MsgReceiver : BroadcastReceiver()
 {
     lateinit var ttsFunc: TTSFunc
+    private val TAG = "@@@MsgReceiver : "
+
 
     override fun onReceive(context: Context, intent: Intent)
     {
         // 수신되었을 때 호출되는 콜백 메서드
         // 매개변수 intent의 액션에 방송의 '종류'가 들어있고 필드에는 '추가정보' 가 들어있음
 
-        Log.i("@@@msgReceiver", ":onReceive")
+        Log.i(TAG, ":onReceive")
         
-        parsingMessage(intent)
+        parsingMessage(context, intent)
     }
 
-    private fun parsingMessage(intent: Intent)
+    private fun parsingMessage(context: Context, intent: Intent)
     {
         val bundle = intent.extras
         if (bundle != null)
@@ -35,35 +37,39 @@ class msgReceiver : BroadcastReceiver()
             //TODO::이부분 어떻게 스트링 미리 정의 해 둘 수 없을까?
             //실제 메세지는 Object타입의 배열에 PDU 형식으로 저장됨
             //문자 메시지는 pdus란 종류 값으로 들어있다.
-            val pdus = bundle.get("pdus") as Array<Any>?
-            val msgs = arrayOfNulls<SmsMessage>(pdus!!.size)
+            val arrPdus = bundle.get("pdus") as Array<Any>?
+            val arrMsgs = arrayOfNulls<SmsMessage>(arrPdus!!.size)
 
-            for (repeatNum in msgs.indices)
+            for (repeatNum in arrMsgs.indices)
             {
                 // PDU 포맷으로 되어 있는 메시지를 복원합니다.
-                msgs[repeatNum] = SmsMessage
-                    .createFromPdu(pdus[repeatNum] as ByteArray)
+                arrMsgs[repeatNum] = SmsMessage
+                    .createFromPdu(arrPdus[repeatNum] as ByteArray)
 
-                val sender = msgs[repeatNum]?.getOriginatingAddress()
-                val content = msgs[repeatNum]?.getMessageBody().toString()
+                val strSender = arrMsgs[repeatNum]?.originatingAddress
+                val strContent = arrMsgs[repeatNum]?.messageBody.toString()
 
-                Log.i("@@@msgReceiver:num: ", sender!!)
-                Log.i("@@@msgReceiver:data: ", content)
+                Log.i(TAG, strSender!!)
+                Log.i(TAG, strContent)
+
+                var ttsServiceIntent = Intent(context, MsgTtsService::class.java)
+                ttsServiceIntent.putExtra("message", strContent)
+                context.startService(ttsServiceIntent)
 
                 //TODO::왜팅기는지 잘 모르겠음. 0000으로 보내는 건 지양하는 것으로.. ...
-                if (sender == "01000000000")
+                if (strSender == "01000000000")
                 {
-                    senderIs01000000000(content)
+                    senderIs01000000000(strContent)
                 }
             }
         }
     }
 
-    private fun senderIs01000000000(content : String)
+    private fun senderIs01000000000(messageText : String)
     {
-        val startIdx = content.indexOf("[")
-        val endIdx = content.indexOf("]")
-        val authNumber = content.substring(startIdx + 1, endIdx)
-        Log.i("@@@msgReceiver:authNum", authNumber)
+        val startIdx = messageText.indexOf("[")
+        val endIdx = messageText.indexOf("]")
+        val authNumber = messageText.substring(startIdx + 1, endIdx)
+        Log.i(TAG, authNumber)
     }
 }

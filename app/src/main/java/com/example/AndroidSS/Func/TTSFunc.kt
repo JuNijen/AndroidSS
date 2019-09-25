@@ -1,9 +1,11 @@
 package com.example.AndroidSS.Func
 
 //하단부터 추가된 파일.
+import android.content.Context
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Build
+import com.example.AndroidSS.Service.MsgReceiver
 import java.util.*
 
 //20190917 제작
@@ -11,6 +13,9 @@ import java.util.*
 //https://devofandroid.blogspot.com/2018/10/text-to-speech-android-studio-kotlin.html
 //수정에 참고한 자료 ::
 //https://gist.github.com/leesc22/5f13cc049e84610fe147f21ab7e4b814
+//20190925 수정
+//참고자료::
+//https://stackoverflow.com/questions/5219568/running-android-tts-in-a-service
 
 
 class TTSFunc
@@ -18,6 +23,11 @@ class TTSFunc
     private lateinit var mTTS: TextToSpeech
 
     // public fun ----------------------------------------------------------------------------------
+
+    fun callInitFunc(textToSpeech: TextToSpeech)
+    {
+        initFunc(textToSpeech)
+    }
 
     fun callInitFunc(appCompactActivity: AppCompatActivity)
     {
@@ -36,6 +46,11 @@ class TTSFunc
 
 
     // private fun ---------------------------------------------------------------------------------
+
+    private fun initFunc(textToSpeech: TextToSpeech)
+    {
+        mTTS = textToSpeech
+    }
 
     private fun initFunc(appCompactActivity: AppCompatActivity)
     {
