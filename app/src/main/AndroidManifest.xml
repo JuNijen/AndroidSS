@@ -67,7 +67,7 @@
         </receiver>
 
         <!-- 20190924 SMS Receiver 제작을 위하여 추가 된 부분 -->
-        <receiver android:name=".Service.MySMSReceiver">
+        <receiver android:name=".Service.msgReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>

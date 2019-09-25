@@ -59,7 +59,7 @@
      ㄴ ㄴㄴ 이거 realm 포함하고있어서 복잡해짐.
 
      https://g-y-e-o-m.tistory.com/26
-     ㄴ 이거 심플하고 좋은듯.
+     ㄴ 이게 심플하고 좋은듯.
 
 30 | 참고자료 ::
      https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_ttrend&wr_id=6746&page=19

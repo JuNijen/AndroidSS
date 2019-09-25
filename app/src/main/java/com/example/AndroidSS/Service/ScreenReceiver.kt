@@ -18,12 +18,12 @@ class ScreenReceiver : BroadcastReceiver()
     override fun onReceive(context: Context, intent: Intent)
     {
         //onReceive 로 들어왔음을 알리는 로그.
-        Log.e("@@@", "@@@onReceive")
+        Log.e("@@@ScreenReceiver", "@@@onReceive")
 
         if (intent.action == Intent.ACTION_SCREEN_OFF)
         {
             wasScreenOn = false
-            Log.e("@@@", "@@@wasScreenOn$wasScreenOn")
+            Log.e("@@@ScreenReceiver", "@@@wasScreenOn$wasScreenOn")
 
             //일단은 꺼졌을 때 소리를 들려주는 걸로 해 보자.
             soundTest(context, R.raw.sasara_thunder)
@@ -31,14 +31,14 @@ class ScreenReceiver : BroadcastReceiver()
         else if (intent.action == Intent.ACTION_SCREEN_ON)
         {
             wasScreenOn = true
-            Log.e("@@@", "@@@wasScreenOn$wasScreenOn")
+            Log.e("@@@ScreenReceiver", "@@@wasScreenOn$wasScreenOn")
 
             //일단은 켜졌을 때도 소리를 들려주는 걸로 해 보자.
             soundTest(context, R.raw.sasara_twister)
         }
         else if (intent.action == Intent.ACTION_USER_PRESENT)
         {
-            Log.e("@@@", "@@@userpresent")
+            Log.e("@@@ScreenReceiver", "@@@userpresent")
             //do something.
         }
     }
@@ -68,7 +68,7 @@ class ScreenReceiver : BroadcastReceiver()
         }
         catch (e: IOException)
         {
-            Log.e("@@@", "@@@Err on soundTest")
+            Log.e("@@@ScreenReceiver", "@@@Err on soundTest")
         }
     }
 }

@@ -88,7 +88,7 @@ class TTSFunc
     //TTSFunc를 사용중인 곳에 추가하여야 할 것.
     //override fun onPause()
     //{
-    //    (TTSFunc 변수).callStopTTS()
+    //    ttsFunc.callStopTTS()
     //    super.onPause()
     //}
 }
