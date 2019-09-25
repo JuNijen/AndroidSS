@@ -54,6 +54,8 @@ class MsgReceiver : BroadcastReceiver()
 
                 var ttsServiceIntent = Intent(context, MsgTtsService::class.java)
                 ttsServiceIntent.putExtra("message", strContent)
+                ttsServiceIntent.putExtra("maxNum", arrMsgs.size)
+                ttsServiceIntent.putExtra("currentNum", repeatNum)
                 context.startService(ttsServiceIntent)
 
                 //TODO::왜팅기는지 잘 모르겠음. 0000으로 보내는 건 지양하는 것으로.. ...

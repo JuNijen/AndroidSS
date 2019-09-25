@@ -1,11 +1,9 @@
 package com.example.AndroidSS.Func
 
 //하단부터 추가된 파일.
-import android.content.Context
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Build
-import com.example.AndroidSS.Service.MsgReceiver
 import java.util.*
 
 //20190917 제작
@@ -34,9 +32,9 @@ class TTSFunc
         initFunc(appCompactActivity)
     }
 
-    fun callPlayTTS(toSpeak: String)
+    fun callPlayTTS(toSpeak: String,  bAddQueue : Boolean = false)
     {
-        playTTS(toSpeak)
+        playTTS(toSpeak, bAddQueue)
     }
 
     fun callStopTTS()
@@ -63,7 +61,7 @@ class TTSFunc
         })
     }
 
-    private fun playTTS(toSpeak: String)
+    private fun playTTS(toSpeak: String, bAddQueue : Boolean = false)
     {
         //내용이 있어야만 작성 가능.
         if (toSpeak.isNullOrBlank())
@@ -75,12 +73,26 @@ class TTSFunc
             //롤리팝 이상일 경우
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             {
-                mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
+                if(bAddQueue)
+                {
+                    mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_ADD, null, "")
+                }
+                else
+                {
+                    mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
+                }
             }
             //롤리팝 미만일경우
             else
             {
-                @Suppress("DEPRECATION") mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                if(bAddQueue)
+                {
+                    @Suppress("DEPRECATION") mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_ADD, null)
+                }
+                else
+                {
+                    @Suppress("DEPRECATION") mTTS!!.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null)
+                }
             }
         }
     }

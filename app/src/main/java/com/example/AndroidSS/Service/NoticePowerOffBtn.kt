@@ -10,7 +10,7 @@ import android.os.Binder
 //20190923 제작
 //참고자료 ::
 //https://stackoverflow.com/questions/33013400/handle-event-power-button-press-if-activity-is-closed
-class PowerOffService : Service()
+class NoticePowerOffBtn : Service()
 {
 
     override fun onBind(intent: Intent): IBinder?
@@ -36,7 +36,7 @@ class PowerOffService : Service()
     //TODO :: 이친구의 존재이유에 대한 고찰이 필요.
     inner class LocalBinder : Binder()
     {
-        internal val service: PowerOffService
-            get() = this@PowerOffService
+        internal val service: NoticePowerOffBtn
+            get() = this@NoticePowerOffBtn
     }
 }

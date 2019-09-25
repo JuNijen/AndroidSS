@@ -9,13 +9,12 @@ import android.widget.TextView
 import android.widget.Button
 import android.widget.Toast
 import android.content.Intent
-import android.media.audiofx.Visualizer
 import android.net.Uri
 
 import com.example.AndroidSS.Func.*
 import com.example.AndroidSS.R
 import android.view.View
-import com.example.AndroidSS.Service.PowerOffService
+import com.example.AndroidSS.Service.NoticePowerOffBtn
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer
 
 
@@ -222,7 +221,7 @@ class ButtonsActivity : AppCompatActivity()
 
         //20190924 PowerOffSeivice (가제)의 적용을 위하여 추가됨.
         //TODO::꼭 여기에 넣어줬어야했는가? 다른데 어디에 넣어야 할 지는 모르겠음.
-        this.startService(Intent(this, PowerOffService::class.java))
+        this.startService(Intent(this, NoticePowerOffBtn::class.java))
     }
 
     private fun returnHomeBtnOnClick()

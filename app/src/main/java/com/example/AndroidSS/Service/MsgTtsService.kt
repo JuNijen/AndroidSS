@@ -29,6 +29,9 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
         mTTS = TextToSpeech(this,this)
         mTTS!!.language = Locale.getDefault()
 
+        //mTTS!!.setPitch(0.7f)
+        mTTS!!.setSpeechRate(0.75f)
+
         ttsFunc = TTSFunc()
         ttsFunc.callInitFunc(mTTS!!)
 
@@ -50,7 +53,25 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     override fun onStart(intent: Intent, startId: Int)
     {
         Log.v(TAG, "onstart_service")
-        callPlayTTS(intent.getStringExtra("message"))
+
+        var maxNum = intent.getIntExtra("maxNum", 1)
+        var currentNum = intent.getIntExtra("currentNum", 1)
+
+        if(maxNum == 1)
+        {
+            callPlayTTS(intent.getStringExtra("message"))
+        }
+        else if(maxNum >= 2)
+        {
+            if(currentNum == 0)
+            {
+                callPlayTTS(intent.getStringExtra("message"))
+            }
+            else
+            {
+                callPlayTTS(intent.getStringExtra("message"), true)
+            }
+        }
 
         super.onStart(intent, startId)
     }
@@ -63,16 +84,16 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     // public fun ----------------------------------------------------------------------------------
 
     //TODO::흠 너무 비효율적인가?
-    fun callPlayTTS(toSpeak: String)
+    fun callPlayTTS(toSpeak: String,  bAddQueue : Boolean = false)
     {
-        playTTS(toSpeak)
+        playTTS(toSpeak, bAddQueue)
     }
 
     // private fun ---------------------------------------------------------------------------------
 
     //TODO::흠 너무 비효율적인가?
-    private fun playTTS(toSpeak: String)
+    private fun playTTS(toSpeak: String,  bAddQueue : Boolean = false)
     {
-        ttsFunc.callPlayTTS(toSpeak)
+        ttsFunc.callPlayTTS(toSpeak, bAddQueue)
     }
 }

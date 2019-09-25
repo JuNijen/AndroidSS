@@ -74,7 +74,7 @@
         </receiver>
 
         <!-- 20190923 화면의 On Off 감지를 위하여 추가된 부분 -->
-        <service android:name=".Service.PowerOffService" >
+        <service android:name=".Service.NoticePowerOffBtn" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
