@@ -1,10 +1,12 @@
 package com.example.AndroidSS.Service
 
 import android.app.Service
+import android.content.Context
 import android.speech.tts.TextToSpeech
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import com.example.AndroidSS.Func.ContactFunc
 import java.util.*
 
 import com.example.AndroidSS.Func.TTSFunc
@@ -90,8 +92,12 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     private fun setTTS()
     {
-        var strList = mIntent?.getStringArrayListExtra("message")
+        var strList = mIntent?.getStringArrayListExtra("messageData")
+        var phoneNumber  = mIntent?.getStringExtra("senderNumber")
+        var context = mIntent?.getBundleExtra("context") as Context
         var maxNum = strList!!.size
+
+        ContactFunc().callContactIdByPhoneNumber(context, phoneNumber!!)
 
         for(repeatNum in 0 until maxNum)
         {

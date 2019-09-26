@@ -4,6 +4,7 @@ import android.telephony.SmsMessage
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 
 import com.example.AndroidSS.Func.TTSFunc
@@ -41,6 +42,9 @@ class MsgReceiver : BroadcastReceiver()
             val arrMsgs = arrayOfNulls<SmsMessage>(arrPdus!!.size)
 
             var stringList : ArrayList<String> = ArrayList()
+            var strContent: String?
+            var strSender : String? = ""
+
 
             for (repeatNum in arrMsgs.indices)
             {
@@ -48,8 +52,8 @@ class MsgReceiver : BroadcastReceiver()
                 arrMsgs[repeatNum] = SmsMessage
                     .createFromPdu(arrPdus[repeatNum] as ByteArray)
 
-                val strSender = arrMsgs[repeatNum]?.originatingAddress
-                val strContent = arrMsgs[repeatNum]?.messageBody.toString()
+                strSender = arrMsgs[repeatNum]?.originatingAddress
+                strContent = arrMsgs[repeatNum]?.messageBody.toString()
 
                 Log.i(TAG, strSender!!)
                 Log.i(TAG, strContent)
@@ -64,7 +68,9 @@ class MsgReceiver : BroadcastReceiver()
             }
 
             var ttsServiceIntent = Intent(context, MsgTtsService::class.java)
-            ttsServiceIntent.putExtra("message", stringList)
+            ttsServiceIntent.putExtra("messageData", stringList)
+            ttsServiceIntent.putExtra("senderNumber", strSender)
+            ttsServiceIntent.putExtra("context", context as Bundle)
             context.startService(ttsServiceIntent)
 
             stringList.clear()
