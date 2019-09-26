@@ -40,6 +40,8 @@ class MsgReceiver : BroadcastReceiver()
             val arrPdus = bundle.get("pdus") as Array<Any>?
             val arrMsgs = arrayOfNulls<SmsMessage>(arrPdus!!.size)
 
+            var stringList : ArrayList<String> = ArrayList()
+
             for (repeatNum in arrMsgs.indices)
             {
                 // PDU 포맷으로 되어 있는 메시지를 복원합니다.
@@ -52,11 +54,7 @@ class MsgReceiver : BroadcastReceiver()
                 Log.i(TAG, strSender!!)
                 Log.i(TAG, strContent)
 
-                var ttsServiceIntent = Intent(context, MsgTtsService::class.java)
-                ttsServiceIntent.putExtra("message", strContent)
-                ttsServiceIntent.putExtra("maxNum", arrMsgs.size)
-                ttsServiceIntent.putExtra("currentNum", repeatNum)
-                context.startService(ttsServiceIntent)
+                stringList.add(strContent)
 
                 //TODO::왜팅기는지 잘 모르겠음. 0000으로 보내는 건 지양하는 것으로.. ...
                 if (strSender == "01000000000")
@@ -64,6 +62,12 @@ class MsgReceiver : BroadcastReceiver()
                     senderIs01000000000(strContent)
                 }
             }
+
+            var ttsServiceIntent = Intent(context, MsgTtsService::class.java)
+            ttsServiceIntent.putExtra("message", stringList)
+            context.startService(ttsServiceIntent)
+
+            stringList.clear()
         }
     }
 

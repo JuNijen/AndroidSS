@@ -86,23 +86,31 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     private fun setTTS(intent: Intent)
     {
-        var maxNum = intent.getIntExtra("maxNum", 1)
-        var currentNum = intent.getIntExtra("currentNum", 1)
+        var strList = intent.getStringArrayListExtra("message")
+        var maxNum = strList.size
 
-        if(maxNum == 1)
+        for(repeatNum in 0 until maxNum)
         {
-            callPlayTTS(intent.getStringExtra("message"))
-        }
-        else if(maxNum >= 2)
-        {
-            if(currentNum == 0)
+            //SMS일 경우
+            if(maxNum == 1)
             {
-                callPlayTTS(intent.getStringExtra("message"))
+                //QUEUE 추가 없이 FULSH
+                callPlayTTS(strList[repeatNum])
             }
-            else
+            else if(maxNum >= 2)
             {
-                callPlayTTS(intent.getStringExtra("message"), true)
+                //QUEUE 첫번째는 FLUSH로 실행 해 주어야 함.
+                if(repeatNum == 0)
+                {
+                    callPlayTTS(strList[repeatNum])
+                }
+                else
+                {
+                    //QUEUE에 추가.
+                    callPlayTTS(strList[repeatNum], true)
+                }
             }
         }
+
     }
 }
