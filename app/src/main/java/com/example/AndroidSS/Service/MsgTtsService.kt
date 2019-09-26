@@ -19,6 +19,8 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     private var mTTS: TextToSpeech? = null
     private val TAG = "@@@MsgTtsService"
 
+    private var mIntent : Intent? = null
+
     override fun onBind(arg0: Intent): IBinder?
     {
         return null
@@ -45,13 +47,15 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     override fun onStart(intent: Intent, startId: Int)
     {
-        setTTS(intent)
+        mIntent = intent
 
         super.onStart(intent, startId)
     }
 
     override fun onInit(status: Int)
     {
+        setTTS()
+
         Log.v(TAG, "oninit")
     }
 
@@ -84,10 +88,10 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
         ttsFunc.callInitFunc(mTTS!!)
     }
 
-    private fun setTTS(intent: Intent)
+    private fun setTTS()
     {
-        var strList = intent.getStringArrayListExtra("message")
-        var maxNum = strList.size
+        var strList = mIntent?.getStringArrayListExtra("message")
+        var maxNum = strList!!.size
 
         for(repeatNum in 0 until maxNum)
         {
@@ -111,6 +115,6 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
                 }
             }
         }
-
+        mIntent = null
     }
 }
