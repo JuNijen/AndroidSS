@@ -26,17 +26,9 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     override fun onCreate()
     {
-        mTTS = TextToSpeech(this,this)
-        Thread.sleep(1000)
-        mTTS!!.language = Locale.getDefault()
-
-        //mTTS!!.setPitch(0.7f)
-        mTTS!!.setSpeechRate(0.75f)
-
-        ttsFunc = TTSFunc()
-        ttsFunc.callInitFunc(mTTS!!)
-
         Log.v(TAG, "oncreate_service")
+        setInit()
+
         super.onCreate()
     }
 
@@ -77,6 +69,19 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     private fun playTTS(toSpeak: String,  bAddQueue : Boolean = false)
     {
         ttsFunc.callPlayTTS(toSpeak, bAddQueue)
+    }
+
+    private fun setInit()
+    {
+        mTTS = TextToSpeech(this,this)
+        Thread.sleep(1000)
+        mTTS!!.language = Locale.getDefault()
+
+        //mTTS!!.setPitch(0.7f)
+        mTTS!!.setSpeechRate(0.75f)
+
+        ttsFunc = TTSFunc()
+        ttsFunc.callInitFunc(mTTS!!)
     }
 
     private fun setTTS(intent: Intent)
