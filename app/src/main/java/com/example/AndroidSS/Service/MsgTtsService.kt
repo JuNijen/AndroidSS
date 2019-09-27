@@ -94,10 +94,10 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     {
         var strList = mIntent?.getStringArrayListExtra("messageData")
         var phoneNumber  = mIntent?.getStringExtra("senderNumber")
-        var context = mIntent?.getBundleExtra("context") as Context
+        //var context = mIntent?.getBundleExtra("context") as Context
         var maxNum = strList!!.size
 
-        ContactFunc().callContactIdByPhoneNumber(context, phoneNumber!!)
+        var name = ContactFunc().callContactIdByPhoneNumber(applicationContext, phoneNumber!!)
 
         for(repeatNum in 0 until maxNum)
         {

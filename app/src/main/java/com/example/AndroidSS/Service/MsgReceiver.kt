@@ -45,7 +45,6 @@ class MsgReceiver : BroadcastReceiver()
             var strContent: String?
             var strSender : String? = ""
 
-
             for (repeatNum in arrMsgs.indices)
             {
                 // PDU 포맷으로 되어 있는 메시지를 복원합니다.
@@ -66,14 +65,11 @@ class MsgReceiver : BroadcastReceiver()
                     senderIs01000000000(strContent)
                 }
             }
-
             var ttsServiceIntent = Intent(context, MsgTtsService::class.java)
             ttsServiceIntent.putExtra("messageData", stringList)
             ttsServiceIntent.putExtra("senderNumber", strSender)
-            ttsServiceIntent.putExtra("context", context as Bundle)
-            context.startService(ttsServiceIntent)
 
-            stringList.clear()
+            context.startService(ttsServiceIntent)
         }
     }
 

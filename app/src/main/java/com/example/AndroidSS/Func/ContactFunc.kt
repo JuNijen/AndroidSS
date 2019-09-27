@@ -26,9 +26,9 @@ class ContactFunc
     {
         var contactID = ""
         var contentResolver: ContentResolver?
-        var projectionList : ArrayList<String>? = null
-        var projection : Array<String>?
-        var cursor : Cursor?
+        //var projectionList : ArrayList<String>? = null
+        //var projection : Array<String>?
+        //var cursor : Cursor?
         var uri : Uri
 
         //전화번호에 에러가 없는지 체크.
@@ -37,19 +37,20 @@ class ContactFunc
             contentResolver = context.contentResolver
             uri = Uri . withAppendedPath (ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
 
-            projectionList?.add(ContactsContract.PhoneLookup._ID)
-            projection = projectionList as Array<String>
+            var projection = arrayOf(ContactsContract.PhoneLookup._ID)
+            //projectionList?.add(ContactsContract.PhoneLookup._ID)
+            //projection = projectionList as Array<String>
             //var projection = String[] { ContactsContract.PhoneLookup._ID }
 
-            cursor = contentResolver.query (uri, projection, null, null, null)
+            var cursor = contentResolver.query (uri, projection, null, null, null)
 
             if (cursor != null)
             {
-                while (cursor.moveToNext())
+                while (cursor?.moveToNext())
                 {
-                    contactID = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID))
+                    contactID = cursor?.getString(cursor?.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID))
                 }
-                cursor.close()
+                cursor?.close()
             }
         }
         return contactID
