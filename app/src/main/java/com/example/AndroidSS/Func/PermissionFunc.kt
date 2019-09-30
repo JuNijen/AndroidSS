@@ -1,11 +1,13 @@
 package com.example.AndroidSS.Func
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 
 //하단부터 추가된 파일.
 //Permission을 위하여 추가된 파일
 import androidx.core.content.ContextCompat
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import androidx.core.app.ActivityCompat
 import com.example.AndroidSS.R
 
@@ -27,7 +29,8 @@ enum class MY_PERMISSION
     E_WRITE_EXTERNAL_STORAGE,
     E_INTERNET,
     E_READ_SMS,
-    E_RECEIVE_SMS
+    E_RECEIVE_SMS,
+    E_READ_CONTACTS
 }
 
 class PermissionFunc
@@ -41,6 +44,8 @@ class PermissionFunc
     private var P_INTERNET_ENABLE = 0
     private var P_READ_SMS_ENABLE = 0
     private var P_RECEIVE_SMS_ENABLE = 0
+    private var P_READ_CONTACTS = 0
+
 
 
     // public fun ----------------------------------------------------------------------------------
@@ -77,6 +82,8 @@ class PermissionFunc
     // private fun ---------------------------------------------------------------------------------
 
     //Check에는 Alart > Request 기능이 포함되어있다.
+    //흠 %s 쓰는게 안좋은 습관인가?
+    @SuppressLint("StringFormatInvalid")
     private fun checkPermission(appCompactActivity: AppCompatActivity, per_type: MY_PERMISSION): Boolean
     {
         var bReady = false
@@ -86,9 +93,8 @@ class PermissionFunc
         {
             //퍼미션을 보유중이지 않을 경우
             //알림창을 별도로 띄워준다.
-            GeneralFunc()
-                .CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
-                    appCompactActivity.getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(appCompactActivity, per_type)),
+            GeneralFunc().CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
+                    Resources.getSystem().getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(per_type)),
                 false, per_type)
         }
         else
@@ -117,8 +123,8 @@ class PermissionFunc
         {
             //요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명
             GeneralFunc()
-                .CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
-                    appCompactActivity.getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(appCompactActivity, per_type))
+                .CallCreateAlertDialog(appCompactActivity, Resources.getSystem().getString(R.string.TEXT_NOTICE),
+                    Resources.getSystem().getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(per_type))
                 , false, per_type)
         }
         else
@@ -144,6 +150,7 @@ class PermissionFunc
             MY_PERMISSION.E_INTERNET -> type_string = android.Manifest.permission.INTERNET
             MY_PERMISSION.E_READ_SMS -> type_string = android.Manifest.permission.READ_SMS
             MY_PERMISSION.E_RECEIVE_SMS -> type_string = android.Manifest.permission.RECEIVE_SMS
+            MY_PERMISSION.E_READ_CONTACTS -> type_string = android.Manifest.permission.READ_CONTACTS
         }
 
         return type_string
@@ -152,57 +159,60 @@ class PermissionFunc
     //Permission에 맞는 Code로 바꿔줌
     private fun getTypeCode(type_num: MY_PERMISSION): Int
     {
-        var type_code = 0
+        var typeCode = 0
 
         when (type_num)
         {
-            MY_PERMISSION.E_CALL_PHONE -> type_code = P_CALL_PHONE_ENABLE
-            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> type_code = P_ACESS_FINE_LOCATION_ENABLE
-            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> type_code = P_ACCESS_COARSE_LOCATION_ENABLE
-            MY_PERMISSION.E_RECORD_AUDIO -> type_code = P_RECORD_AUDIO_ENABLE
-            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> type_code = P_WRITE_EXTERNAL_STORAGE_ENABLE
-            MY_PERMISSION.E_INTERNET -> type_code = P_INTERNET_ENABLE
-            MY_PERMISSION.E_READ_SMS -> type_code = P_READ_SMS_ENABLE
-            MY_PERMISSION.E_RECEIVE_SMS -> type_code = P_RECEIVE_SMS_ENABLE
+            MY_PERMISSION.E_CALL_PHONE -> typeCode = P_CALL_PHONE_ENABLE
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> typeCode = P_ACESS_FINE_LOCATION_ENABLE
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> typeCode = P_ACCESS_COARSE_LOCATION_ENABLE
+            MY_PERMISSION.E_RECORD_AUDIO -> typeCode = P_RECORD_AUDIO_ENABLE
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> typeCode = P_WRITE_EXTERNAL_STORAGE_ENABLE
+            MY_PERMISSION.E_INTERNET -> typeCode = P_INTERNET_ENABLE
+            MY_PERMISSION.E_READ_SMS -> typeCode = P_READ_SMS_ENABLE
+            MY_PERMISSION.E_RECEIVE_SMS -> typeCode = P_RECEIVE_SMS_ENABLE
+            MY_PERMISSION.E_READ_CONTACTS -> typeCode = P_READ_CONTACTS
         }
 
-        return type_code
+        return typeCode
     }
 
     //Permission에 맞는 Name로 바꿔줌
-    private fun getPermissionName(appCompactActivity: AppCompatActivity, type_num: MY_PERMISSION): String
+    private fun getPermissionName(type_num: MY_PERMISSION): String
     {
         //TODO:: 이거 하나때문에 app_activity를 받아오는것이 옳은지 생각 해 봐야한다.
-        var name_string = ""
+        var nameString = ""
 
         when (type_num)
         {
-            MY_PERMISSION.E_CALL_PHONE -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_CALL_PHONE
-            )
-            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION
-            )
-            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION
-            )
-            MY_PERMISSION.E_RECORD_AUDIO -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_RECORD_AUDIO
-            )
-            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE
-            )
-            MY_PERMISSION.E_INTERNET -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_INTERNET
-            )
-            MY_PERMISSION.E_READ_SMS -> name_string = appCompactActivity.getString(
-            R.string.TEXT_PERMISSION_READ_SMS
-            )
-            MY_PERMISSION.E_RECEIVE_SMS -> name_string = appCompactActivity.getString(
-                R.string.TEXT_PERMISSION_RECEIVE_SMS
-            )
+            MY_PERMISSION.E_CALL_PHONE -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_CALL_PHONE)
+
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION)
+
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION)
+
+            MY_PERMISSION.E_RECORD_AUDIO -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_RECORD_AUDIO)
+
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE)
+
+            MY_PERMISSION.E_INTERNET -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_INTERNET)
+
+            MY_PERMISSION.E_READ_SMS -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_READ_SMS)
+
+            MY_PERMISSION.E_RECEIVE_SMS -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_RECEIVE_SMS)
+
+            MY_PERMISSION.E_READ_CONTACTS -> nameString =
+                Resources.getSystem().getString(R.string.TEXT_PERMISSION_READ_CONTEXT)
         }
 
-        return name_string
+        return nameString
     }
 }

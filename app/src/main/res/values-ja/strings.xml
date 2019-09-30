@@ -60,6 +60,7 @@
     <string name="TEXT_PERMISSION_INTERNET">インターネットの使用</string>
     <string name="TEXT_PERMISSION_READ_SMS">メッセージを読む</string>
     <string name="TEXT_PERMISSION_RECEIVE_SMS">メッセージの受信</string>
+    <string name="TEXT_PERMISSION_READ_CONTEXT">連絡先を読む</string>
 
 
     <!-- 문자열 참조하는 방법 메모 -->

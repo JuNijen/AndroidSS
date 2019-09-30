@@ -9,6 +9,9 @@ import android.widget.Button
 import android.widget.Toast
 
 import android.content.Intent
+import com.example.AndroidSS.Func.AbstractData
+import com.example.AndroidSS.Func.MY_PERMISSION
+import com.example.AndroidSS.Func.PermissionFunc
 import com.example.AndroidSS.R
 
 
@@ -16,7 +19,7 @@ import com.example.AndroidSS.R
 
 class MainActivity : AppCompatActivity()
 {
-    lateinit var editText : EditText
+    private lateinit var editText : EditText
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -52,11 +55,18 @@ class MainActivity : AppCompatActivity()
             //에디터 텍스트값을 비운다.
             editText.setText("")
 
+            imsiFunc()
+
             //ButtonsActivity 로 화면 이동
             val intent = Intent(this, ButtonsActivity::class.java)
             startActivity(intent)
 
             finish()
         }
+    }
+
+    private fun imsiFunc()
+    {
+        PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_READ_CONTACTS)
     }
 }

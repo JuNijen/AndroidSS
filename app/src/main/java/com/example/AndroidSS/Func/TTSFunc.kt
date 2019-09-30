@@ -14,7 +14,7 @@ import java.util.*
 //20190925 수정
 //참고자료::
 //https://stackoverflow.com/questions/5219568/running-android-tts-in-a-service
-
+//20190930 수정 isNullOrBlank > isNullOrEmpty
 
 class TTSFunc
 {
@@ -64,7 +64,7 @@ class TTSFunc
     private fun playTTS(toSpeak: String, bAddQueue : Boolean = false)
     {
         //내용이 있어야만 작성 가능.
-        if (toSpeak.isNullOrBlank())
+        if (toSpeak.isNullOrEmpty())
         {
             //안내 등 무언가의 처리를 해 주면 좋을듯.
         }

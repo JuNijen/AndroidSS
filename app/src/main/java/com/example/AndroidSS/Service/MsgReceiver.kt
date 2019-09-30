@@ -4,10 +4,16 @@ import android.telephony.SmsMessage
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
+import android.content.pm.PackageManager
+import android.os.Build
 import android.util.Log
-
-import com.example.AndroidSS.Func.TTSFunc
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.AndroidSS.Activity.MainActivity
+import com.example.AndroidSS.Func.MY_PERMISSION
+import com.example.AndroidSS.Func.PermissionFunc
 
 
 //20190924 제작
@@ -16,8 +22,8 @@ import com.example.AndroidSS.Func.TTSFunc
 //https://g-y-e-o-m.tistory.com/26
 class MsgReceiver : BroadcastReceiver()
 {
-    lateinit var ttsFunc: TTSFunc
     private val TAG = "@@@MsgReceiver : "
+    private var mContext : Context? = null
 
 
     override fun onReceive(context: Context, intent: Intent)
@@ -35,6 +41,8 @@ class MsgReceiver : BroadcastReceiver()
         val bundle = intent.extras
         if (bundle != null)
         {
+            this.mContext = context
+
             //TODO::이부분 어떻게 스트링 미리 정의 해 둘 수 없을까?
             //실제 메세지는 Object타입의 배열에 PDU 형식으로 저장됨
             //문자 메시지는 pdus란 종류 값으로 들어있다.
@@ -44,6 +52,7 @@ class MsgReceiver : BroadcastReceiver()
             var stringList : ArrayList<String> = ArrayList()
             var strContent: String?
             var strSender : String? = ""
+
 
             for (repeatNum in arrMsgs.indices)
             {
@@ -57,7 +66,11 @@ class MsgReceiver : BroadcastReceiver()
                 Log.i(TAG, strSender!!)
                 Log.i(TAG, strContent)
 
-                stringList.add(strContent)
+
+                if(PermissionFunc().readContextEnable)
+                {
+                    stringList.add(strContent)
+                }
 
                 //TODO::왜팅기는지 잘 모르겠음. 0000으로 보내는 건 지양하는 것으로.. ...
                 if (strSender == "01000000000")

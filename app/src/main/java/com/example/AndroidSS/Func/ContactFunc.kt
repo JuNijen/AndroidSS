@@ -3,8 +3,8 @@ package com.example.AndroidSS.Func
 import android.provider.ContactsContract
 import android.content.ContentResolver
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 
 
 //20190926 제작
@@ -24,12 +24,10 @@ class ContactFunc
 
     private fun contactIdByPhoneNumber(context: Context, phoneNumber: String): String
     {
+        var uri : Uri
         var contactID = ""
         var contentResolver: ContentResolver?
-        //var projectionList : ArrayList<String>? = null
-        //var projection : Array<String>?
-        //var cursor : Cursor?
-        var uri : Uri
+
 
         //전화번호에 에러가 없는지 체크.
         if (!phoneNumber.isNullOrEmpty())
@@ -42,6 +40,7 @@ class ContactFunc
             //projection = projectionList as Array<String>
             //var projection = String[] { ContactsContract.PhoneLookup._ID }
 
+            //여기까지는 잘 들어오는데 대충 여기서 좆되고있음 왜인지 당췌 모르겠음
             var cursor = contentResolver.query (uri, projection, null, null, null)
 
             if (cursor != null)
