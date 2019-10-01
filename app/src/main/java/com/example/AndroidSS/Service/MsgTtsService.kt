@@ -20,9 +20,9 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 {
     private lateinit var ttsFunc: TTSFunc
     private var mTTS: TextToSpeech? = null
-    private val TAG = "@@@MsgTtsService"
-
     private var mIntent : Intent? = null
+    private val TAG = "@@@MsgTtsService"
+    private var isInited = false
 
     override fun onBind(arg0: Intent): IBinder?
     {
@@ -50,13 +50,32 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     override fun onStart(intent: Intent, startId: Int)
     {
-        mIntent = intent
+        //20191001 수정
+        //사유 : 이전 메세지가 읽는 중이면 버그가 발생함.
+        if (mIntent == null)
+        {
+            mIntent = intent
+
+            if(isInited)
+            {
+                setTTS()
+            }
+        }
+        else
+        {
+            mIntent = intent
+            setTTS()
+        }
 
         super.onStart(intent, startId)
     }
 
     override fun onInit(status: Int)
     {
+        //20191001 수정
+        //사유 : 이전 메세지가 읽는 중이면 버그가 발생함.
+        isInited = true
+
         setTTS()
 
         Log.v(TAG, "oninit")
