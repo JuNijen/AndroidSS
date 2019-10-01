@@ -9,10 +9,9 @@ import android.widget.Button
 import android.widget.Toast
 
 import android.content.Intent
-import com.example.AndroidSS.Func.AbstractData
+import com.example.AndroidSS.R
 import com.example.AndroidSS.Func.MY_PERMISSION
 import com.example.AndroidSS.Func.PermissionFunc
-import com.example.AndroidSS.R
 
 
 //20190916 제작

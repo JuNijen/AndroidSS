@@ -66,11 +66,7 @@ class MsgReceiver : BroadcastReceiver()
                 Log.i(TAG, strSender!!)
                 Log.i(TAG, strContent)
 
-
-                if(PermissionFunc().readContextEnable)
-                {
-                    stringList.add(strContent)
-                }
+                stringList.add(strContent)
 
                 //TODO::왜팅기는지 잘 모르겠음. 0000으로 보내는 건 지양하는 것으로.. ...
                 if (strSender == "01000000000")

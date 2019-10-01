@@ -1,15 +1,17 @@
 package com.example.AndroidSS.Service
 
+import android.annotation.SuppressLint
 import android.app.Service
-import android.content.Context
 import android.speech.tts.TextToSpeech
 import android.content.Intent
+import android.content.res.Resources
 import android.os.IBinder
 import android.util.Log
 import com.example.AndroidSS.Func.ContactFunc
 import java.util.*
 
 import com.example.AndroidSS.Func.TTSFunc
+import com.example.AndroidSS.R
 
 
 //20190925 제작
@@ -93,36 +95,62 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     private fun setTTS()
     {
         var strList = mIntent?.getStringArrayListExtra("messageData")
-        var phoneNumber  = mIntent?.getStringExtra("senderNumber")
         var maxNum = strList!!.size
+        var name = checkContact()
+
+        if(name.isNullOrEmpty())
+        {
+            for(repeatNum in 0 until maxNum)
+            {
+                //SMS일 경우
+                if(maxNum == 1)
+                {
+                    //QUEUE 추가 없이 FULSH
+                    callPlayTTS(strList[repeatNum])
+                }
+                else if(maxNum >= 2)
+                {
+                    //QUEUE 첫번째는 FLUSH로 실행 해 주어야 함.
+                    if(repeatNum == 0)
+                    {
+                        callPlayTTS(strList[repeatNum])
+                    }
+                    else
+                    {
+                        callPlayTTS(strList[repeatNum], true)
+                    }
+                }
+            }
+        }
+        else
+        {
+            callPlayTTS(name)
+
+            for(repeatNum in 0 until maxNum)
+            {
+                callPlayTTS(strList[repeatNum], true)
+            }
+        }
+
+        mIntent = null
+    }
+
+    private fun checkContact() : String
+    {
+        var phoneNumber  = mIntent?.getStringExtra("senderNumber")
+        var name = ""
 
         if(!phoneNumber.isNullOrEmpty())
         {
-            var name = ContactFunc().callContactIdByPhoneNumber(applicationContext, phoneNumber!!)
+            name = ContactFunc().callContactIdByPhoneNumber(applicationContext, phoneNumber!!)
+
+            if(!name.isNullOrEmpty())
+            {
+                var strInfoOfSender = Resources.getSystem().getString(R.string.TEXT_TTS_INFO_OF_SENDER)
+                name = String.format(strInfoOfSender, name)
+            }
         }
 
-        for(repeatNum in 0 until maxNum)
-        {
-            //SMS일 경우
-            if(maxNum == 1)
-            {
-                //QUEUE 추가 없이 FULSH
-                callPlayTTS(strList[repeatNum])
-            }
-            else if(maxNum >= 2)
-            {
-                //QUEUE 첫번째는 FLUSH로 실행 해 주어야 함.
-                if(repeatNum == 0)
-                {
-                    callPlayTTS(strList[repeatNum])
-                }
-                else
-                {
-                    //QUEUE에 추가.
-                    callPlayTTS(strList[repeatNum], true)
-                }
-            }
-        }
-        mIntent = null
+        return name
     }
 }
