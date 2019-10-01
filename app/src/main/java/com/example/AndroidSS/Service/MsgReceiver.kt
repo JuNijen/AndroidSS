@@ -4,16 +4,7 @@ import android.telephony.SmsMessage
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.example.AndroidSS.Activity.MainActivity
-import com.example.AndroidSS.Func.MY_PERMISSION
-import com.example.AndroidSS.Func.PermissionFunc
 
 
 //20190924 제작

@@ -2,15 +2,13 @@ package com.example.AndroidSS.Func
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
-
-//하단부터 추가된 파일.
-//Permission을 위하여 추가된 파일
 import androidx.core.content.ContextCompat
+import androidx.core.app.ActivityCompat
+
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.nfc.Tag
 import android.util.Log
-import androidx.core.app.ActivityCompat
+
 import com.example.AndroidSS.R
 
 
