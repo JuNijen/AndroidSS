@@ -1,6 +1,5 @@
 package com.example.AndroidSS.Service
 
-import android.annotation.SuppressLint
 import android.app.Service
 import android.speech.tts.TextToSpeech
 import android.content.Intent
@@ -94,11 +93,11 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     private fun setTTS()
     {
-        var strList = mIntent?.getStringArrayListExtra("messageData")
-        var maxNum = strList!!.size
-        var name = checkContact()
+        val strList = mIntent?.getStringArrayListExtra("messageData")
+        val maxNum = strList!!.size
+        val name = checkContact()
 
-        if(name.isNullOrEmpty())
+        if(name.isEmpty())
         {
             for(repeatNum in 0 until maxNum)
             {
@@ -137,17 +136,17 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
 
     private fun checkContact() : String
     {
-        var phoneNumber  = mIntent?.getStringExtra("senderNumber")
+        val phoneNumber  = mIntent?.getStringExtra("senderNumber")
         var name = ""
 
         if(!phoneNumber.isNullOrEmpty())
         {
-            name = ContactFunc().callContactIdByPhoneNumber(applicationContext, phoneNumber!!)
+            name = ContactFunc().callGetContactName(applicationContext, phoneNumber).toString()
 
-            if(!name.isNullOrEmpty())
+            if(name.isNotEmpty())
             {
-                var strInfoOfSender = Resources.getSystem().getString(R.string.TEXT_TTS_INFO_OF_SENDER)
-                name = String.format(strInfoOfSender, name)
+                name = applicationContext.getString(R.string.TEXT_TTS_INFO_OF_SENDER, name)
+                //name = String.format(Resources.getSystem().getString(R.string.TEXT_TTS_INFO_OF_SENDER), name)
             }
         }
 

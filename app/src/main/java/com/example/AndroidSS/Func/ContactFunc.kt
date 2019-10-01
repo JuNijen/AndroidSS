@@ -1,7 +1,6 @@
 package com.example.AndroidSS.Func
 
-import android.provider.ContactsContract
-import android.content.ContentResolver
+import android.provider.ContactsContract.PhoneLookup
 import android.content.Context
 import android.net.Uri
 
@@ -9,48 +8,42 @@ import android.net.Uri
 //20190926 제작
 //참고자료 ::
 //http://effcode.com/coding/android-find-contact-id-by-phone-number/
+//20191001 수정
+//참고자료 :: https://code-examples.net/ko/q/2efcc5
 class ContactFunc
 {
     // public fun ----------------------------------------------------------------------------------
 
-    fun callContactIdByPhoneNumber(context: Context, phoneNumber: String): String
-    {
-        return contactIdByPhoneNumber(context, phoneNumber)
-    }
 
+    fun callGetContactName(context: Context, phoneNumber: String): String?
+    {
+        return getContactName(context, phoneNumber)
+    }
 
     // private fun ---------------------------------------------------------------------------------
 
-    private fun contactIdByPhoneNumber(context: Context, phoneNumber: String): String
+
+    //20191001 제작
+    //참고자료 ::
+    //https://code-examples.net/ko/q/2efcc5
+    fun getContactName(context: Context, phoneNumber: String): String?
     {
-        val uri : Uri
-        var contactID = ""
-        val contentResolver: ContentResolver?
+        val cr = context.contentResolver
+        val uri = Uri.withAppendedPath(PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
+        val cursor =
+            cr.query(uri, arrayOf(PhoneLookup.DISPLAY_NAME), null, null, null) ?: return null
+        var contactName: String? = null
 
-
-        //전화번호에 에러가 없는지 체크.
-        if (phoneNumber.isNotEmpty())
+        if (cursor.moveToFirst())
         {
-            contentResolver = context.contentResolver
-            uri = Uri . withAppendedPath (ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phoneNumber))
-
-            val projection = arrayOf(ContactsContract.PhoneLookup._ID)
-            //projectionList?.add(ContactsContract.PhoneLookup._ID)
-            //projection = projectionList as Array<String>
-            //var projection = String[] { ContactsContract.PhoneLookup._ID }
-
-            //여기까지는 잘 들어오는데 대충 여기서 좆되고있음 왜인지 당췌 모르겠음
-            val cursor = contentResolver.query (uri, projection, null, null, null)
-
-            if (cursor != null)
-            {
-                while (cursor.moveToNext())
-                {
-                    contactID = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID))
-                }
-                cursor.close()
-            }
+            contactName = cursor.getString(cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME))
         }
-        return contactID
+
+        if (cursor != null && !cursor.isClosed)
+        {
+            cursor.close()
+        }
+
+        return contactName
     }
 }
