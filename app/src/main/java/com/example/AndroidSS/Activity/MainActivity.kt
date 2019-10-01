@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity()
             //에디터 텍스트값을 비운다.
             editText.setText("")
 
-            imsiFunc()
+            readContactsPermission()
 
             //ButtonsActivity 로 화면 이동
             val intent = Intent(this, ButtonsActivity::class.java)
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity()
         }
     }
 
-    private fun imsiFunc()
+    private fun readContactsPermission()
     {
         PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_READ_CONTACTS)
     }

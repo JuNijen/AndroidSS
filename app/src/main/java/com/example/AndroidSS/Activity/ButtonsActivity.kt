@@ -4,18 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 //하단부터 추가된 파일.
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Button
-import android.widget.Toast
 import android.content.Intent
+import android.view.View
+import android.widget.*
 import android.net.Uri
 
 import com.example.AndroidSS.Func.*
-import com.example.AndroidSS.R
-import android.view.View
 import com.example.AndroidSS.Service.NoticePowerOffBtn
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer
+import com.example.AndroidSS.R
+import java.io.IOException
 
 
 //20190916 제작
@@ -43,6 +41,7 @@ class ButtonsActivity : AppCompatActivity()
         initActivity()
         setVisualizer()
         setButtons()
+        readLogFile()
     }
 
     override fun onPause()
@@ -238,4 +237,38 @@ class ButtonsActivity : AppCompatActivity()
         //TODO:: 이 부분은 임시입니다.
         ttsFunc.callPlayTTS(getString(R.string.TEXT_PERMISSION_NOTICE, getString(R.string.TEXT_EMPTY)))
     }
+
+    private fun readLogFile()
+    {
+        var fileName = "MEMO.txt"
+        var string = loadData(fileName)
+
+        findViewById<TextView>(R.id.textView2).text = string
+    }
+
+
+    //20191001 제작
+    //참고자료 ::
+    //https://stackoverflow.com/questions/9544737/read-file-from-assets
+    fun loadData(inFile: String): String
+    {
+        var tContents = ""
+
+        try
+        {
+            val stream = assets.open(inFile)
+
+            val size = stream.available()
+            val buffer = ByteArray(size)
+            stream.read(buffer)
+            stream.close()
+            tContents = String(buffer)
+        }
+        catch (e: IOException)
+        {
+            // Handle exceptions here
+        }
+        return tContents
+    }
+
 }
