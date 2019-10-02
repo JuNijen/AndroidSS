@@ -23,7 +23,7 @@ class MsgTtsService : Service(), TextToSpeech.OnInitListener
     private val TAG = "@@@MsgTtsService"
     private var isInited = false
     private var sleepDelay: Long = 1000
-    private var voiceSpeed = 0.6f
+    private var voiceSpeed = 0.7f
 
     override fun onBind(arg0: Intent): IBinder?
     {

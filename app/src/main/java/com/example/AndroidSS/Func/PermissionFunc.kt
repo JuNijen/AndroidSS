@@ -84,8 +84,6 @@ class PermissionFunc
     // private fun ---------------------------------------------------------------------------------
 
     //Check에는 Alart > Request 기능이 포함되어있다.
-    //흠 %s 쓰는게 안좋은 습관인가?
-    @SuppressLint("StringFormatInvalid")
     private fun checkPermission(appCompactActivity: AppCompatActivity, perType: MY_PERMISSION): Boolean
     {
         var bReady = false
@@ -96,7 +94,7 @@ class PermissionFunc
             //퍼미션을 보유중이지 않을 경우
             //알림창을 별도로 띄워준다.
             GeneralFunc().CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
-                    Resources.getSystem().getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(perType)),
+                    appCompactActivity.getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(appCompactActivity, perType)),
                 false, perType)
         }
         else
@@ -125,9 +123,9 @@ class PermissionFunc
         {
             //요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명
             GeneralFunc()
-                .CallCreateAlertDialog(appCompactActivity, Resources.getSystem().getString(R.string.TEXT_NOTICE),
-                    Resources.getSystem().getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(perType))
-                , false, perType)
+                .CallCreateAlertDialog(appCompactActivity, appCompactActivity.getString(R.string.TEXT_NOTICE),
+                    appCompactActivity.getString(R.string.TEXT_PERMISSION_NOTICE, getPermissionName(appCompactActivity, perType)),
+                    false, perType)
         }
         else
         {
@@ -153,8 +151,6 @@ class PermissionFunc
             MY_PERMISSION.E_READ_SMS -> typeString = android.Manifest.permission.READ_SMS
             MY_PERMISSION.E_RECEIVE_SMS -> typeString = android.Manifest.permission.RECEIVE_SMS
             MY_PERMISSION.E_READ_CONTACTS -> typeString = android.Manifest.permission.READ_CONTACTS
-
-            MY_PERMISSION.E_NONE -> Log.i(TAG, Resources.getSystem().getString(R.string.ERR_FROM_CODE))
         }
 
         return typeString
@@ -176,49 +172,47 @@ class PermissionFunc
             MY_PERMISSION.E_READ_SMS -> typeCode = P_READ_SMS_ENABLE
             MY_PERMISSION.E_RECEIVE_SMS -> typeCode = P_RECEIVE_SMS_ENABLE
             MY_PERMISSION.E_READ_CONTACTS -> typeCode = P_READ_CONTACTS
-
-            MY_PERMISSION.E_NONE -> Log.i(TAG, Resources.getSystem().getString(R.string.ERR_FROM_CODE))
         }
 
         return typeCode
     }
 
     //Permission에 맞는 Name로 바꿔줌
-    private fun getPermissionName(typeNum: MY_PERMISSION): String
+    private fun getPermissionName(appCompactActivity: AppCompatActivity, typeNum: MY_PERMISSION): String
     {
         //TODO:: 이거 하나때문에 app_activity를 받아오는것이 옳은지 생각 해 봐야한다.
         var nameString = ""
 
         when (typeNum)
         {
-            MY_PERMISSION.E_CALL_PHONE -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_CALL_PHONE)
+            MY_PERMISSION.E_CALL_PHONE ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_CALL_PHONE)
 
-            MY_PERMISSION.E_ACCESS_FINE_LOCATION -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION)
+            MY_PERMISSION.E_ACCESS_FINE_LOCATION ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_ACCESS_FINE_LOCATION)
 
-            MY_PERMISSION.E_ACCESS_COARSE_LOCATION -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION)
+            MY_PERMISSION.E_ACCESS_COARSE_LOCATION ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_ACCESS_COARSE_LOCATION)
 
-            MY_PERMISSION.E_RECORD_AUDIO -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_RECORD_AUDIO)
+            MY_PERMISSION.E_RECORD_AUDIO ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_RECORD_AUDIO)
 
-            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE)
+            MY_PERMISSION.E_WRITE_EXTERNAL_STORAGE ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_WRITE_EXTERNAL_STORAGE)
 
-            MY_PERMISSION.E_INTERNET -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_INTERNET)
+            MY_PERMISSION.E_INTERNET ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_INTERNET)
 
-            MY_PERMISSION.E_READ_SMS -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_READ_SMS)
+            MY_PERMISSION.E_READ_SMS ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_READ_SMS)
 
-            MY_PERMISSION.E_RECEIVE_SMS -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_RECEIVE_SMS)
+            MY_PERMISSION.E_RECEIVE_SMS ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_RECEIVE_SMS)
 
-            MY_PERMISSION.E_READ_CONTACTS -> nameString =
-                Resources.getSystem().getString(R.string.TEXT_PERMISSION_READ_CONTEXT)
+            MY_PERMISSION.E_READ_CONTACTS ->
+                nameString = appCompactActivity.getString(R.string.TEXT_PERMISSION_READ_CONTEXT)
 
-            MY_PERMISSION.E_NONE -> Log.i(TAG, Resources.getSystem().getString(R.string.ERR_FROM_CODE))
+            MY_PERMISSION.E_NONE -> Log.i(TAG, appCompactActivity.getString(R.string.ERR_FROM_CODE))
         }
 
         return nameString

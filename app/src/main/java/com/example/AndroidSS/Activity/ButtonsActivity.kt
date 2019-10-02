@@ -210,6 +210,7 @@ class ButtonsActivity : AppCompatActivity()
         var bInternet = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_INTERNET)
         var bReadSms = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_READ_SMS)
         var bReceiveSms = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_RECEIVE_SMS)
+        var bReadContact = PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_READ_CONTACTS)
 
         if(!bInternet)
             PermissionFunc().callRequestPermission(this, MY_PERMISSION.E_INTERNET)
@@ -217,6 +218,9 @@ class ButtonsActivity : AppCompatActivity()
             PermissionFunc().callRequestPermission(this, MY_PERMISSION.E_READ_SMS)
         if(!bReceiveSms)
             PermissionFunc().callRequestPermission(this, MY_PERMISSION.E_RECEIVE_SMS)
+        if(!bReadContact)
+            PermissionFunc().callCheckPermission(this, MY_PERMISSION.E_READ_CONTACTS)
+
 
         //20190924 PowerOffSeivice (가제)의 적용을 위하여 추가됨.
         //TODO::꼭 여기에 넣어줬어야했는가? 다른데 어디에 넣어야 할 지는 모르겠음.
