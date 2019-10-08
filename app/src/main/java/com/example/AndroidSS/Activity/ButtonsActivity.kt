@@ -40,6 +40,7 @@ class ButtonsActivity : AppCompatActivity()
     private lateinit var mStopRecordBtn: Button
     private lateinit var mStartPlayBtn: Button
     private lateinit var mStopPlayBtn: Button
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private var mVisualizer: BarVisualizer? = null
 
@@ -286,8 +287,6 @@ class ButtonsActivity : AppCompatActivity()
         }
         return tContents
     }
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     fun things()
     {
