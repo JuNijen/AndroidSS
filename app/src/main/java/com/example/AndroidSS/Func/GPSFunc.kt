@@ -26,7 +26,6 @@ import java.util.Locale
 //https://webnautes.tistory.com/1315
 
 
-//TODO:: 여기에 있는 내용 중 퍼미션에 해당하는 부분을 PermissionFunc.kt 로 옮길 필요가 있음.
 class GPSFunc
 {
     private var gpsTracker: GpsTracker? = null
