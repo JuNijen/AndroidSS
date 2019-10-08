@@ -13,4 +13,8 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
+    <!-- 20191008 Toolbar, Theme 변경을 위하여 추가됨. -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
