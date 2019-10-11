@@ -48,6 +48,7 @@ class ButtonsActivity : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.app_main)
 
         things()
         initActivity()
@@ -289,8 +290,6 @@ class ButtonsActivity : AppCompatActivity()
 
     fun things()
     {
-        setContentView(R.layout.app_main)
-
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 

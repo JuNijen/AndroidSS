@@ -1,19 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--20190916 제작-->
+<!--20190923 추가 - audio wave 를 위함. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_home"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:contentDescription="@string/XML_DESC_TEXTVIEW" />
+
+            <!--20190923 추가 - audio wave visualizer 추가를 위함.-->
+            <com.gauravk.audiovisualizer.visualizer.BarVisualizer
+                android:id="@+id/barVisualizer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#80383838"
+                app:avColor="@color/av_dark_blue"
+                app:avDensity="0.8"
+                app:avSpeed="normal"
+                app:avType="fill" />
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnRecord"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/XML_TEXT_START_RECORD"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/XML_TEXT_STOP_RECORD"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnPlay"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/XML_TEXT_PLAY_RECORD"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/btnStopPlay"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/XML_TEXT_STOP_RECORD_PLAYING"
+                    android:textSize="12sp" />
+
+            </TableRow>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="152dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/callBtn"
+                    android:layout_width="205dp"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/XML_DESC_CALL_BTN"
+                    app:srcCompat="@android:drawable/ic_menu_call" />
+
+                <ImageButton
+                    android:id="@+id/gpsBtn"
+                    android:layout_width="205dp"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/XML_DESC_GPS_BTN"
+                    app:srcCompat="@android:drawable/ic_menu_mylocation" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/voiceBtn"
+                    android:layout_width="205dp"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/XML_DESC_AUDIO_RECORD_BTN"
+                    app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
+                <ImageButton
+                    android:id="@+id/speakerBtn"
+                    android:layout_width="205dp"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/XML_DESC_SPEAKER_BTN"
+                    tools:srcCompat="@android:drawable/stat_sys_speakerphone" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/returnHomeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/TEXT_LOGOUT"
+                android:text="@string/TEXT_LOGOUT" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
