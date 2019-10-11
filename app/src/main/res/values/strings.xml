@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">_T1008_2</string>
+    <string name="app_name" translatable="false">_T10011_2</string>
 
     <!--20190919 추가-->
     <!--Environment.getExternalStoragePublicDirectory 하위에 만들 것.-->
