@@ -1,12 +1,10 @@
 package com.example.AndroidSS.Func
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.app.ActivityCompat
 
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.util.Log
 
 import com.example.AndroidSS.R
